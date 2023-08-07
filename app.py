@@ -1,7 +1,7 @@
 import os
 
-from flask import Flask, send_from_directory, render_template, g, request
-
+from flask import Flask, send_from_directory, render_template, g, request, flash, redirect
+from werkzeug.utils import secure_filename
 
 def read_filenames_with_version(folder):
     # 创建一个空列表来存储结果
@@ -65,6 +65,28 @@ def create_app():
     @app.route('/download_file/<file_name>')
     def download_file(file_name):
         return send_from_directory('file/standard', file_name, as_attachment=True)
+
+    @app.route('/submit', methods=['POST'])
+    def submit():
+        # 获取表单中的文本数据
+        business = request.form.get('business')
+        fileType = request.form.get('fileType')
+        # 获取表单中的文件数据
+        dataFile = request.files.get('dataFile')
+        # 验证文件是否存在并且符合要求
+        if dataFile and dataFile.filename.endswith('.xlsx'):
+            # 为文件生成一个安全的文件名
+            filename = secure_filename(dataFile.filename)
+            # 将文件保存到服务器的uploads目录下
+            dataFile.save(os.path.join('file/standard', filename))
+            # 返回一个成功的响应
+            flash('文件上传成功！')
+            return redirect("/")
+        else:
+            # 返回一个失败的响应
+            flash('文件上传失败，请检查文件类型是否正确！')
+            return redirect("/")
+
 
     return app
 
