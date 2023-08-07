@@ -53,6 +53,16 @@
     </script>
 </head>
 <body>
+{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <!-- 根据不同的类别，使用不同的bootstrap警告组件显示消息 -->
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 <!-- 弹出窗口 -->
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -68,10 +78,10 @@
                         <label for="selectBusiness" class="col-sm-4 col-form-label">请选择业务线：</label>
                         <div class="col-sm-8">
                             <select class="form-select" id="selectBusiness" name="business">
-                                <option value="option1">学工</option>
-                                <option value="option2">人事</option>
-                                <option value="option3">研究生</option>
-                                <option value="option4">教务</option>
+                                <option value="学工">学工</option>
+                                <option value="人事">人事</option>
+                                <option value="研究生">研究生</option>
+                                <option value="教务">教务</option>
                             </select>
                         </div>
                     </div>
@@ -79,10 +89,10 @@
                         <label for="selectFileType" class="col-sm-4 col-form-label">请选择文件类型：</label>
                         <div class="col-sm-8">
                             <select class="form-select" id="selectFileType" name="fileType">
-                                <option value="option1">数据元素</option>
-                                <option value="option2">标准代码</option>
-                                <option value="option3">业务线数据元素映射</option>
-                                <option value="option4">标准层模型</option>
+                                <option value="数据元素">数据元素</option>
+                                <option value="标准代码">标准代码</option>
+                                <option value="业务线数据元素映射">业务线数据元素映射</option>
+                                <option value="标准层模型">标准层模型</option>
                             </select>
                         </div>
                     </div>
@@ -207,6 +217,7 @@
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="../static/resources/scripts/axure/ios.js"></script>
 </body>
 </html>

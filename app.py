@@ -1,7 +1,9 @@
 import os
 
 from flask import Flask, send_from_directory, render_template, g, request, flash, redirect
-from werkzeug.utils import secure_filename
+
+
+# from werkzeug.utils import secure_filename
 
 def read_filenames_with_version(folder):
     # 创建一个空列表来存储结果
@@ -19,6 +21,8 @@ def read_filenames_with_version(folder):
         result.append((business, version, file_type, file))
     # 返回结果列表
     return result
+
+
 def read_filenames(folder):
     # 创建一个空列表来存储结果
     result = []
@@ -30,10 +34,10 @@ def read_filenames(folder):
         if len(segments) != 2:
             continue
         # 否则，把拆分后的三段分别赋值给业务线、版本、文件类型
-        business,  file_type = segments
+        business, file_type = segments
         file_type = file_type.split('.')[0]
         # 把这三个值作为一个元组添加到结果列表中
-        result.append((business,  file_type, file))
+        result.append((business, file_type, file))
     # 返回结果列表
     return result
 
@@ -76,7 +80,7 @@ def create_app():
         # 验证文件是否存在并且符合要求
         if dataFile and dataFile.filename.endswith('.xlsx'):
             # 为文件生成一个安全的文件名
-            filename = secure_filename(dataFile.filename)
+            filename = business + "_" + fileType + ".xlsx"
             # 将文件保存到服务器的uploads目录下
             dataFile.save(os.path.join('file/standard', filename))
             # 返回一个成功的响应
@@ -86,7 +90,6 @@ def create_app():
             # 返回一个失败的响应
             flash('文件上传失败，请检查文件类型是否正确！')
             return redirect("/")
-
 
     return app
 
