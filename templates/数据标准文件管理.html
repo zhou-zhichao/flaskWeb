@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <title>数据标准文件管理</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
@@ -52,6 +53,54 @@
     </script>
 </head>
 <body>
+<!-- 弹出窗口 -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">表单</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- 表单 -->
+                <form action="/submit" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3 row">
+                        <label for="selectBusiness" class="col-sm-4 col-form-label">请选择业务线：</label>
+                        <div class="col-sm-8">
+                            <select class="form-select" id="selectBusiness" name="business">
+                                <option value="option1">学工</option>
+                                <option value="option2">人事</option>
+                                <option value="option3">研究生</option>
+                                <option value="option4">教务</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="selectFileType" class="col-sm-4 col-form-label">请选择文件类型：</label>
+                        <div class="col-sm-8">
+                            <select class="form-select" id="selectFileType" name="fileType">
+                                <option value="option1">数据元素</option>
+                                <option value="option2">标准代码</option>
+                                <option value="option3">业务线数据元素映射</option>
+                                <option value="option4">标准层模型</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="fileInput" class="col-sm-4 col-form-label">请选择数据标准文件：</label>
+                        <div class="col-sm-8">
+                            <input type="file" class="form-control" id="fileInput" name="dataFile" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">提交</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="base" class="">
 
     <!-- Unnamed (动态面板) -->
@@ -108,7 +157,7 @@
                 </div>
 
                 <!-- Unnamed (矩形) -->
-                <div id="u122" class="ax_default _形状">
+                <div id="u122" class="ax_default _形状" data-bs-toggle="modal" data-bs-target="#myModal">
                     <div id="u122_div" class=""></div>
                     <div id="u122_text" class="text ">
                         <p><span>提交检查文件</span></p>
@@ -157,6 +206,7 @@
 
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../static/resources/scripts/axure/ios.js"></script>
 </body>
 </html>
