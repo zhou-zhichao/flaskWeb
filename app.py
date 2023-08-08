@@ -67,8 +67,8 @@ def create_app():
     @app.route('/second')
     def second():
         return render_template('数据线落标检查.html')
-    @app.route('/thrid')
-    def thrid():
+    @app.route('/third')
+    def third():
         return render_template('业务线数据落标.html')
 
     @app.route('/download_template/<file_name>')
