@@ -45,7 +45,10 @@
     <script src="../static/resources/scripts/axure/math.js"></script>
     <script src="../static/resources/scripts/axure/jquery.nicescroll.min.js"></script>
     <script src="../static/data/document.js"></script>
-    <script src="../static/files/数据标准文件管理/data.js"></script>
+{% block datajs %}
+{% endblock %}
+
+
     <script type="text/javascript">
         $axure.utils.getTransparentGifPath = function () {
             return 'resources/images/transparent.gif';

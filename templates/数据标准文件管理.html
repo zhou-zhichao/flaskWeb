@@ -7,7 +7,9 @@
 {% block css %}
     <link href="../static/files/数据标准文件管理/styles.css" type="text/css" rel="stylesheet"/>
 {% endblock %}
-
+{% block datajs %}
+    <script src="../static/files/数据标准文件管理/data.js"></script>
+{% endblock %}
 
 {% block content %}
 {% with messages = get_flashed_messages() %}
