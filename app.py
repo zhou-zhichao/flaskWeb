@@ -21,6 +21,8 @@ def read_filenames_with_version(folder):
         result.append((business, version, file_type, file))
     # 返回结果列表
     return result
+
+
 #
 def read_filenames(folder):
     # 创建一个空列表来存储结果
@@ -63,8 +65,11 @@ def create_app():
         return render_template('数据标准文件管理.html', tuples=g.file_tuple)
 
     @app.route('/second')
-        def second():
-            pass
+    def second():
+        return render_template('数据线落标检查.html')
+    @app.route('/thrid')
+    def thrid():
+        return render_template('业务线数据落标.html')
 
     @app.route('/download_template/<file_name>')
     def download_template(file_name):
