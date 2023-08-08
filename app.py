@@ -62,7 +62,9 @@ def create_app():
     def index():
         return render_template('数据标准文件管理.html', tuples=g.file_tuple)
 
-    @app.route('')
+    @app.route('/second')
+        def second():
+            pass
 
     @app.route('/download_template/<file_name>')
     def download_template(file_name):
