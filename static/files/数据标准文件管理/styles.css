@@ -22,7 +22,10 @@
 #u116 {
     position: absolute;
     left: 50px;
+    right:50px;
     top: 50px;
+    width:1100px;
+    height:1100px;
 }
 
 #u116_state0 {

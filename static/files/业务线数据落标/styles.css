@@ -12,10 +12,10 @@
   border-color:transparent;
   background-color:transparent;
 }
-#base {
-  position:absolute;
-  z-index:0;
-}
+/*#base {*/
+/*  position:absolute;*/
+/*  z-index:0;*/
+/*}*/
 #u0 {
   position:absolute;
   left:50px;
