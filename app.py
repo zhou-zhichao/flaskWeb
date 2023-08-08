@@ -45,6 +45,7 @@ def create_app():
     # create and configure the app
     app = Flask(__name__)
     app.secret_key = 'dev'
+    app.debug = True
 
     @app.before_request
     def before_request():
