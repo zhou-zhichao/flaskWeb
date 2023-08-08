@@ -53,16 +53,24 @@
     </script>
 </head>
 <body>
-{% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <!-- 根据不同的类别，使用不同的bootstrap警告组件显示消息 -->
-                <div class="alert alert-{{ category }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="alert alert-info alert-dismissible fade show center-block fixed-top" role="alert">
+            {{ messages[0] }}
+{#            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
+{#                <span aria-hidden="true">&times;</span>#}
+{#            </button>#}
+        </div>
+    {% endif %}
+{% endwith %}
+<script>
+    // 获取alert元素
+    var alert = $('.alert');
+    // 设置2秒后淡出并收起alert
+    alert.fadeTo(1000, 500).slideUp(500, function () {
+        alert.slideUp(500);
+    });
+</script>
 <!-- 弹出窗口 -->
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -99,7 +107,8 @@
                     <div class="mb-3 row">
                         <label for="fileInput" class="col-sm-4 col-form-label">请选择数据标准文件：</label>
                         <div class="col-sm-8">
-                            <input type="file" class="form-control" id="fileInput" name="dataFile" required accept=".xlsx">
+                            <input type="file" class="form-control" id="fileInput" name="dataFile" required
+                                   accept=".xlsx">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -157,7 +166,7 @@
                 <!-- Unnamed (下拉列表) -->
                 <div id="u121" class="ax_default _下拉列表">
                     <div id="u121_div" class=""></div>
-                    <select id="u121_input" class="u121_input">
+                    <select id="u121_input" class="u121_input" name="select_list">
                         <option class="u121_input_option" selected value="全部">全部</option>
                         <option class="u121_input_option" value="学工">学工</option>
                         <option class="u121_input_option" value="人事">人事</option>
@@ -201,7 +210,7 @@
                                     <td></td>
                                     <td>{{ tuple[0] }}</td>
                                     <td>{{ tuple[2] }}</td>
-                                    <td><a href="{{url_for('download_file',file_name=tuple[2])}}">下载</a></td>
+                                    <td><a href="{{ url_for('download_file',file_name=tuple[2]) }}">下载</a></td>
 
                                 </tr>
                             {% endif %}

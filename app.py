@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, send_from_directory, render_template, g, request, flash, redirect
+from flask import Flask, send_from_directory, render_template, g, request, flash, redirect, make_response
 
 
 # from werkzeug.utils import secure_filename
@@ -21,8 +21,7 @@ def read_filenames_with_version(folder):
         result.append((business, version, file_type, file))
     # 返回结果列表
     return result
-
-
+#
 def read_filenames(folder):
     # 创建一个空列表来存储结果
     result = []
@@ -84,8 +83,9 @@ def create_app():
             # 将文件保存到服务器的uploads目录下
             dataFile.save(os.path.join('file/standard', filename))
             # 返回一个成功的响应
-            flash('文件上传成功！')
-            return redirect("/")
+            response = make_response(redirect("/"))
+            flash(f'{filename}上传成功！')
+            return response
         else:
             # 返回一个失败的响应
             flash('文件上传失败，请检查文件类型是否正确！')

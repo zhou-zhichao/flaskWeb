@@ -491,10 +491,10 @@ table tfoot tr td {
     text-align: right;
     padding-right: 20px;
 }
-td:nth-child(4){
+
+td:nth-child(4) {
     width: 400px;
 }
-
 
 
 #u125_img {
@@ -2357,4 +2357,32 @@ td:nth-child(4){
     border-width: 0px;
     white-space: nowrap;
     text-transform: none;
+}
+
+/* 定义一个样式类，用于显示不同类型的flash信息 */
+.flash {
+    padding: 10px;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+.flash-error {
+    background-color: #ffcccc;
+}
+
+.flash-success {
+    background-color: #ccffcc;
+}
+
+/* 定义一个绝对定位和透明度的样式类 */
+.flash-fade {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    opacity: 1;
+    /* 定义一个过渡效果 */
+    transition: opacity 2s ease-in-out;
+}
+.alert-info{
+    text-align:center;
 }
