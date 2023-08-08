@@ -62,6 +62,8 @@ def create_app():
     def index():
         return render_template('数据标准文件管理.html', tuples=g.file_tuple)
 
+    @app.route('')
+
     @app.route('/download_template/<file_name>')
     def download_template(file_name):
         return send_from_directory('file/template', file_name, as_attachment=True)

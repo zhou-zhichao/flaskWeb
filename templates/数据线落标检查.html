@@ -1,631 +1,619 @@
-﻿
-
-
-
-<!DOCTYPE html>
-<html>
-  <head>
+﻿{% extends "base.html" %}
+{% block title %}
     <title>数据线落标检查</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <link href="../static/resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
-    <link href="../static/data/styles.css" type="text/css" rel="stylesheet"/>
+{% endblock %}
+
+{% block css %}
     <link href="../static/files/数据线落标检查/styles.css" type="text/css" rel="stylesheet"/>
-    <script src="../static/resources/scripts/jquery-3.2.1.min.js"></script>
-    <script src="../static/resources/scripts/axure/axQuery.js"></script>
-    <script src="../static/resources/scripts/axure/globals.js"></script>
-    <script src="../static/resources/scripts/axutils.js"></script>
-    <script src="../static/resources/scripts/axure/annotation.js"></script>
-    <script src="../static/resources/scripts/axure/axQuery.std.js"></script>
-    <script src="../static/resources/scripts/axure/doc.js"></script>
-    <script src="../static/resources/scripts/messagecenter.js"></script>
-    <script src="../static/resources/scripts/axure/events.js"></script>
-    <script src="../static/resources/scripts/axure/recording.js"></script>
-    <script src="../static/resources/scripts/axure/action.js"></script>
-    <script src="../static/resources/scripts/axure/expr.js"></script>
-    <script src="../static/resources/scripts/axure/geometry.js"></script>
-    <script src="../static/resources/scripts/axure/flyout.js"></script>
-    <script src="../static/resources/scripts/axure/model.js"></script>
-    <script src="../static/resources/scripts/axure/repeater.js"></script>
-    <script src="../static/resources/scripts/axure/sto.js"></script>
-    <script src="../static/resources/scripts/axure/utils.temp.js"></script>
-    <script src="../static/resources/scripts/axure/variables.js"></script>
-    <script src="../static/resources/scripts/axure/drag.js"></script>
-    <script src="../static/resources/scripts/axure/move.js"></script>
-    <script src="../static/resources/scripts/axure/visibility.js"></script>
-    <script src="../static/resources/scripts/axure/style.js"></script>
-    <script src="../static/resources/scripts/axure/adaptive.js"></script>
-    <script src="../static/resources/scripts/axure/tree.js"></script>
-    <script src="../static/resources/scripts/axure/init.temp.js"></script>
-    <script src="../static/resources/scripts/axure/legacy.js"></script>
-    <script src="../static/resources/scripts/axure/viewer.js"></script>
-    <script src="../static/resources/scripts/axure/math.js"></script>
-    <script src="../static/resources/scripts/axure/jquery.nicescroll.min.js"></script>
-    <script src="../static/data/document.js"></script>
-    <script src="../static/files/数据线落标检查/data.js"></script>
-    <script type="text/javascript">
-      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
-      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
-      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
-    </script>
-  </head>
-  <body>
+{% endblock %}
+
+{% block content %}
+
+
     <div id="base" class="">
 
-      <!-- Unnamed (动态面板) -->
-      <div id="u46" class="ax_default">
-        <div id="u46_state0" class="panel_state" data-label="记录列表" style="">
-          <div id="u46_state0_content" class="panel_state_content">
+        <!-- Unnamed (动态面板) -->
+        <div id="u46" class="ax_default">
+            <div id="u46_state0" class="panel_state" data-label="记录列表" style="">
+                <div id="u46_state0_content" class="panel_state_content">
 
-            <!-- Unnamed (矩形) -->
-            <div id="u47" class="ax_default _形状">
-              <div id="u47_div" class=""></div>
-              <div id="u47_text" class="text " style="display:none; visibility: hidden">
-                <p></p>
-              </div>
+                    <!-- Unnamed (矩形) -->
+                    <div id="u47" class="ax_default _形状">
+                        <div id="u47_div" class=""></div>
+                        <div id="u47_text" class="text " style="display:none; visibility: hidden">
+                            <p></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u48" class="ax_default _文本段落1">
+                        <div id="u48_div" class=""></div>
+                        <div id="u48_text" class="text ">
+                            <p><span style="text-decoration:underline ;">重要业务结果文件模板下载</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u49" class="ax_default _文本段落1">
+                        <div id="u49_div" class=""></div>
+                        <div id="u49_text" class="text ">
+                            <p><span style="text-decoration:underline ;">重要业务结果文件模板下载</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u50" class="ax_default _文本段落1">
+                        <div id="u50_div" class=""></div>
+                        <div id="u50_text" class="text ">
+                            <p><span>业务线</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (下拉列表) -->
+                    <div id="u51" class="ax_default _下拉列表">
+                        <div id="u51_div" class=""></div>
+                        <select id="u51_input" class="u51_input">
+                            <option class="u51_input_option" selected value="全部">全部</option>
+                            <option class="u51_input_option" value="学工">学工</option>
+                            <option class="u51_input_option" value="人事">人事</option>
+                            <option class="u51_input_option" value="研究生">研究生</option>
+                            <option class="u51_input_option" value="教务">教务</option>
+                        </select>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u52" class="ax_default _二级标题1">
+                        <div id="u52_div" class=""></div>
+                        <div id="u52_text" class="text ">
+                            <p><span>业务线数据落标检查确认</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (下拉列表) -->
+                    <div id="u53" class="ax_default _下拉列表">
+                        <div id="u53_div" class=""></div>
+                        <select id="u53_input" class="u53_input">
+                            <option class="u53_input_option" value="待确认">待确认</option>
+                            <option class="u53_input_option" value="已确认">已确认</option>
+                            <option class="u53_input_option" selected value="全部">全部</option>
+                        </select>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u54" class="ax_default _文本段落1">
+                        <div id="u54_div" class=""></div>
+                        <div id="u54_text" class="text ">
+                            <p><span>状态</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (表格) -->
+                    <div id="u55" class="ax_default _表格">
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u56" class="ax_default _单元格">
+                            <img id="u56_img" class="img " src="../static/images/数据线落标检查/u56.png"/>
+                            <div id="u56_text" class="text ">
+                                <p><span>业务线</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u57" class="ax_default _单元格">
+                            <img id="u57_img" class="img " src="../static/images/数据线落标检查/u57.png"/>
+                            <div id="u57_text" class="text ">
+                                <p><span>版本</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u58" class="ax_default _单元格">
+                            <img id="u58_img" class="img " src="../static/images/数据线落标检查/u58.png"/>
+                            <div id="u58_text" class="text ">
+                                <p><span>数据标准检查结果</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u59" class="ax_default _单元格">
+                            <img id="u59_img" class="img " src="../static/images/数据线落标检查/u59.png"/>
+                            <div id="u59_text" class="text ">
+                                <p><span>数据标准检查结果</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u60" class="ax_default _单元格">
+                            <img id="u60_img" class="img " src="../static/images/数据线落标检查/u60.png"/>
+                            <div id="u60_text" class="text ">
+                                <p><span>确认状态</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u61" class="ax_default _单元格">
+                            <img id="u61_img" class="img " src="../static/images/数据线落标检查/u61.png"/>
+                            <div id="u61_text" class="text ">
+                                <p><span>操作</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u62" class="ax_default _单元格">
+                            <img id="u62_img" class="img " src="../static/images/数据线落标检查/u62.png"/>
+                            <div id="u62_text" class="text ">
+                                <p><span>人事</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u63" class="ax_default _单元格">
+                            <img id="u63_img" class="img " src="../static/images/数据线落标检查/u63.png"/>
+                            <div id="u63_text" class="text ">
+                                <p><span>4.2.3</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u64" class="ax_default _单元格">
+                            <img id="u64_img" class="img " src="../static/images/数据线落标检查/u64.png"/>
+                            <div id="u64_text" class="text ">
+                                <p><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">人事产品_4.2.3_外供数据检查.xlsx</span><span
+                                        style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp; </span><span
+                                        style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u65" class="ax_default _单元格">
+                            <img id="u65_img" class="img " src="../static/images/数据线落标检查/u65.png"/>
+                            <div id="u65_text" class="text ">
+                                <p><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">人事产品_4.2.3_外供数据检查确认.xlsx</span><span
+                                        style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp; </span><span
+                                        style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u66" class="ax_default _单元格">
+                            <img id="u66_img" class="img " src="../static/images/数据线落标检查/u66.png"/>
+                            <div id="u66_text" class="text ">
+                                <p><span>已确认</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u67" class="ax_default _单元格">
+                            <img id="u67_img" class="img " src="../static/images/数据线落标检查/u67.png"/>
+                            <div id="u67_text" class="text ">
+                                <p><span style="text-decoration:underline ;">确认</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u68" class="ax_default _单元格">
+                            <img id="u68_img" class="img " src="../static/images/数据线落标检查/u62.png"/>
+                            <div id="u68_text" class="text ">
+                                <p><span>人事</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u69" class="ax_default _单元格">
+                            <img id="u69_img" class="img " src="../static/images/数据线落标检查/u63.png"/>
+                            <div id="u69_text" class="text ">
+                                <p><span>4.2.3</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u70" class="ax_default _单元格">
+                            <img id="u70_img" class="img " src="../static/images/数据线落标检查/u64.png"/>
+                            <div id="u70_text" class="text ">
+                                <p><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">人事产品_4.2.3_对外数据要求检查.xlsx</span><span
+                                        style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp; </span><span
+                                        style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u71" class="ax_default _单元格">
+                            <img id="u71_img" class="img " src="../static/images/数据线落标检查/u65.png"/>
+                            <div id="u71_text" class="text ">
+                                <p><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">人事产品_4.2.3_对外数据要求检查确认.xlsx</span><span
+                                        style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp; </span><span
+                                        style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u72" class="ax_default _单元格">
+                            <img id="u72_img" class="img " src="../static/images/数据线落标检查/u66.png"/>
+                            <div id="u72_text" class="text ">
+                                <p><span>已确认</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u73" class="ax_default _单元格">
+                            <img id="u73_img" class="img " src="../static/images/数据线落标检查/u67.png"/>
+                            <div id="u73_text" class="text ">
+                                <p><span style="text-decoration:underline ;">确认</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u74" class="ax_default _单元格">
+                            <img id="u74_img" class="img " src="../static/images/数据线落标检查/u62.png"/>
+                            <div id="u74_text" class="text ">
+                                <p><span>人事</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u75" class="ax_default _单元格">
+                            <img id="u75_img" class="img " src="../static/images/数据线落标检查/u63.png"/>
+                            <div id="u75_text" class="text ">
+                                <p><span>4.2.3</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u76" class="ax_default _单元格">
+                            <img id="u76_img" class="img " src="../static/images/数据线落标检查/u64.png"/>
+                            <div id="u76_text" class="text ">
+                                <p><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">人事产品_4.2.3_自定义代码检查.xlsx</span><span
+                                        style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp; </span><span
+                                        style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u77" class="ax_default _单元格">
+                            <img id="u77_img" class="img " src="../static/images/数据线落标检查/u65.png"/>
+                            <div id="u77_text" class="text ">
+                                <p><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">人事产品_4.2.3_自定义代码检查确认.xlsx</span><span
+                                        style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp; </span><span
+                                        style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u78" class="ax_default _单元格">
+                            <img id="u78_img" class="img " src="../static/images/数据线落标检查/u66.png"/>
+                            <div id="u78_text" class="text ">
+                                <p><span>已确认</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u79" class="ax_default _单元格">
+                            <img id="u79_img" class="img " src="../static/images/数据线落标检查/u67.png"/>
+                            <div id="u79_text" class="text ">
+                                <p><span style="text-decoration:underline ;">确认</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u80" class="ax_default _单元格">
+                            <img id="u80_img" class="img " src="../static/images/数据线落标检查/u62.png"/>
+                            <div id="u80_text" class="text ">
+                                <p><span>学工</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u81" class="ax_default _单元格">
+                            <img id="u81_img" class="img " src="../static/images/数据线落标检查/u63.png"/>
+                            <div id="u81_text" class="text ">
+                                <p><span style="font-family:'ArialMT', 'Arial', sans-serif;">4</span><span
+                                        style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">.0.1</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u82" class="ax_default _单元格">
+                            <img id="u82_img" class="img " src="../static/images/数据线落标检查/u64.png"/>
+                            <div id="u82_text" class="text ">
+                                <p><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">学工产品_4.0.1_自定义代码检查.xlsx</span><span
+                                        style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp; </span><span
+                                        style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u83" class="ax_default _单元格">
+                            <img id="u83_img" class="img " src="../static/images/数据线落标检查/u65.png"/>
+                            <div id="u83_text" class="text " style="display:none; visibility: hidden">
+                                <p></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u84" class="ax_default _单元格">
+                            <img id="u84_img" class="img " src="../static/images/数据线落标检查/u66.png"/>
+                            <div id="u84_text" class="text ">
+                                <p><span>已确认</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u85" class="ax_default _单元格">
+                            <img id="u85_img" class="img " src="../static/images/数据线落标检查/u67.png"/>
+                            <div id="u85_text" class="text ">
+                                <p><span style="text-decoration:underline ;">确认</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u86" class="ax_default _单元格">
+                            <img id="u86_img" class="img " src="../static/images/数据线落标检查/u86.png"/>
+                            <div id="u86_text" class="text ">
+                                <p><span>学工</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u87" class="ax_default _单元格">
+                            <img id="u87_img" class="img " src="../static/images/数据线落标检查/u87.png"/>
+                            <div id="u87_text" class="text ">
+                                <p><span style="font-family:'ArialMT', 'Arial', sans-serif;">4</span><span
+                                        style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">.0.1</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u88" class="ax_default _单元格">
+                            <img id="u88_img" class="img " src="../static/images/数据线落标检查/u88.png"/>
+                            <div id="u88_text" class="text ">
+                                <p><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">学工产品_4.0.1_对外数据要求检查.xlsx</span><span
+                                        style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp; </span><span
+                                        style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u89" class="ax_default _单元格">
+                            <img id="u89_img" class="img " src="../static/images/数据线落标检查/u89.png"/>
+                            <div id="u89_text" class="text " style="display:none; visibility: hidden">
+                                <p></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u90" class="ax_default _单元格">
+                            <img id="u90_img" class="img " src="../static/images/数据线落标检查/u90.png"/>
+                            <div id="u90_text" class="text ">
+                                <p><span>未确认</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Unnamed (单元格) -->
+                        <div id="u91" class="ax_default _单元格">
+                            <img id="u91_img" class="img " src="../static/images/数据线落标检查/u91.png"/>
+                            <div id="u91_text" class="text ">
+                                <p><span style="text-decoration:underline ;">确认</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div id="u46_state1" class="panel_state" data-label="提交记录" style="visibility: hidden;">
+                <div id="u46_state1_content" class="panel_state_content">
 
-            <!-- Unnamed (矩形) -->
-            <div id="u48" class="ax_default _文本段落1">
-              <div id="u48_div" class=""></div>
-              <div id="u48_text" class="text ">
-                <p><span style="text-decoration:underline ;">重要业务结果文件模板下载</span></p>
-              </div>
+                    <!-- Unnamed (矩形) -->
+                    <div id="u92" class="ax_default _形状">
+                        <div id="u92_div" class=""></div>
+                        <div id="u92_text" class="text " style="display:none; visibility: hidden">
+                            <p></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u93" class="ax_default _形状">
+                        <div id="u93_div" class=""></div>
+                        <div id="u93_text" class="text " style="display:none; visibility: hidden">
+                            <p></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u94" class="ax_default _形状">
+                        <div id="u94_div" class=""></div>
+                        <div id="u94_text" class="text ">
+                            <p><span>请选择本地文件</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u95" class="ax_default _文本段落1">
+                        <div id="u95_div" class=""></div>
+                        <div id="u95_text" class="text ">
+                            <p><span>请选择检查文件：</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u96" class="ax_default _文本段落1">
+                        <div id="u96_div" class=""></div>
+                        <div id="u96_text" class="text ">
+                            <p><span>请选择业务线：</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (下拉列表) -->
+                    <div id="u97" class="ax_default _下拉列表">
+                        <div id="u97_div" class=""></div>
+                        <select id="u97_input" class="u97_input">
+                            <option class="u97_input_option" value="学工">学工</option>
+                            <option class="u97_input_option" selected value="人事">人事</option>
+                            <option class="u97_input_option" value="研究生">研究生</option>
+                            <option class="u97_input_option" value="教务">教务</option>
+                        </select>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u98" class="ax_default _文本段落1">
+                        <div id="u98_div" class=""></div>
+                        <div id="u98_text" class="text ">
+                            <p><span>请输入版本号：</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u99" class="ax_default _形状">
+                        <div id="u99_div" class=""></div>
+                        <div id="u99_text" class="text " style="display:none; visibility: hidden">
+                            <p></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u100" class="ax_default _形状">
+                        <div id="u100_div" class=""></div>
+                        <div id="u100_text" class="text ">
+                            <p><span>确认</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u101" class="ax_default _形状">
+                        <div id="u101_div" class=""></div>
+                        <div id="u101_text" class="text ">
+                            <p><span>取消</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u102" class="ax_default _二级标题1">
+                        <div id="u102_div" class=""></div>
+                        <div id="u102_text" class="text " style="display:none; visibility: hidden">
+                            <p></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u103" class="ax_default _形状">
+                        <div id="u103_div" class=""></div>
+                        <div id="u103_text" class="text ">
+                            <p><span>业务线落标确认文件提交</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (线段) -->
+                    <div id="u104" class="ax_default _线段">
+                        <img id="u104_img" class="img " src="../static/images/业务线数据落标/u38.svg"/>
+                        <div id="u104_text" class="text " style="display:none; visibility: hidden">
+                            <p></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u105" class="ax_default _文本段落1">
+                        <div id="u105_div" class=""></div>
+                        <div id="u105_text" class="text ">
+                            <p><span>请选择文件类型：</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (下拉列表) -->
+                    <div id="u106" class="ax_default _下拉列表">
+                        <div id="u106_div" class=""></div>
+                        <select id="u106_input" class="u106_input">
+                            <option class="u106_input_option" selected value="重要业务结果确认">重要业务结果确认
+                            </option>
+                            <option class="u106_input_option" value="自定义代码确认">自定义代码确认</option>
+                        </select>
+                    </div>
+                </div>
             </div>
+            <div id="u46_state2" class="panel_state" data-label="提示" style="visibility: hidden;">
+                <div id="u46_state2_content" class="panel_state_content">
 
-            <!-- Unnamed (矩形) -->
-            <div id="u49" class="ax_default _文本段落1">
-              <div id="u49_div" class=""></div>
-              <div id="u49_text" class="text ">
-                <p><span style="text-decoration:underline ;">重要业务结果文件模板下载</span></p>
-              </div>
+                    <!-- Unnamed (矩形) -->
+                    <div id="u107" class="ax_default _形状">
+                        <div id="u107_div" class=""></div>
+                        <div id="u107_text" class="text " style="display:none; visibility: hidden">
+                            <p></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u108" class="ax_default _形状">
+                        <div id="u108_div" class=""></div>
+                        <div id="u108_text" class="text " style="display:none; visibility: hidden">
+                            <p></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u109" class="ax_default _形状">
+                        <div id="u109_div" class=""></div>
+                        <div id="u109_text" class="text ">
+                            <p><span>确认</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u110" class="ax_default _二级标题1">
+                        <div id="u110_div" class=""></div>
+                        <div id="u110_text" class="text " style="display:none; visibility: hidden">
+                            <p></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u111" class="ax_default _形状">
+                        <div id="u111_div" class=""></div>
+                        <div id="u111_text" class="text ">
+                            <p><span>提示</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u112" class="ax_default _文本段落1">
+                        <div id="u112_div" class=""></div>
+                        <div id="u112_text" class="text ">
+                            <p><span>数据落标确认文件提交成功。</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u113" class="ax_default _文本段落1">
+                        <div id="u113_div" class=""></div>
+                        <div id="u113_text" class="text ">
+                            <p><span>产品版本： 4.2.3</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u114" class="ax_default _文本段落1">
+                        <div id="u114_div" class=""></div>
+                        <div id="u114_text" class="text ">
+                            <p><span>业务线： 人事产品</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (矩形) -->
+                    <div id="u115" class="ax_default _文本段落1">
+                        <div id="u115_div" class=""></div>
+                        <div id="u115_text" class="text ">
+                            <p><span>文件类型： 自定义代码 </span></p>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u50" class="ax_default _文本段落1">
-              <div id="u50_div" class=""></div>
-              <div id="u50_text" class="text ">
-                <p><span>业务线</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (下拉列表) -->
-            <div id="u51" class="ax_default _下拉列表">
-              <div id="u51_div" class=""></div>
-              <select id="u51_input" class="u51_input">
-                <option class="u51_input_option" selected value="全部">全部</option>
-                <option class="u51_input_option" value="学工">学工</option>
-                <option class="u51_input_option" value="人事">人事</option>
-                <option class="u51_input_option" value="研究生">研究生</option>
-                <option class="u51_input_option" value="教务">教务</option>
-              </select>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u52" class="ax_default _二级标题1">
-              <div id="u52_div" class=""></div>
-              <div id="u52_text" class="text ">
-                <p><span>业务线数据落标检查确认</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (下拉列表) -->
-            <div id="u53" class="ax_default _下拉列表">
-              <div id="u53_div" class=""></div>
-              <select id="u53_input" class="u53_input">
-                <option class="u53_input_option" value="待确认">待确认</option>
-                <option class="u53_input_option" value="已确认">已确认</option>
-                <option class="u53_input_option" selected value="全部">全部</option>
-              </select>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u54" class="ax_default _文本段落1">
-              <div id="u54_div" class=""></div>
-              <div id="u54_text" class="text ">
-                <p><span>状态</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (表格) -->
-            <div id="u55" class="ax_default _表格">
-
-              <!-- Unnamed (单元格) -->
-              <div id="u56" class="ax_default _单元格">
-                <img id="u56_img" class="img " src="../static/images/数据线落标检查/u56.png"/>
-                <div id="u56_text" class="text ">
-                  <p><span>业务线</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u57" class="ax_default _单元格">
-                <img id="u57_img" class="img " src="../static/images/数据线落标检查/u57.png"/>
-                <div id="u57_text" class="text ">
-                  <p><span>版本</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u58" class="ax_default _单元格">
-                <img id="u58_img" class="img " src="../static/images/数据线落标检查/u58.png"/>
-                <div id="u58_text" class="text ">
-                  <p><span>数据标准检查结果</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u59" class="ax_default _单元格">
-                <img id="u59_img" class="img " src="../static/images/数据线落标检查/u59.png"/>
-                <div id="u59_text" class="text ">
-                  <p><span>数据标准检查结果</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u60" class="ax_default _单元格">
-                <img id="u60_img" class="img " src="../static/images/数据线落标检查/u60.png"/>
-                <div id="u60_text" class="text ">
-                  <p><span>确认状态</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u61" class="ax_default _单元格">
-                <img id="u61_img" class="img " src="../static/images/数据线落标检查/u61.png"/>
-                <div id="u61_text" class="text ">
-                  <p><span>操作</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u62" class="ax_default _单元格">
-                <img id="u62_img" class="img " src="../static/images/数据线落标检查/u62.png"/>
-                <div id="u62_text" class="text ">
-                  <p><span>人事</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u63" class="ax_default _单元格">
-                <img id="u63_img" class="img " src="../static/images/数据线落标检查/u63.png"/>
-                <div id="u63_text" class="text ">
-                  <p><span>4.2.3</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u64" class="ax_default _单元格">
-                <img id="u64_img" class="img " src="../static/images/数据线落标检查/u64.png"/>
-                <div id="u64_text" class="text ">
-                  <p><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">人事产品_4.2.3_外供数据检查.xlsx</span><span style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp; </span><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u65" class="ax_default _单元格">
-                <img id="u65_img" class="img " src="../static/images/数据线落标检查/u65.png"/>
-                <div id="u65_text" class="text ">
-                  <p><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">人事产品_4.2.3_外供数据检查确认.xlsx</span><span style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp; </span><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u66" class="ax_default _单元格">
-                <img id="u66_img" class="img " src="../static/images/数据线落标检查/u66.png"/>
-                <div id="u66_text" class="text ">
-                  <p><span>已确认</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u67" class="ax_default _单元格">
-                <img id="u67_img" class="img " src="../static/images/数据线落标检查/u67.png"/>
-                <div id="u67_text" class="text ">
-                  <p><span style="text-decoration:underline ;">确认</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u68" class="ax_default _单元格">
-                <img id="u68_img" class="img " src="../static/images/数据线落标检查/u62.png"/>
-                <div id="u68_text" class="text ">
-                  <p><span>人事</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u69" class="ax_default _单元格">
-                <img id="u69_img" class="img " src="../static/images/数据线落标检查/u63.png"/>
-                <div id="u69_text" class="text ">
-                  <p><span>4.2.3</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u70" class="ax_default _单元格">
-                <img id="u70_img" class="img " src="../static/images/数据线落标检查/u64.png"/>
-                <div id="u70_text" class="text ">
-                  <p><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">人事产品_4.2.3_对外数据要求检查.xlsx</span><span style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp; </span><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u71" class="ax_default _单元格">
-                <img id="u71_img" class="img " src="../static/images/数据线落标检查/u65.png"/>
-                <div id="u71_text" class="text ">
-                  <p><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">人事产品_4.2.3_对外数据要求检查确认.xlsx</span><span style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp; </span><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u72" class="ax_default _单元格">
-                <img id="u72_img" class="img " src="../static/images/数据线落标检查/u66.png"/>
-                <div id="u72_text" class="text ">
-                  <p><span>已确认</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u73" class="ax_default _单元格">
-                <img id="u73_img" class="img " src="../static/images/数据线落标检查/u67.png"/>
-                <div id="u73_text" class="text ">
-                  <p><span style="text-decoration:underline ;">确认</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u74" class="ax_default _单元格">
-                <img id="u74_img" class="img " src="../static/images/数据线落标检查/u62.png"/>
-                <div id="u74_text" class="text ">
-                  <p><span>人事</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u75" class="ax_default _单元格">
-                <img id="u75_img" class="img " src="../static/images/数据线落标检查/u63.png"/>
-                <div id="u75_text" class="text ">
-                  <p><span>4.2.3</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u76" class="ax_default _单元格">
-                <img id="u76_img" class="img " src="../static/images/数据线落标检查/u64.png"/>
-                <div id="u76_text" class="text ">
-                  <p><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">人事产品_4.2.3_自定义代码检查.xlsx</span><span style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp; </span><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u77" class="ax_default _单元格">
-                <img id="u77_img" class="img " src="../static/images/数据线落标检查/u65.png"/>
-                <div id="u77_text" class="text ">
-                  <p><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">人事产品_4.2.3_自定义代码检查确认.xlsx</span><span style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp; </span><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u78" class="ax_default _单元格">
-                <img id="u78_img" class="img " src="../static/images/数据线落标检查/u66.png"/>
-                <div id="u78_text" class="text ">
-                  <p><span>已确认</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u79" class="ax_default _单元格">
-                <img id="u79_img" class="img " src="../static/images/数据线落标检查/u67.png"/>
-                <div id="u79_text" class="text ">
-                  <p><span style="text-decoration:underline ;">确认</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u80" class="ax_default _单元格">
-                <img id="u80_img" class="img " src="../static/images/数据线落标检查/u62.png"/>
-                <div id="u80_text" class="text ">
-                  <p><span>学工</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u81" class="ax_default _单元格">
-                <img id="u81_img" class="img " src="../static/images/数据线落标检查/u63.png"/>
-                <div id="u81_text" class="text ">
-                  <p><span style="font-family:'ArialMT', 'Arial', sans-serif;">4</span><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">.0.1</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u82" class="ax_default _单元格">
-                <img id="u82_img" class="img " src="../static/images/数据线落标检查/u64.png"/>
-                <div id="u82_text" class="text ">
-                  <p><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">学工产品_4.0.1_自定义代码检查.xlsx</span><span style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp; </span><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u83" class="ax_default _单元格">
-                <img id="u83_img" class="img " src="../static/images/数据线落标检查/u65.png"/>
-                <div id="u83_text" class="text " style="display:none; visibility: hidden">
-                  <p></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u84" class="ax_default _单元格">
-                <img id="u84_img" class="img " src="../static/images/数据线落标检查/u66.png"/>
-                <div id="u84_text" class="text ">
-                  <p><span>已确认</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u85" class="ax_default _单元格">
-                <img id="u85_img" class="img " src="../static/images/数据线落标检查/u67.png"/>
-                <div id="u85_text" class="text ">
-                  <p><span style="text-decoration:underline ;">确认</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u86" class="ax_default _单元格">
-                <img id="u86_img" class="img " src="../static/images/数据线落标检查/u86.png"/>
-                <div id="u86_text" class="text ">
-                  <p><span>学工</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u87" class="ax_default _单元格">
-                <img id="u87_img" class="img " src="../static/images/数据线落标检查/u87.png"/>
-                <div id="u87_text" class="text ">
-                  <p><span style="font-family:'ArialMT', 'Arial', sans-serif;">4</span><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">.0.1</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u88" class="ax_default _单元格">
-                <img id="u88_img" class="img " src="../static/images/数据线落标检查/u88.png"/>
-                <div id="u88_text" class="text ">
-                  <p><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">学工产品_4.0.1_对外数据要求检查.xlsx</span><span style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp; </span><span style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u89" class="ax_default _单元格">
-                <img id="u89_img" class="img " src="../static/images/数据线落标检查/u89.png"/>
-                <div id="u89_text" class="text " style="display:none; visibility: hidden">
-                  <p></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u90" class="ax_default _单元格">
-                <img id="u90_img" class="img " src="../static/images/数据线落标检查/u90.png"/>
-                <div id="u90_text" class="text ">
-                  <p><span>未确认</span></p>
-                </div>
-              </div>
-
-              <!-- Unnamed (单元格) -->
-              <div id="u91" class="ax_default _单元格">
-                <img id="u91_img" class="img " src="../static/images/数据线落标检查/u91.png"/>
-                <div id="u91_text" class="text ">
-                  <p><span style="text-decoration:underline ;">确认</span></p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-        <div id="u46_state1" class="panel_state" data-label="提交记录" style="visibility: hidden;">
-          <div id="u46_state1_content" class="panel_state_content">
-
-            <!-- Unnamed (矩形) -->
-            <div id="u92" class="ax_default _形状">
-              <div id="u92_div" class=""></div>
-              <div id="u92_text" class="text " style="display:none; visibility: hidden">
-                <p></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u93" class="ax_default _形状">
-              <div id="u93_div" class=""></div>
-              <div id="u93_text" class="text " style="display:none; visibility: hidden">
-                <p></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u94" class="ax_default _形状">
-              <div id="u94_div" class=""></div>
-              <div id="u94_text" class="text ">
-                <p><span>请选择本地文件</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u95" class="ax_default _文本段落1">
-              <div id="u95_div" class=""></div>
-              <div id="u95_text" class="text ">
-                <p><span>请选择检查文件：</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u96" class="ax_default _文本段落1">
-              <div id="u96_div" class=""></div>
-              <div id="u96_text" class="text ">
-                <p><span>请选择业务线：</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (下拉列表) -->
-            <div id="u97" class="ax_default _下拉列表">
-              <div id="u97_div" class=""></div>
-              <select id="u97_input" class="u97_input">
-                <option class="u97_input_option" value="学工">学工</option>
-                <option class="u97_input_option" selected value="人事">人事</option>
-                <option class="u97_input_option" value="研究生">研究生</option>
-                <option class="u97_input_option" value="教务">教务</option>
-              </select>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u98" class="ax_default _文本段落1">
-              <div id="u98_div" class=""></div>
-              <div id="u98_text" class="text ">
-                <p><span>请输入版本号：</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u99" class="ax_default _形状">
-              <div id="u99_div" class=""></div>
-              <div id="u99_text" class="text " style="display:none; visibility: hidden">
-                <p></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u100" class="ax_default _形状">
-              <div id="u100_div" class=""></div>
-              <div id="u100_text" class="text ">
-                <p><span>确认</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u101" class="ax_default _形状">
-              <div id="u101_div" class=""></div>
-              <div id="u101_text" class="text ">
-                <p><span>取消</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u102" class="ax_default _二级标题1">
-              <div id="u102_div" class=""></div>
-              <div id="u102_text" class="text " style="display:none; visibility: hidden">
-                <p></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u103" class="ax_default _形状">
-              <div id="u103_div" class=""></div>
-              <div id="u103_text" class="text ">
-                <p><span>业务线落标确认文件提交</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (线段) -->
-            <div id="u104" class="ax_default _线段">
-              <img id="u104_img" class="img " src="../static/images/业务线数据落标/u38.svg"/>
-              <div id="u104_text" class="text " style="display:none; visibility: hidden">
-                <p></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u105" class="ax_default _文本段落1">
-              <div id="u105_div" class=""></div>
-              <div id="u105_text" class="text ">
-                <p><span>请选择文件类型：</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (下拉列表) -->
-            <div id="u106" class="ax_default _下拉列表">
-              <div id="u106_div" class=""></div>
-              <select id="u106_input" class="u106_input">
-                <option class="u106_input_option" selected value="重要业务结果确认">重要业务结果确认</option>
-                <option class="u106_input_option" value="自定义代码确认">自定义代码确认</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div id="u46_state2" class="panel_state" data-label="提示" style="visibility: hidden;">
-          <div id="u46_state2_content" class="panel_state_content">
-
-            <!-- Unnamed (矩形) -->
-            <div id="u107" class="ax_default _形状">
-              <div id="u107_div" class=""></div>
-              <div id="u107_text" class="text " style="display:none; visibility: hidden">
-                <p></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u108" class="ax_default _形状">
-              <div id="u108_div" class=""></div>
-              <div id="u108_text" class="text " style="display:none; visibility: hidden">
-                <p></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u109" class="ax_default _形状">
-              <div id="u109_div" class=""></div>
-              <div id="u109_text" class="text ">
-                <p><span>确认</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u110" class="ax_default _二级标题1">
-              <div id="u110_div" class=""></div>
-              <div id="u110_text" class="text " style="display:none; visibility: hidden">
-                <p></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u111" class="ax_default _形状">
-              <div id="u111_div" class=""></div>
-              <div id="u111_text" class="text ">
-                <p><span>提示</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u112" class="ax_default _文本段落1">
-              <div id="u112_div" class=""></div>
-              <div id="u112_text" class="text ">
-                <p><span>数据落标确认文件提交成功。</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u113" class="ax_default _文本段落1">
-              <div id="u113_div" class=""></div>
-              <div id="u113_text" class="text ">
-                <p><span>产品版本： 4.2.3</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u114" class="ax_default _文本段落1">
-              <div id="u114_div" class=""></div>
-              <div id="u114_text" class="text ">
-                <p><span>业务线： 人事产品</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u115" class="ax_default _文本段落1">
-              <div id="u115_div" class=""></div>
-              <div id="u115_text" class="text ">
-                <p><span>文件类型： 自定义代码 </span></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-    <script src="../static/resources/scripts/axure/ios.js"></script>
-  </body>
-</html>
+{% endblock %}
+
