@@ -20,11 +20,12 @@ def create_app():
         elif request.path == '/third':
             filenames = get_all_filenames('file\\input')
             print(filenames)
-            table_tuple = transform_list(filenames)
-            print(table_tuple)
-            s = [('人事', '1.1', '', '人事_1.1_自定义代码.xlsx', '', '数据元素'),
-                 ('学工', '1', '学工_1_重要业务结果.xlsx', '', '', '数据元素'),
-                 ('学工', '1.1', '学工_1.1_重要业务结果.xlsx', '学工_1.1_自定义代码.xlsx', '', '数据元素')]
+            g.table_tuple = transform_list(filenames)
+            print(g.table_tuple)
+
+            # s = [('人事', '1.1', '', '人事_1.1_自定义代码.xlsx', '', '数据元素'),
+            #      ('学工', '1', '学工_1_重要业务结果.xlsx', '', '', '数据元素'),
+            #      ('学工', '1.1', '学工_1.1_重要业务结果.xlsx', '学工_1.1_自定义代码.xlsx', '', '数据元素')]
 
 
     # a simple page that says hello
@@ -136,8 +137,12 @@ def transform_list(file_list):
             elif '自定义代码' in name:
                 fourth = name
         # 最后一位固定为'数据元素'
-
-        fifth = '数据元素'
+        standard_elem_name = first + "_数据元素.xlsx"
+        elem_exists = os.path.exists(os.path.join("file/standard/",standard_elem_name))
+        if elem_exists:
+            fifth = standard_elem_name
+        else:
+            fifth = ""
         # 把每个元组添加到结果列表中
         result.append((first, second, third, fourth, fifth))
     # 返回结果列表
