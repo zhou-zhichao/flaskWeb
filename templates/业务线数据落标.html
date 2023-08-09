@@ -75,47 +75,48 @@
     </div>
 </nav>
 <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">业务线数据检查文件提交</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="/business_submit" method="POST" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="exampleSelect1" class="form-label">请选择业务线：</label>
-                            <select class="form-select" id="business" name="business" required>
-                                <option>学工</option>
-                                <option>人事</option>
-                                <option>研究生</option>
-                                <option>教务</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">请输入版本号：</label>
-                            <input type="text" class="form-control" id="version" name="version" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFileUpload1" class="form-label">请选择重要业务结果文件：</label>
-                            <input class="form-control" type="file" id="business_result_file" name="business_result_file" accept="xlsx" >
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFileUpload2" class="form-label">请选择自定义代码文件：</label>
-                            <input class="form-control" type="file" id="code_file" name="code_file">
-                        </div>
-                        <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">保存 </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
-
-                </div>
-                    </form>
-                </div>
-
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">业务线数据检查文件提交</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body">
+                <form action="/business_submit" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="exampleSelect1" class="form-label">请选择业务线：</label>
+                        <select class="form-select" id="business" name="business" required>
+                            <option>学工</option>
+                            <option>人事</option>
+                            <option>研究生</option>
+                            <option>教务</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInput1" class="form-label">请输入版本号：</label>
+                        <input type="text" class="form-control" id="version" name="version" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFileUpload1" class="form-label">请选择重要业务结果文件：</label>
+                        <input class="form-control" type="file" id="business_result_file" name="business_result_file"
+                               accept="xlsx">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFileUpload2" class="form-label">请选择自定义代码文件：</label>
+                        <input class="form-control" type="file" id="code_file" name="code_file">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">保存</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
+</div>
 
 <div id="base" class="container">
 
@@ -153,47 +154,50 @@
                 </div>
 
 
-
                 <!-- Unnamed (表格) -->
                 <div id="u4" class="ax_default _表格">
                     <table>
-                            <thead>
+                        <thead>
+                        <tr>
+                            <td>业务线</td>
+                            <td>版本</td>
+                            <td>重要业务结果</td>
+                            {#                                <td>下载链接</td>#}
+                            <td>自定义代码</td>
+                            {#                                <td>下载链接</td>#}
+                            <td>数据标准检查结果</td>
+                            {#                                <td>下载链接</td>#}
+                            <td>标准数据元素映射</td>
+                            {#                                <td>下载链接</td>#}
+                        </tr>
+                        </thead>
+                        {% for tuple in tuples %}
+                            {% if tuple %}
                             <tr>
-                                <td>业务线</td>
-                                <td>版本</td>
-                                <td>重要业务结果</td>
-{#                                <td>下载链接</td>#}
-                                <td>自定义代码</td>
-{#                                <td>下载链接</td>#}
-                                <td>数据标准检查结果</td>
-{#                                <td>下载链接</td>#}
-                                <td>标准数据元素映射</td>
-{#                                <td>下载链接</td>#}
-                            </tr>
-                            </thead>
-                            {% for tuple in tuples %}
-                                {% if tuple %}
-                                    <tr>
-                                        <td>{{ tuple[0] }}</td>
-                                        <td>{{ tuple[1] }}</td>
-                                        <td>{{ tuple[2] }}</td>
-                                        <td>{{ tuple[3] }}</td>
-                                        <td>{{ tuple[4] }}</td>
-                                        <td>{{ tuple[5] }}<a href="{{ url_for('download_file',file_name=tuple[2]) }}">下载</a></td>
+                                <td>{{ tuple[0] }}</td>
+                                <td>{{ tuple[1] }}</td>
+                                <td>{% if tuple[2] %}
+                                    {{ tuple[2] }}
+                                    <a href="{{ url_for('download_file',file_name=tuple[2]) }}">下载</a>
+                                    {%  endif %}</td>
+                                    <td>{% if tuple[3] %}{{ tuple[3] }}
+                                        <a href="{{ url_for('download_file',file_name=tuple[2]) }}">下载</a>{% endif %}
+                                    </td>
+                                    <td></td>
+                                    <td>{% if tuple[4] %}{{ tuple[4] }}<a
+                                            href="{{ url_for('download_file',file_name=tuple[2]) }}">下载</a>{% endif %}
+                                    </td>
 
-{#                                        <td><a href="{{ url_for('download_file',file_name=tuple[2]) }}">下载</a></td>#}
+                                    {#                                        <td><a href="{{ url_for('download_file',file_name=tuple[2]) }}">下载</a></td>#}
 
                                     </tr>
                                 {% endif %}
-                            {% endfor %}
+                        {% endfor %}
 
 
-                        </table>
+                    </table>
 
                 </div>
-
-
-
 
 
                 <!-- Unnamed (矩形) -->
@@ -219,8 +223,8 @@
                 <!-- Unnamed (矩形) -->
                 <div id="u22" class="ax_default _形状" data-bs-toggle="modal" data-bs-target="#myModal">
                     <div id="u22_div" class=""></div>
-                    <div id="u22_text" class="text " >
-                        <p><span >提交检查文件</span></p>
+                    <div id="u22_text" class="text ">
+                        <p><span>提交检查文件</span></p>
                     </div>
                 </div>
 

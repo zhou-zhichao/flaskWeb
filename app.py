@@ -21,12 +21,12 @@ def create_app():
             filenames = get_all_filenames('file\\input')
             print(filenames)
             g.table_tuple = transform_list(filenames)
+            g.table_tuple.reverse()
             print(g.table_tuple)
 
             # s = [('人事', '1.1', '', '人事_1.1_自定义代码.xlsx', '', '数据元素'),
             #      ('学工', '1', '学工_1_重要业务结果.xlsx', '', '', '数据元素'),
             #      ('学工', '1.1', '学工_1.1_重要业务结果.xlsx', '学工_1.1_自定义代码.xlsx', '', '数据元素')]
-
 
     # a simple page that says hello
     @app.route('/hello')
@@ -43,7 +43,7 @@ def create_app():
 
     @app.route('/third')
     def third():
-        return render_template('业务线数据落标.html', tuples=[("人事", "4.2", '1', '2', '3', '4')])
+        return render_template('业务线数据落标.html', tuples=g.table_tuple)
 
     @app.route('/download_template/<file_name>')
     def download_template(file_name):
@@ -138,7 +138,7 @@ def transform_list(file_list):
                 fourth = name
         # 最后一位固定为'数据元素'
         standard_elem_name = first + "_数据元素.xlsx"
-        elem_exists = os.path.exists(os.path.join("file/standard/",standard_elem_name))
+        elem_exists = os.path.exists(os.path.join("file/standard/", standard_elem_name))
         if elem_exists:
             fifth = standard_elem_name
         else:
@@ -147,7 +147,6 @@ def transform_list(file_list):
         result.append((first, second, third, fourth, fifth))
     # 返回结果列表
     return result
-
 
 
 def get_all_filenames(path):
