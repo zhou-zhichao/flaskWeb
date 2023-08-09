@@ -40,7 +40,21 @@ def read_filenames(folder):
         result.append((business, file_type, file))
     # 返回结果列表
     return result
-
+def check_and_create_folder(folder_path):
+    # 检查文件夹路径是否有效
+    if not isinstance(folder_path, str):
+        print("无效的文件夹路径")
+        return
+    # 检查文件夹是否存在
+    if os.path.exists(folder_path):
+        print("文件夹已存在")
+    else:
+        # 创建文件夹
+        try:
+            os.makedirs(folder_path)
+            print("文件夹创建成功")
+        except OSError as e:
+            print("文件夹创建失败，错误信息：", e)
 
 def create_app():
     # create and configure the app
@@ -100,6 +114,10 @@ def create_app():
             # 返回一个失败的响应
             flash('文件上传失败，请检查文件类型是否正确！')
             return redirect("/")
+    @app.route("/business_submit")
+    def business_submit():
+        business = request.form.get('business')
+        version = request.form.get('version')
 
     return app
 
