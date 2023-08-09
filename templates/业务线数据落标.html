@@ -117,21 +117,29 @@
                     <table>
                             <thead>
                             <tr>
-                                <td>文件类型</td>
-                                <td>版本</td>
                                 <td>业务线</td>
-                                <td>标准文件</td>
-                                <td>下载链接</td>
+                                <td>版本</td>
+                                <td>重要业务结果</td>
+{#                                <td>下载链接</td>#}
+                                <td>自定义代码</td>
+{#                                <td>下载链接</td>#}
+                                <td>数据标准检查结果</td>
+{#                                <td>下载链接</td>#}
+                                <td>标准数据元素映射</td>
+{#                                <td>下载链接</td>#}
                             </tr>
                             </thead>
                             {% for tuple in tuples %}
                                 {% if tuple %}
                                     <tr>
-                                        <td>{{ tuple[1] }}</td>
-                                        <td></td>
                                         <td>{{ tuple[0] }}</td>
+                                        <td>{{ tuple[1] }}</td>
                                         <td>{{ tuple[2] }}</td>
-                                        <td><a href="{{ url_for('download_file',file_name=tuple[2]) }}">下载</a></td>
+                                        <td>{{ tuple[3] }}</td>
+                                        <td>{{ tuple[4] }}</td>
+                                        <td>{{ tuple[5] }}<a href="{{ url_for('download_file',file_name=tuple[2]) }}">下载</a></td>
+
+{#                                        <td><a href="{{ url_for('download_file',file_name=tuple[2]) }}">下载</a></td>#}
 
                                     </tr>
                                 {% endif %}

@@ -69,7 +69,7 @@ def create_app():
 
     @app.route('/third')
     def third():
-        return render_template('业务线数据落标.html', tuples=('1', '2', '3'))
+        return render_template('业务线数据落标.html', tuples=[("人事", "4.2", '1', '2', '3', '4')])
 
     @app.route('/download_template/<file_name>')
     def download_template(file_name):
