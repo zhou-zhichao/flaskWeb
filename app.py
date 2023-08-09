@@ -16,10 +16,16 @@ def create_app():
     def before_request():
         if request.path == '/':
             g.file_tuple = read_filenames('file/standard')
-            print(g.file_tuple)
-        elif request.path == '/business_submit':
-            filenames = get_all_filenames('file/input')
+            # print(g.file_tuple)
+        elif request.path == '/third':
+            filenames = get_all_filenames('file\\input')
             print(filenames)
+            table_tuple = transform_list(filenames)
+            print(table_tuple)
+            s = [('人事', '1.1', '', '人事_1.1_自定义代码.xlsx', '', '数据元素'),
+                 ('学工', '1', '学工_1_重要业务结果.xlsx', '', '', '数据元素'),
+                 ('学工', '1.1', '学工_1.1_重要业务结果.xlsx', '学工_1.1_自定义代码.xlsx', '', '数据元素')]
+
 
     # a simple page that says hello
     @app.route('/hello')
@@ -86,7 +92,7 @@ def create_app():
             business_result_file.filename = business + '_' + version + "_" + "重要业务结果.xlsx"
             business_result_file.save(os.path.join(folder_path, business_result_file.filename))
         if code_file_exists or business_result_file_exists:
-            message = code_file.filename + "  " +business_result_file.filename + "上传成功"
+            message = code_file.filename + "  " + business_result_file.filename + "上传成功"
             flash(message=message)
         else:
             message = "上传失败"
@@ -95,6 +101,48 @@ def create_app():
         return redirect("/third")
 
     return app
+
+
+def transform_list(file_list):
+    # 定义一个空的字典
+    dic = {}
+    # 遍历列表中的每个文件路径
+    for path in file_list:
+        # 用反斜杠分割成子字符串
+        sub = path.split('\\')
+        # 取出最后两个子字符串
+        folder = sub[-2]
+        file = sub[-1]
+        # 判断字典中是否已经有这个文件夹名作为键
+        if folder not in dic:
+            # 创建一个新的键值对
+            dic[folder] = [file]
+        else:
+            # 把文件名追加到对应的列表中
+            dic[folder].append(file)
+    # 定义一个空的列表
+    result = []
+    # 遍历字典中的每个键值对
+    for key, value in dic.items():
+        # 用文件夹名拆分成前两位和后一位
+        first, second = key.split('_')[:2]
+        third = ''
+        fourth = ''
+        # 遍历文件名列表中的元素
+        for name in value:
+            # 判断是否有重要业务结果或自定义代码
+            if '重要业务结果' in name:
+                third = name
+            elif '自定义代码' in name:
+                fourth = name
+        # 最后一位固定为'数据元素'
+
+        fifth = '数据元素'
+        # 把每个元组添加到结果列表中
+        result.append((first, second, third, fourth, fifth))
+    # 返回结果列表
+    return result
+
 
 
 def get_all_filenames(path):
