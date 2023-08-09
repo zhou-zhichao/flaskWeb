@@ -5,56 +5,6 @@ from flask import Flask, send_from_directory, render_template, g, request, flash
 
 # from werkzeug.utils import secure_filename
 
-def read_filenames_with_version(folder):
-    # 创建一个空列表来存储结果
-    result = []
-    # 遍历文件夹下的所有文件
-    for file in os.listdir(folder):
-        # 把文件名按照 _ 拆分成三段
-        segments = file.split("_")
-        # 如果拆分后的长度不是3，说明文件名不符合要求，跳过这个文件
-        if len(segments) != 3:
-            continue
-        # 否则，把拆分后的三段分别赋值给业务线、版本、文件类型
-        business, version, file_type = segments
-        # 把这三个值作为一个元组添加到结果列表中
-        result.append((business, version, file_type, file))
-    # 返回结果列表
-    return result
-
-
-def read_filenames(folder):
-    # 创建一个空列表来存储结果
-    result = []
-    # 遍历文件夹下的所有文件
-    for file in os.listdir(folder):
-        # 把文件名按照 _ 拆分成2段
-        segments = file.split("_")
-        # 如果拆分后的长度不是3，说明文件名不符合要求，跳过这个文件
-        if len(segments) != 2:
-            continue
-        # 否则，把拆分后的三段分别赋值给业务线、版本、文件类型
-        business, file_type = segments
-        file_type = file_type.split('.')[0]
-        # 把这三个值作为一个元组添加到结果列表中
-        result.append((business, file_type, file))
-    # 返回结果列表
-    return result
-def check_and_create_folder(folder_path):
-    # 检查文件夹路径是否有效
-    if not isinstance(folder_path, str):
-        print("无效的文件夹路径")
-        return
-    # 检查文件夹是否存在
-    if os.path.exists(folder_path):
-        print("文件夹已存在")
-    else:
-        # 创建文件夹
-        try:
-            os.makedirs(folder_path)
-            print("文件夹创建成功")
-        except OSError as e:
-            print("文件夹创建失败，错误信息：", e)
 
 def create_app():
     # create and configure the app
@@ -114,12 +64,70 @@ def create_app():
             # 返回一个失败的响应
             flash('文件上传失败，请检查文件类型是否正确！')
             return redirect("/")
-    @app.route("/business_submit")
+
+    @app.route("/business_submit" , methods=['POST'])
     def business_submit():
         business = request.form.get('business')
         version = request.form.get('version')
+        folder_path = "/file/input" + business + '_'+version
+        check_and_create_folder(folder_path)
+        return redirect("/third")
 
     return app
+
+
+def check_and_create_folder(folder_path):
+    # 检查文件夹路径是否有效
+    if not isinstance(folder_path, str):
+        print("无效的文件夹路径")
+        return
+    # 检查文件夹是否存在
+    if os.path.exists(folder_path):
+        print("文件夹已存在")
+    else:
+        # 创建文件夹
+        try:
+            os.makedirs(folder_path)
+            print("文件夹创建成功")
+        except OSError as e:
+            print("文件夹创建失败，错误信息：", e)
+
+
+def read_filenames_with_version(folder):
+    # 创建一个空列表来存储结果
+    result = []
+    # 遍历文件夹下的所有文件
+    for file in os.listdir(folder):
+        # 把文件名按照 _ 拆分成三段
+        segments = file.split("_")
+        # 如果拆分后的长度不是3，说明文件名不符合要求，跳过这个文件
+        if len(segments) != 3:
+            continue
+        # 否则，把拆分后的三段分别赋值给业务线、版本、文件类型
+        business, version, file_type = segments
+        # 把这三个值作为一个元组添加到结果列表中
+        result.append((business, version, file_type, file))
+    # 返回结果列表
+    return result
+
+
+def read_filenames(folder):
+    # 创建一个空列表来存储结果
+    result = []
+    # 遍历文件夹下的所有文件
+    for file in os.listdir(folder):
+        # 把文件名按照 _ 拆分成2段
+        segments = file.split("_")
+        # 如果拆分后的长度不是3，说明文件名不符合要求，跳过这个文件
+        if len(segments) != 2:
+            continue
+        # 否则，把拆分后的三段分别赋值给业务线、版本、文件类型
+        business, file_type = segments
+        file_type = file_type.split('.')[0]
+        # 把这三个值作为一个元组添加到结果列表中
+        result.append((business, file_type, file))
+    # 返回结果列表
+    return result
 
 
 if __name__ == '__main__':

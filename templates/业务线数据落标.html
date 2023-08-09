@@ -86,7 +86,7 @@
                     <form action="/business_submit" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="exampleSelect1" class="form-label">请选择业务线：</label>
-                            <select class="form-select" id="business">
+                            <select class="form-select" id="business" name="business">
                                 <option>学工</option>
                                 <option>人事</option>
                                 <option>研究生</option>
@@ -95,22 +95,24 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleInput1" class="form-label">请输入版本号：</label>
-                            <input type="text" class="form-control" id="version">
+                            <input type="text" class="form-control" id="version" name="version">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFileUpload1" class="form-label">请选择重要业务结果文件：</label>
-                            <input class="form-control" type="file" id="business_result_file">
+                            <input class="form-control" type="file" id="business_result_file" name="business_result_file">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFileUpload2" class="form-label">请选择自定义代码文件：</label>
-                            <input class="form-control" type="file" id="code_file">
+                            <input class="form-control" type="file" id="code_file" name="code_file">
                         </div>
+                        <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">保存 </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+
+                </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">保存 </button>
-                </div>
+
             </div>
         </div>
     </div>
