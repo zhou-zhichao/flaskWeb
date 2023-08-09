@@ -69,9 +69,20 @@ def create_app():
     def business_submit():
         business = request.form.get('business')
         version = request.form.get('version')
-        folder_path = "file/input/" + business + '_' + version+"/"
+        folder_path = "file/input/" + business + '_' + version + "/"
         print(folder_path)
         check_and_create_folder(folder_path)
+        code_file = request.files.get("code_file")
+        business_result_file = request.files.get("business_result_file")
+        code_file_exists = (code_file.filename != '')
+        business_result_file_exists = (business_result_file.filename != '')
+        if code_file_exists:
+            code_file.filename = business + '_' + version + "_" + "自定义代码.xlsx"
+            code_file.save(os.path.join(folder_path, code_file.filename))
+        if business_result_file_exists:
+            business_result_file.filename = business + '_' + version + "_" + "重要业务结果.xlsx"
+            business_result_file.save(os.path.join(folder_path, business_result_file.filename))
+
 
         return redirect("/third")
 
