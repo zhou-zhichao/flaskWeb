@@ -1,4 +1,5 @@
 import os
+import re
 
 from flask import Flask, send_from_directory, render_template, g, request, flash, redirect, make_response
 
@@ -52,6 +53,19 @@ def create_app():
     @app.route('/download_file/<file_name>')
     def download_file(file_name):
         return send_from_directory('file/standard', file_name, as_attachment=True)
+
+    @app.route('/third/download/<file_name>')
+    def third_download(file_name):
+        m = re.search(r".*(?=_[^_]+$)", file_name)
+        # 如果 m 不为空，说明找到了匹配
+        if m:
+            # 使用 m.group() 方法，返回匹配的字符串
+            path = m.group()
+        # 否则，返回 None
+        else:
+            path = None
+        path = os.path.join("file\\input\\", path)
+        return send_from_directory(path, file_name, as_attachment=True)
 
     @app.route('/submit', methods=['POST'])
     def submit():

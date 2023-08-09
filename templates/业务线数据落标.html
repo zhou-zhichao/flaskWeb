@@ -178,14 +178,14 @@
                                 <td>{{ tuple[1] }}</td>
                                 <td>{% if tuple[2] %}
                                     {{ tuple[2] }}
-                                    <a href="{{ url_for('download_file',file_name=tuple[2]) }}">下载</a>
+                                    <a href="{{ url_for('third_download',file_name=tuple[2]) }}">下载</a>
                                     {%  endif %}</td>
                                     <td>{% if tuple[3] %}{{ tuple[3] }}
-                                        <a href="{{ url_for('download_file',file_name=tuple[2]) }}">下载</a>{% endif %}
+                                        <a href="{{ url_for('third_download',file_name=tuple[3]) }}">下载</a>{% endif %}
                                     </td>
                                     <td></td>
                                     <td>{% if tuple[4] %}{{ tuple[4] }}<a
-                                            href="{{ url_for('download_file',file_name=tuple[2]) }}">下载</a>{% endif %}
+                                            href="{{ url_for('third_download',file_name=tuple[4]) }}">下载</a>{% endif %}
                                     </td>
 
                                     {#                                        <td><a href="{{ url_for('download_file',file_name=tuple[2]) }}">下载</a></td>#}
