@@ -17,6 +17,9 @@ def create_app():
         if request.path == '/':
             g.file_tuple = read_filenames('file/standard')
             print(g.file_tuple)
+        elif request.path == '/business_submit':
+            filenames = get_all_filenames('file/input')
+            print(filenames)
 
     # a simple page that says hello
     @app.route('/hello')
@@ -82,11 +85,31 @@ def create_app():
         if business_result_file_exists:
             business_result_file.filename = business + '_' + version + "_" + "重要业务结果.xlsx"
             business_result_file.save(os.path.join(folder_path, business_result_file.filename))
-
+        if code_file_exists or business_result_file_exists:
+            message = code_file.filename + "  " +business_result_file.filename + "上传成功"
+            flash(message=message)
+        else:
+            message = "上传失败"
+            flash(message=message)
 
         return redirect("/third")
 
     return app
+
+
+def get_all_filenames(path):
+    # 创建一个空列表，用来存储所有文件名
+    filenames = []
+    # 遍历指定目录及其子目录
+    for root, dirs, files in os.walk(path):
+        # 对于每个非目录子文件
+        for file in files:
+            # 获取文件的完整路径
+            file_path = os.path.join(root, file)
+            # 把文件名添加到列表中
+            filenames.append(file_path)
+    # 返回文件名列表
+    return filenames
 
 
 def check_and_create_folder(folder_path):
