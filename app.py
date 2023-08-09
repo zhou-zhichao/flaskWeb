@@ -22,8 +22,7 @@ def read_filenames_with_version(folder):
     # 返回结果列表
     return result
 
-#
-#
+
 def read_filenames(folder):
     # 创建一个空列表来存储结果
     result = []
@@ -55,6 +54,7 @@ def create_app():
             g.file_tuple = read_filenames('file/standard')
             print(g.file_tuple)
 
+
     # a simple page that says hello
     @app.route('/hello')
     def hello():
@@ -67,6 +67,7 @@ def create_app():
     @app.route('/second')
     def second():
         return render_template('数据线落标检查.html')
+
     @app.route('/third')
     def third():
         return render_template('业务线数据落标.html')
