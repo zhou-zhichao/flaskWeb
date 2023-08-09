@@ -79,36 +79,37 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">模态标题</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">业务线数据检查文件提交</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label for="exampleSelect1" class="form-label">下拉框描述</label>
-                            <select class="form-select" id="exampleSelect1">
-                                <option>选项1</option>
-                                <option>选项2</option>
-                                <option>选项3</option>
+                            <label for="exampleSelect1" class="form-label">请选择业务线：</label>
+                            <select class="form-select" id="business">
+                                <option>学工</option>
+                                <option>人事</option>
+                                <option>研究生</option>
+                                <option>教务</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInput1" class="form-label">输入框描述</label>
-                            <input type="text" class="form-control" id="exampleInput1">
+                            <label for="exampleInput1" class="form-label">请输入版本号：</label>
+                            <input type="text" class="form-control" id="version">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleFileUpload1" class="form-label">文件上传描述1</label>
-                            <input class="form-control" type="file" id="exampleFileUpload1">
+                            <label for="exampleFileUpload1" class="form-label">请选择重要业务结果文件：</label>
+                            <input class="form-control" type="file" id="business_result_file">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleFileUpload2" class="form-label">文件上传描述2</label>
-                            <input class="form-control" type="file" id="exampleFileUpload2">
+                            <label for="exampleFileUpload2" class="form-label">请选择自定义代码文件：</label>
+                            <input class="form-control" type="file" id="code_file">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">保存更改</button>
+                    <button type="button" class="btn btn-primary">保存 </button>
                 </div>
             </div>
         </div>
