@@ -75,37 +75,44 @@
     </div>
 </nav>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header d-block text-center">
-        <h5 class="modal-title" id="exampleModalLabel">模态框示例</h5>
-      </div>
-      <div class="modal-body">
-        <label for="dropdownExample">下拉框</label>
-        <select class="form-control" id="dropdownExample">
-          <option>选项1</option>
-          <option>选项2</option>
-          <option>选项3</option>
-          <!-- etc... -->
-        </select>
-
-        <label for="inputExample" class="mt-3">输入框</label>
-        <input type="text" id="inputExample" class="form-control">
-
-        <label for="fileUpload1" class="mt-3">上传文件1</label>
-        <input type="file" id="fileUpload1" class="form-control-file">
-
-        <label for="fileUpload2" class="mt-3">上传文件2</label>
-        <input type="file" id="fileUpload2" class="form-control-file">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary">保存</button>
-      </div>
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">模态标题</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="exampleSelect1" class="form-label">下拉框描述</label>
+                            <select class="form-select" id="exampleSelect1">
+                                <option>选项1</option>
+                                <option>选项2</option>
+                                <option>选项3</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInput1" class="form-label">输入框描述</label>
+                            <input type="text" class="form-control" id="exampleInput1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFileUpload1" class="form-label">文件上传描述1</label>
+                            <input class="form-control" type="file" id="exampleFileUpload1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFileUpload2" class="form-label">文件上传描述2</label>
+                            <input class="form-control" type="file" id="exampleFileUpload2">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">保存更改</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
 <div id="base" class="container">
 
@@ -207,7 +214,7 @@
                 </div>
 
                 <!-- Unnamed (矩形) -->
-                <div id="u22" class="ax_default _形状" data-toggle="modal" data-target="#exampleModal">
+                <div id="u22" class="ax_default _形状" data-bs-toggle="modal" data-bs-target="#myModal">
                     <div id="u22_div" class=""></div>
                     <div id="u22_text" class="text " >
                         <p><span >提交检查文件</span></p>
