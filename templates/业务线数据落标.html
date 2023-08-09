@@ -114,160 +114,32 @@
 
                 <!-- Unnamed (表格) -->
                 <div id="u4" class="ax_default _表格">
+                    <table>
+                            <thead>
+                            <tr>
+                                <td>文件类型</td>
+                                <td>版本</td>
+                                <td>业务线</td>
+                                <td>标准文件</td>
+                                <td>下载链接</td>
+                            </tr>
+                            </thead>
+                            {% for tuple in tuples %}
+                                {% if tuple %}
+                                    <tr>
+                                        <td>{{ tuple[1] }}</td>
+                                        <td></td>
+                                        <td>{{ tuple[0] }}</td>
+                                        <td>{{ tuple[2] }}</td>
+                                        <td><a href="{{ url_for('download_file',file_name=tuple[2]) }}">下载</a></td>
 
-                    <!-- Unnamed (单元格) -->
-                    <div id="u5" class="ax_default _单元格">
-                        <img id="u5_img" class="img " src="../static/images/业务线数据落标/u5.png"/>
-                        <div id="u5_text" class="text ">
-                            <p><span>业务线</span></p>
-                        </div>
-                    </div>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
 
-                    <!-- Unnamed (单元格) -->
-                    <div id="u6" class="ax_default _单元格">
-                        <img id="u6_img" class="img " src="../static/images/业务线数据落标/u6.png"/>
-                        <div id="u6_text" class="text ">
-                            <p><span>版本</span></p>
-                        </div>
-                    </div>
 
-                    <!-- Unnamed (单元格) -->
-                    <div id="u7" class="ax_default _单元格">
-                        <img id="u7_img" class="img " src="../static/images/业务线数据落标/u7.png"/>
-                        <div id="u7_text" class="text ">
-                            <p><span>数据标准检查文件</span></p>
-                        </div>
-                    </div>
+                        </table>
 
-                    <!-- Unnamed (单元格) -->
-                    <div id="u8" class="ax_default _单元格">
-                        <img id="u8_img" class="img " src="../static/images/业务线数据落标/u8.png"/>
-                        <div id="u8_text" class="text ">
-                            <p><span>数据标准检查结果</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (单元格) -->
-                    <div id="u9" class="ax_default _单元格">
-                        <img id="u9_img" class="img " src="../static/images/业务线数据落标/u9.png"/>
-                        <div id="u9_text" class="text ">
-                            <p><span>标准数据元素映射</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (单元格) -->
-                    <div id="u10" class="ax_default _单元格">
-                        <img id="u10_img" class="img " src="../static/images/业务线数据落标/u10.png"/>
-                        <div id="u10_text" class="text ">
-                            <p><span>人事</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (单元格) -->
-                    <div id="u11" class="ax_default _单元格">
-                        <img id="u11_img" class="img " src="../static/images/业务线数据落标/u11.png"/>
-                        <div id="u11_text" class="text ">
-                            <p><span>4.2.3</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (单元格) -->
-                    <div id="u12" class="ax_default _单元格">
-                        <img id="u12_img" class="img " src="../static/images/业务线数据落标/u12.png"/>
-                        <div id="u12_text" class="text ">
-                            <p><span
-                                    style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">人事产品</span><span
-                                    style="font-family:'ArialMT', 'Arial', sans-serif;">_4.2.3.zip&nbsp;&nbsp; </span><span
-                                    style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span>
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (单元格) -->
-                    <div id="u13" class="ax_default _单元格">
-                        <img id="u13_img" class="img " src="../static/images/业务线数据落标/u13.png"/>
-                        <div id="u13_text" class="text ">
-                            <p><span
-                                    style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">人事产品</span><span
-                                    style="font-family:'ArialMT', 'Arial', sans-serif;">_4.2.3_</span><span
-                                    style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">检查结果</span><span
-                                    style="font-family:'ArialMT', 'Arial', sans-serif;">.zip&nbsp;&nbsp; </span><span
-                                    style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span>
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (单元格) -->
-                    <div id="u14" class="ax_default _单元格">
-                        <img id="u14_img" class="img " src="../static/images/业务线数据落标/u14.png"/>
-                        <div id="u14_text" class="text ">
-                            <p><span
-                                    style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">人事产品</span><span
-                                    style="font-family:'ArialMT', 'Arial', sans-serif;">_4.2.3_</span><span
-                                    style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">数据元素.xlsx</span><span
-                                    style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp;&nbsp; </span><span
-                                    style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span>
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (单元格) -->
-                    <div id="u15" class="ax_default _单元格">
-                        <img id="u15_img" class="img " src="../static/images/业务线数据落标/u15.png"/>
-                        <div id="u15_text" class="text ">
-                            <p><span>学工</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (单元格) -->
-                    <div id="u16" class="ax_default _单元格">
-                        <img id="u16_img" class="img " src="../static/images/业务线数据落标/u16.png"/>
-                        <div id="u16_text" class="text ">
-                            <p><span>4.0.1</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (单元格) -->
-                    <div id="u17" class="ax_default _单元格">
-                        <img id="u17_img" class="img " src="../static/images/业务线数据落标/u17.png"/>
-                        <div id="u17_text" class="text ">
-                            <p><span
-                                    style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">学工产品</span><span
-                                    style="font-family:'ArialMT', 'Arial', sans-serif;">_4.0.1</span><span
-                                    style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">.zip</span><span
-                                    style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp;&nbsp; </span><span
-                                    style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span>
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (单元格) -->
-                    <div id="u18" class="ax_default _单元格">
-                        <img id="u18_img" class="img " src="../static/images/业务线数据落标/u18.png"/>
-                        <div id="u18_text" class="text ">
-                            <p><span
-                                    style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">学工产品</span><span
-                                    style="font-family:'ArialMT', 'Arial', sans-serif;">_4.0.1_</span><span
-                                    style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">检查结果.zip</span><span
-                                    style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp;&nbsp; </span><span
-                                    style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span>
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Unnamed (单元格) -->
-                    <div id="u19" class="ax_default _单元格">
-                        <img id="u19_img" class="img " src="../static/images/业务线数据落标/u19.png"/>
-                        <div id="u19_text" class="text ">
-                            <p><span
-                                    style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">人事产品</span><span
-                                    style="font-family:'ArialMT', 'Arial', sans-serif;">_4.0.1_</span><span
-                                    style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;">数据元素.xlsx</span><span
-                                    style="font-family:'ArialMT', 'Arial', sans-serif;">&nbsp;&nbsp; </span><span
-                                    style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;text-decoration:underline ;color:#02A7F0;">下载</span>
-                            </p>
-                        </div>
-                    </div>
                 </div>
 
 

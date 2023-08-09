@@ -54,7 +54,6 @@ def create_app():
             g.file_tuple = read_filenames('file/standard')
             print(g.file_tuple)
 
-
     # a simple page that says hello
     @app.route('/hello')
     def hello():
@@ -70,7 +69,7 @@ def create_app():
 
     @app.route('/third')
     def third():
-        return render_template('业务线数据落标.html')
+        return render_template('业务线数据落标.html', tuples=('1', '2', '3'))
 
     @app.route('/download_template/<file_name>')
     def download_template(file_name):
