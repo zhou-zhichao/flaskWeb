@@ -65,12 +65,14 @@ def create_app():
             flash('文件上传失败，请检查文件类型是否正确！')
             return redirect("/")
 
-    @app.route("/business_submit" , methods=['POST'])
+    @app.route("/business_submit", methods=['POST'])
     def business_submit():
         business = request.form.get('business')
         version = request.form.get('version')
-        folder_path = "/file/input" + business + '_'+version
+        folder_path = "file/input/" + business + '_' + version+"/"
+        print(folder_path)
         check_and_create_folder(folder_path)
+
         return redirect("/third")
 
     return app
