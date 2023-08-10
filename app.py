@@ -1,7 +1,7 @@
-
-
 from flask import Flask, send_from_directory, render_template, g, request, flash, redirect, make_response
+
 from datatool import *
+
 
 # from werkzeug.utils import secure_filename
 
@@ -29,7 +29,6 @@ def create_app():
             #      ('学工', '1.1', '学工_1.1_重要业务结果.xlsx', '学工_1.1_自定义代码.xlsx', '', '数据元素')]
         elif request.path == "":
             pass
-
 
     # a simple page that says hello
     @app.route('/hello')
@@ -116,7 +115,7 @@ def create_app():
         else:
             message = "上传失败"
             flash(message=message)
-        print(business_result_file_path,'开始datatool')
+        print(business_result_file_path, '开始datatool')
         # sep_on_field(business_result_file_path)
 
         return redirect("/third")
