@@ -247,13 +247,15 @@ def merge_to_standard(file_path, merge_file):
 
 def first_sheet_write(file_path, merge_file):
     # 打开一个excel file_path的'产品线对外数据要求数据检查'sheet
-    df = pd.read_excel(file_path, sheet_name='外部数据检查')
+    df = pd.read_excel(file_path, sheet_name='对外数据要求检查')
     # 筛选出标准状态不是'有'的所有行
-    df = df[df['标准状态'] != '有']
+    df = df[df['标准确认'] != '有']
     df = df[df['确认状态'] != '暂不提供']
     # 将筛选出的行添加到merge_file的'产品线对外数据要求数据检查'sheet中
     with pd.ExcelWriter(merge_file, engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
         df.to_excel(writer, sheet_name='产品线对外数据要求数据检查', index=False)
+    # with pd.ExcelWriter(, engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
+    #     df.to_excel(writer, sheet_name='产品线对外数据要求数据检查', index=False)
 
 
 def data_elem_align(file_path, elem_standard, sheet_name):
