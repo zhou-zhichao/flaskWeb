@@ -136,7 +136,7 @@ def auto_adjust_column_width(df, file_name, sheet_name='Sheet1'):
 # 定义一个函数，用于将一个Excel文件中的一个工作表按照"字段确认"列的不同值分割成多个子表，并保存到不同的Excel文件中
 def sep_on_field(file_name):
     # Load the data from the specified Excel file and sheet name
-    df = pd.read_excel(f"{file_name}", engine="openpyxl", sheet_name='重要业务结果检查')
+    df = pd.read_excel(f"{file_name}", engine="openpyxl", sheet_name='外供数据检查')
     df[['业务域', "业务子域", "业务过程", "表/视图名称"]] = df[
         ['业务域', "业务子域", "业务过程", "表/视图名称"]].fillna(
         method='ffill')
@@ -155,7 +155,7 @@ def sep_on_field(file_name):
         sheets[field] = sub_df
         print(f"Field: {field}, row count: {len(sub_df)}")
     file_name = re.sub(r"\.[^.]+$", "", file_name)
-    file_name = file_name.split('\\')[1]
+    file_name = file_name.split('/')[1]
     # Save each subset dataframe to a separate Excel file
     for field, subdiv_df in sheets.items():
         safe_field = field.replace("/", "-").replace(":", "")
