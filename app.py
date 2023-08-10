@@ -1,8 +1,7 @@
-import os
-import re
+
 
 from flask import Flask, send_from_directory, render_template, g, request, flash, redirect, make_response
-
+from datatool import *
 
 # from werkzeug.utils import secure_filename
 
@@ -105,16 +104,20 @@ def create_app():
         business_result_file_exists = (business_result_file.filename != '')
         if code_file_exists:
             code_file.filename = business + '_' + version + "_" + "自定义代码.xlsx"
-            code_file.save(os.path.join(folder_path, code_file.filename))
+            code_file_path = os.path.join(folder_path, code_file.filename)
+            code_file.save(code_file_path)
         if business_result_file_exists:
             business_result_file.filename = business + '_' + version + "_" + "重要业务结果.xlsx"
-            business_result_file.save(os.path.join(folder_path, business_result_file.filename))
+            business_result_file_path = os.path.join(folder_path, business_result_file.filename)
+            business_result_file.save(business_result_file_path)
         if code_file_exists or business_result_file_exists:
             message = code_file.filename + "  " + business_result_file.filename + "上传成功"
             flash(message=message)
         else:
             message = "上传失败"
             flash(message=message)
+        print('开始datatool')
+        sep_on_field(business_result_file_path)
 
         return redirect("/third")
 
@@ -153,8 +156,8 @@ def transform_list(file_list):
                 third = name
             elif '自定义代码' in name:
                 fourth = name
-        # 最后一位固定为'数据元素'
-        standard_elem_name = first + "_数据元素.xlsx"
+
+        standard_elem_name = first + "_业务线数据元素映射.xlsx"
         elem_exists = os.path.exists(os.path.join("file/standard/", standard_elem_name))
         if elem_exists:
             fifth = standard_elem_name
