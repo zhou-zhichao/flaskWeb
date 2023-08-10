@@ -28,6 +28,9 @@ def create_app():
             # s = [('人事', '1.1', '', '人事_1.1_自定义代码.xlsx', '', '数据元素'),
             #      ('学工', '1', '学工_1_重要业务结果.xlsx', '', '', '数据元素'),
             #      ('学工', '1.1', '学工_1.1_重要业务结果.xlsx', '学工_1.1_自定义代码.xlsx', '', '数据元素')]
+        elif request.path == "":
+            pass
+
 
     # a simple page that says hello
     @app.route('/hello')

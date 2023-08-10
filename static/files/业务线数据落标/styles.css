@@ -2118,7 +2118,9 @@
     white-space: nowrap;
     text-transform: none;
 }
-
+.alert-info{
+    text-align:center;
+}
 
 table {
     width: 100%;
