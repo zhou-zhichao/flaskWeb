@@ -117,7 +117,7 @@ def create_app():
             message = "上传失败"
             flash(message=message)
         print(business_result_file_path,'开始datatool')
-        sep_on_field(business_result_file_path)
+        # sep_on_field(business_result_file_path)
 
         return redirect("/third")
 
