@@ -155,13 +155,13 @@ def sep_on_field(file_name):
         sheets[field] = sub_df
         print(f"Field: {field}, row count: {len(sub_df)}")
     file_name = re.sub(r"\.[^.]+$", "", file_name)
-    file_name = file_name.split('/')[1]
+    file_name = file_name.split('/')[-1]
     # Save each subset dataframe to a separate Excel file
     for field, subdiv_df in sheets.items():
         safe_field = field.replace("/", "-").replace(":", "")
 
         # Create an output directory if it does not exist
-        output_dir = f"output/{file_name}"
+        output_dir = f"file/output/{file_name}"
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
         # else:
