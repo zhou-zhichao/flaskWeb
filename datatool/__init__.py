@@ -1,6 +1,7 @@
 import glob
 import os
 import re
+from pathlib import Path
 
 import numpy as np
 import openpyxl
@@ -250,8 +251,13 @@ def first_sheet_write(file_path, merge_file):
     df = pd.read_excel(file_path, sheet_name='对外数据要求检查')
     # 筛选出标准状态不是'有'的所有行
     df = df[df['标准确认'] != '有']
-    df = df[df['业务先确认'] != '暂不提供']
+    df = df[df['业务线确认'] != '暂不提供']
     # 将筛选出的行添加到merge_file的'产品线对外数据要求数据检查'sheet中
+    if os.path.exists(merge_file):  # 检查文件是否存在
+        print('文件已存在')
+    else:  # 如果不存在
+        with open(merge_file, 'a') as f:  # 以写入模式打开文件
+            print('文件创建成功')
     with pd.ExcelWriter(merge_file, engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
         df.to_excel(writer, sheet_name='产品线对外数据要求数据检查', index=False)
     # with pd.ExcelWriter(, engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
