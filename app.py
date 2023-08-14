@@ -116,8 +116,6 @@ def create_app():
             code_file_path = os.path.join(folder_path, code_file.filename)
             code_file.save(code_file_path)
             code_check("file/standard/标准代码.xlsx", code_file_path)
-            code_file_path = os.path.join("file/confirm", code_file.filename)
-            code_file.save(code_file_path)
         if business_result_file_exists:
             business_result_file.filename = business + '_' + version + "_" + "重要业务结果.xlsx"
             business_result_file_path = os.path.join(folder_path, business_result_file.filename)
