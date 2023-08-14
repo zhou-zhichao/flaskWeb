@@ -27,8 +27,11 @@ def create_app():
             # s = [('人事', '1.1', '', '人事_1.1_自定义代码.xlsx', '', '数据元素'),
             #      ('学工', '1', '学工_1_重要业务结果.xlsx', '', '', '数据元素'),
             #      ('学工', '1.1', '学工_1.1_重要业务结果.xlsx', '学工_1.1_自定义代码.xlsx', '', '数据元素')]
-        elif request.path == "":
-            pass
+        elif request.path == "/second":
+            filenames = get_all_filenames('file\\confirm')
+            print(filenames)
+            g.confirm_tuple = confirm_list_to_tuple(filenames)
+            print(g.confirm_tuple)
 
     # a simple page that says hello
     @app.route('/hello')
@@ -41,7 +44,7 @@ def create_app():
 
     @app.route('/second')
     def second():
-        return render_template('数据线落标检查.html')
+        return render_template('数据线落标检查.html',tuples = g.confirm_tuple)
 
     @app.route('/third')
     def third():

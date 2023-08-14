@@ -192,7 +192,7 @@ def sep_on_sheet(excel):
     sheet_names = workbook.sheetnames
     # Iterate over the sheet names and create a new excel file for each sheet
     for sheet_name in sheet_names:
-        if sheet_name == "统计结果":
+        if sheet_name in ["统计结果", "主数据检查"]:
             continue
         # Get the worksheet object for the current sheet
         worksheet = workbook[sheet_name]
@@ -490,3 +490,19 @@ def delete_all(folder):
             delete_all(file + "/")
             # 删除空文件夹
             os.rmdir(file)
+
+def confirm_list_to_tuple(file_list):
+    # 创建一个空列表来存储元组
+    tuple_list = []
+    # 遍历文件列表中的每个文件名
+    for file in file_list:
+        # 用反斜杠分割文件名，取最后两个部分
+        parts = file.split("\\")[-2:]
+        # 用下划线分割第一个部分，取前两个部分
+        subparts = parts[0].split("_")[:2]
+        # 将第二个部分添加到子部分列表中
+        subparts.append(parts[1])
+        # 将子部分列表转换为元组，并添加到元组列表中
+        tuple_list.append(tuple(subparts))
+    # 返回元组列表
+    return tuple_list

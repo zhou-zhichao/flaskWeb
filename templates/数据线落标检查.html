@@ -107,11 +107,13 @@
                             {% for tuple in tuples %}
                                 {% if tuple %}
                                     <tr>
-                                        <td>{{ tuple[1] }}</td>
-                                        <td></td>
                                         <td>{{ tuple[0] }}</td>
+
+                                        <td>{{ tuple[1] }}</td>
                                         <td>{{ tuple[2] }}</td>
-                                        <td><a href="{{ url_for('download_file',file_name=tuple[2]) }}">下载</a></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>{% if tuple[0] %}<a href="{{ url_for('/confirm',file_name=tuple[2]) }}">确认</a>{% endif %}</td>
 
                                     </tr>
                                 {% endif %}
