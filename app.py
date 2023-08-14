@@ -87,7 +87,7 @@ def create_app():
             # 为文件生成一个安全的文件名
             filename = business + "_" + fileType + ".xlsx"
             # 将文件保存到服务器的uploads目录下
-            if fileType in ["标准代码","标准层模型"]:
+            if fileType in ["标准代码", "标准层模型"]:
                 filename = fileType + ".xlsx"
             dataFile.save(os.path.join('file/standard', filename))
             # 返回一个成功的响应
@@ -113,9 +113,11 @@ def create_app():
         business_result_file_exists = (business_result_file.filename != '')
         if code_file_exists:
             code_file.filename = business + '_' + version + "_" + "自定义代码.xlsx"
+            code_file_path = os.path.join(folder_path, code_file.filename)
+            code_file.save(code_file_path)
+            code_check("file/standard/标准代码.xlsx", code_file_path)
             code_file_path = os.path.join("file/confirm", code_file.filename)
             code_file.save(code_file_path)
-            code_check()
         if business_result_file_exists:
             business_result_file.filename = business + '_' + version + "_" + "重要业务结果.xlsx"
             business_result_file_path = os.path.join(folder_path, business_result_file.filename)
@@ -131,122 +133,6 @@ def create_app():
         return redirect("/third")
 
     return app
-
-
-def transform_list(file_list):
-    # 定义一个空的字典
-    dic = {}
-    # 遍历列表中的每个文件路径
-    for path in file_list:
-        # 用反斜杠分割成子字符串
-        sub = path.split('\\')
-        # 取出最后两个子字符串
-        folder = sub[-2]
-        file = sub[-1]
-        # 判断字典中是否已经有这个文件夹名作为键
-        if folder not in dic:
-            # 创建一个新的键值对
-            dic[folder] = [file]
-        else:
-            # 把文件名追加到对应的列表中
-            dic[folder].append(file)
-    # 定义一个空的列表
-    result = []
-    # 遍历字典中的每个键值对
-    for key, value in dic.items():
-        # 用文件夹名拆分成前两位和后一位
-        first, second = key.split('_')[:2]
-        third = ''
-        fourth = ''
-        # 遍历文件名列表中的元素
-        for name in value:
-            # 判断是否有重要业务结果或自定义代码
-            if '重要业务结果' in name:
-                third = name
-            elif '自定义代码' in name:
-                fourth = name
-
-        standard_elem_name = first + "_业务线数据元素映射.xlsx"
-        elem_exists = os.path.exists(os.path.join("file/standard/", standard_elem_name))
-        if elem_exists:
-            fifth = standard_elem_name
-        else:
-            fifth = ""
-        # 把每个元组添加到结果列表中
-        result.append((first, second, third, fourth, fifth))
-    # 返回结果列表
-    return result
-
-
-def get_all_filenames(path):
-    # 创建一个空列表，用来存储所有文件名
-    filenames = []
-    # 遍历指定目录及其子目录
-    for root, dirs, files in os.walk(path):
-        # 对于每个非目录子文件
-        for file in files:
-            # 获取文件的完整路径
-            file_path = os.path.join(root, file)
-            # 把文件名添加到列表中
-            filenames.append(file_path)
-    # 返回文件名列表
-    return filenames
-
-
-def check_and_create_folder(folder_path):
-    # 检查文件夹路径是否有效
-    if not isinstance(folder_path, str):
-        print("无效的文件夹路径")
-        return
-    # 检查文件夹是否存在
-    if os.path.exists(folder_path):
-        print("文件夹已存在")
-    else:
-        # 创建文件夹
-        try:
-            os.makedirs(folder_path)
-            print("文件夹创建成功")
-        except OSError as e:
-            print("文件夹创建失败，错误信息：", e)
-
-
-def read_filenames_with_version(folder):
-    # 创建一个空列表来存储结果
-    result = []
-    # 遍历文件夹下的所有文件
-    for file in os.listdir(folder):
-        # 把文件名按照 _ 拆分成三段
-        segments = file.split("_")
-        # 如果拆分后的长度不是3，说明文件名不符合要求，跳过这个文件
-        if len(segments) != 3:
-            continue
-        # 否则，把拆分后的三段分别赋值给业务线、版本、文件类型
-        business, version, file_type = segments
-        # 把这三个值作为一个元组添加到结果列表中
-        result.append((business, version, file_type, file))
-    # 返回结果列表
-    return result
-
-
-def read_filenames(folder):
-    # 创建一个空列表来存储结果
-    result = []
-    # 遍历文件夹下的所有文件
-    for file in os.listdir(folder):
-        # 把文件名按照 _ 拆分成2段
-        segments = file.split("_")
-        # 如果拆分后的长度不是3，说明文件名不符合要求，跳过这个文件
-        if len(segments) != 2:
-            file_type = file.split(".")[0]
-            business=""
-        else:
-            # 否则，把拆分后的三段分别赋值给业务线、版本、文件类型
-            business, file_type = segments
-            file_type = file_type.split('.')[0]
-        # 把这三个值作为一个元组添加到结果列表中
-        result.append((business, file_type, file))
-    # 返回结果列表
-    return result
 
 
 if __name__ == '__main__':
