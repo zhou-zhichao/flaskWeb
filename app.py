@@ -123,6 +123,10 @@ def create_app():
     return app
 
 
+    @app.route("/confirm/<filename>")
+    def confirm(filename):
+        pass
+
 def transform_list(file_list):
     # 定义一个空的字典
     dic = {}
