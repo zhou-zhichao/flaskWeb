@@ -186,8 +186,28 @@ def sep_on_field(file_name):
         print(e)
         print("分割文件没有成功\nsep on filed")
 
-
-
+def sep_on_sheet(excel):
+    # Load the excel file and get the sheet names
+    workbook = openpyxl.load_workbook(excel)
+    sheet_names = workbook.sheetnames
+    # Iterate over the sheet names and create a new excel file for each sheet
+    for sheet_name in sheet_names:
+        # Get the worksheet object for the current sheet
+        worksheet = workbook[sheet_name]
+        # Create a new workbook and copy the worksheet to it
+        new_workbook = openpyxl.Workbook()
+        new_worksheet = new_workbook.active
+        new_worksheet.title = sheet_name
+        for row in worksheet:
+            for cell in row:
+                new_worksheet[cell.coordinate].value = cell.value
+        # Save the new workbook with the file name as filname_sheetname.xlsx
+        file_name = excel.split('.')[0] + '_' + sheet_name + '.xlsx'
+        new_workbook.save(file_name)
+        # Call the file_auto_adjust_column_width function to adjust the column width
+        file_auto_adjust_column_width(file_name, sheet_name)
+    # Close the original workbook
+    workbook.close()
 def merge_on_field(dir_path, file_name):
     # 创建一个空的列表，用来存放要合并的DataFrame
     df_list = []
