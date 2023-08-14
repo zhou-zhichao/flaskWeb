@@ -1,12 +1,11 @@
 import glob
 import os
 import re
-from pathlib import Path
+import unicodedata  # 导入unicodedata模块
 
 import numpy as np
 import openpyxl
 import pandas as pd
-import unicodedata  # 导入unicodedata模块
 from openpyxl import Workbook, load_workbook
 
 
@@ -186,12 +185,15 @@ def sep_on_field(file_name):
         print(e)
         print("分割文件没有成功\nsep on filed")
 
+
 def sep_on_sheet(excel):
     # Load the excel file and get the sheet names
     workbook = openpyxl.load_workbook(excel)
     sheet_names = workbook.sheetnames
     # Iterate over the sheet names and create a new excel file for each sheet
     for sheet_name in sheet_names:
+        if sheet_name == "统计结果":
+            continue
         # Get the worksheet object for the current sheet
         worksheet = workbook[sheet_name]
         # Create a new workbook and copy the worksheet to it
@@ -202,12 +204,19 @@ def sep_on_sheet(excel):
             for cell in row:
                 new_worksheet[cell.coordinate].value = cell.value
         # Save the new workbook with the file name as filname_sheetname.xlsx
-        file_name = excel.split('.')[0] + '_' + sheet_name + '.xlsx'
-        new_workbook.save(file_name)
+        file_name = re.sub(r"\.[^.]+$", "", excel)
+        dir_name = file_name.split('/')[-1]
+        # dir_name = dir_name.split('_')[0]+dir_name.split('_')[1]
+        file_name = dir_name + '_' + sheet_name + '.xlsx'
+        file_path = "file/output/" + dir_name
+        final_path = os.path.join(file_path, file_name)
+        new_workbook.save(final_path)
         # Call the file_auto_adjust_column_width function to adjust the column width
-        file_auto_adjust_column_width(file_name, sheet_name)
+        file_auto_adjust_column_width(final_path, sheet_name)
     # Close the original workbook
     workbook.close()
+
+
 def merge_on_field(dir_path, file_name):
     # 创建一个空的列表，用来存放要合并的DataFrame
     df_list = []
@@ -466,6 +475,7 @@ def elem_align(file_path, elem_standard):
     with pd.ExcelWriter(file_path, engine='openpyxl', mode='a',
                         if_sheet_exists='replace') as writer:
         df9.to_excel(writer, sheet_name='重要业务结果检查', index=False)
+
 
 def delete_all(folder):
     # 遍历文件夹下的所有文件和子文件夹
