@@ -44,7 +44,7 @@ def create_app():
 
     @app.route('/second')
     def second():
-        return render_template('数据线落标检查.html',tuples = g.confirm_tuple)
+        return render_template('数据线落标检查.html', tuples=g.confirm_tuple)
 
     @app.route('/third')
     def third():
@@ -58,6 +58,9 @@ def create_app():
     def download_file(file_name):
         return send_from_directory('file/standard', file_name, as_attachment=True)
 
+    @app.route("/confirm/<filename>")
+    def confirm(filename):
+        return redirect("/")
     @app.route('/third/download/<file_name>')
     def third_download(file_name):
         m = re.search(r".*(?=_[^_]+$)", file_name)
@@ -100,13 +103,14 @@ def create_app():
         folder_path = "file/input/" + business + '_' + version + "/"
         print(folder_path)
         check_and_create_folder(folder_path)
+        check_and_create_folder("file/confirm")
         code_file = request.files.get("code_file")
         business_result_file = request.files.get("business_result_file")
         code_file_exists = (code_file.filename != '')
         business_result_file_exists = (business_result_file.filename != '')
         if code_file_exists:
             code_file.filename = business + '_' + version + "_" + "自定义代码.xlsx"
-            code_file_path = os.path.join(folder_path, code_file.filename)
+            code_file_path = os.path.join("file/confirm", code_file.filename)
             code_file.save(code_file_path)
         if business_result_file_exists:
             business_result_file.filename = business + '_' + version + "_" + "重要业务结果.xlsx"
@@ -123,12 +127,10 @@ def create_app():
 
         return redirect("/third")
 
+
+
     return app
 
-
-    @app.route("/confirm/<filename>")
-    def confirm(filename):
-        pass
 
 def transform_list(file_list):
     # 定义一个空的字典
