@@ -61,6 +61,7 @@ def create_app():
     @app.route("/confirm/<filename>")
     def confirm(filename):
         return redirect("/")
+
     @app.route('/third/download/<file_name>')
     def third_download(file_name):
         m = re.search(r".*(?=_[^_]+$)", file_name)
@@ -86,6 +87,8 @@ def create_app():
             # 为文件生成一个安全的文件名
             filename = business + "_" + fileType + ".xlsx"
             # 将文件保存到服务器的uploads目录下
+            if fileType in ["标准代码","标准层模型"]:
+                filename = fileType + ".xlsx"
             dataFile.save(os.path.join('file/standard', filename))
             # 返回一个成功的响应
             response = make_response(redirect("/"))
@@ -112,6 +115,7 @@ def create_app():
             code_file.filename = business + '_' + version + "_" + "自定义代码.xlsx"
             code_file_path = os.path.join("file/confirm", code_file.filename)
             code_file.save(code_file_path)
+            code_check()
         if business_result_file_exists:
             business_result_file.filename = business + '_' + version + "_" + "重要业务结果.xlsx"
             business_result_file_path = os.path.join(folder_path, business_result_file.filename)
@@ -124,10 +128,7 @@ def create_app():
             flash(message=message)
         print(business_result_file_path, '开始datatool')
         sep_on_sheet(business_result_file_path)
-
         return redirect("/third")
-
-
 
     return app
 
@@ -236,10 +237,12 @@ def read_filenames(folder):
         segments = file.split("_")
         # 如果拆分后的长度不是3，说明文件名不符合要求，跳过这个文件
         if len(segments) != 2:
-            continue
-        # 否则，把拆分后的三段分别赋值给业务线、版本、文件类型
-        business, file_type = segments
-        file_type = file_type.split('.')[0]
+            file_type = file.split(".")[0]
+            business=""
+        else:
+            # 否则，把拆分后的三段分别赋值给业务线、版本、文件类型
+            business, file_type = segments
+            file_type = file_type.split('.')[0]
         # 把这三个值作为一个元组添加到结果列表中
         result.append((business, file_type, file))
     # 返回结果列表
