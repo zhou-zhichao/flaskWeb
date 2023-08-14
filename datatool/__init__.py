@@ -207,9 +207,11 @@ def sep_on_sheet(excel):
         file_name = re.sub(r"\.[^.]+$", "", excel)
         dir_name = file_name.split('/')[-1]
         # dir_name = dir_name.split('_')[0]+dir_name.split('_')[1]
-        file_name = dir_name.split("_")[0] +"_"+ dir_name.split("_")[1] + '_' + sheet_name + '.xlsx'
-        file_path = "file/output/" + dir_name
+        file_name = dir_name.split("_")[0] + "_" + dir_name.split("_")[1] + '_' + sheet_name + '.xlsx'
+        file_path = "file/confirm/" + dir_name
         final_path = os.path.join(file_path, file_name)
+        if not os.path.exists(file_path):
+            os.makedirs(file_path)
         new_workbook.save(final_path)
         # Call the file_auto_adjust_column_width function to adjust the column width
         file_auto_adjust_column_width(final_path, sheet_name)
