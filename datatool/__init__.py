@@ -334,6 +334,7 @@ def code_check(standard_file, append_file):
     df1 = pd.read_excel(standard_file)
     df2 = pd.read_excel(append_file)
     # 按照标准表和标准字段两个列来合并两个数据框，保留左边数据框的所有行，用how='left'参数
+    df2["代码"] = df2["代码"].astype('object')
     df3 = pd.merge(df1, df2, on=['代码名称', '代码'], how='right', suffixes=('_y', ''))
     # df3 = df3[['代码名称'	,'代码编码',	'代码',	'上级编码']]
     selected_columns = ['代码名称', '代码编码', '代码', '上级编码', '代码编码_y', '上级编码_y']
@@ -491,6 +492,7 @@ def delete_all(folder):
             # 删除空文件夹
             os.rmdir(file)
 
+
 def confirm_list_to_tuple(file_list):
     # 创建一个空列表来存储元组
     tuple_list = []
@@ -506,6 +508,7 @@ def confirm_list_to_tuple(file_list):
         tuple_list.append(tuple(subparts))
     # 返回元组列表
     return tuple_list
+
 
 def transform_list(file_list):
     # 定义一个空的字典
@@ -612,7 +615,7 @@ def read_filenames(folder):
         # 如果拆分后的长度不是3，说明文件名不符合要求，跳过这个文件
         if len(segments) != 2:
             file_type = file.split(".")[0]
-            business=""
+            business = ""
         else:
             # 否则，把拆分后的三段分别赋值给业务线、版本、文件类型
             business, file_type = segments
