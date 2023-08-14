@@ -122,14 +122,16 @@ def create_app():
             business_result_file.filename = business + '_' + version + "_" + "重要业务结果.xlsx"
             business_result_file_path = os.path.join(folder_path, business_result_file.filename)
             business_result_file.save(business_result_file_path)
+            print(business_result_file_path, '开始datatool')
+            sep_on_sheet(business_result_file_path)
         if code_file_exists or business_result_file_exists:
             message = code_file.filename + "  " + business_result_file.filename + "上传成功"
             flash(message=message)
         else:
             message = "上传失败"
             flash(message=message)
-        print(business_result_file_path, '开始datatool')
-        sep_on_sheet(business_result_file_path)
+
+
         return redirect("/third")
 
     return app
