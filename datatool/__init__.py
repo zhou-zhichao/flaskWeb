@@ -500,17 +500,42 @@ def delete_all(folder):
 def confirm_list_to_tuple(file_list):
     # 创建一个空列表来存储元组
     tuple_list = []
+    # 创建一个空字典来存储三层文件名和对应的四层文件名
+    file_name = {}
     # 遍历文件列表中的每个文件名
-    for file in file_list:
-        # 用反斜杠分割文件名，取最后两个部分
-        parts = file.split("\\")[-2:]
-        # 用下划线分割第一个部分，取前两个部分
-        subparts = parts[0].split("_")[:2]
-        # 将第二个部分添加到子部分列表中
-        subparts.append(parts[1])
-        # 将子部分列表转换为元组，并添加到元组列表中
-        subparts.append(file)
-        tuple_list.append(tuple(subparts))
+    for i, file in enumerate(file_list):
+        all_part = file.split("\\")
+        part_len = len(all_part)
+        if part_len == 4:
+            # 用反斜杠分割文件名，取最后两个部分
+            parts = file.split("\\")[-2:]
+            # 用下划线分割第一个部分，取前两个部分
+            subparts = parts[0].split("_")[:2]
+            # 将第二个部分添加到子部分列表中
+            subparts.append(parts[1])
+            file_name[parts[1]] = i
+            # 将子部分列表转换为元组，并添加到元组列表中
+            subparts.append(file)
+            tuple_list.append(subparts)
+
+
+        elif part_len == 3:
+            # 用反斜杠分割文件名，取最后一个部分
+            part = file.split("\\")[-1]
+            # 用下划线分割文件名，取前两个部分
+            subparts = part.split("_")[:2]
+            # 在字典中查找是否有对应的四层文件名，如果有则添加到子部分列表中，否则添加空字符串
+            if part in file_name:
+                subparts.append(file_name[part])
+                subparts.append("file\\confirm\\" + part + "\\" + file_name[part])
+            else:
+                subparts.append("")
+                subparts.append("")
+            # 将三层文件名添加到子部分列表中
+            subparts.append(part)
+            subparts.append(file)
+            # 将子部分列表转换为元组，并添加到元组列表中
+            tuple_list.append(tuple(subparts))
     # 返回元组列表
     return tuple_list
 
