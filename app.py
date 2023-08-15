@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory, render_template, g, request, flash, redirect, make_response
+from flask import Flask, send_from_directory, render_template, g, request, flash, redirect, make_response, send_file
 
 from datatool import *
 
@@ -60,7 +60,7 @@ def create_app():
 
     @app.route("/confirm/<filename>")
     def confirm(filename):
-
+        xlsx_func(filename)
         return redirect("/")
 
     @app.route('/third/download/<file_name>')
@@ -75,6 +75,10 @@ def create_app():
             path = None
         path = os.path.join("file\\input\\", path)
         return send_from_directory(path, file_name, as_attachment=True)
+
+    @app.route('/second/download/<filename>')
+    def second_download(filename):
+        return send_file(filename, as_attachment=True)
 
     @app.route('/submit', methods=['POST'])
     def submit():
@@ -129,7 +133,6 @@ def create_app():
         else:
             message = "上传失败"
             flash(message=message)
-
 
         return redirect("/third")
 

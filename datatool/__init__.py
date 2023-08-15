@@ -507,6 +507,7 @@ def confirm_list_to_tuple(file_list):
         # 将第二个部分添加到子部分列表中
         subparts.append(parts[1])
         # 将子部分列表转换为元组，并添加到元组列表中
+        subparts.append(file)
         tuple_list.append(tuple(subparts))
     # 返回元组列表
     return tuple_list
@@ -626,3 +627,6 @@ def read_filenames(folder):
         result.append((business, file_type, file))
     # 返回结果列表
     return result
+
+def xlsx_func(filename):
+    pass

@@ -93,7 +93,7 @@
 
                     <!-- Unnamed (表格) -->
                     <div id="u55" class="ax_default _表格">
-                         <table>
+                        <table>
                             <thead>
                             <tr>
                                 <td>业务线</td>
@@ -110,10 +110,14 @@
                                         <td>{{ tuple[0] }}</td>
 
                                         <td>{{ tuple[1] }}</td>
-                                        <td>{{ tuple[2] }}</td>
+                                        <td>{{ tuple[2] }}{% if tuple[2] %}
+                                            <a href="{{ url_for('second_download',filename=tuple[3]) }}">下载</a>
+                                        {% endif %}</td>
                                         <td></td>
                                         <td>未确认</td>
-                                        <td>{% if tuple[0] %}<a href="{{ url_for('confirm',filename=tuple[2]) }}">确认</a>{% endif %}</td>
+                                        <td>{% if tuple[0] %}
+                                            <a href="{{ url_for('confirm',filename=tuple[3]) }}">确认</a>{% endif %}
+                                        </td>
 
                                     </tr>
                                 {% endif %}
