@@ -20,10 +20,10 @@ def create_app():
             # print(g.file_tuple)
         elif request.path == '/third':
             filenames = get_all_filenames('file\\input')
-            print(filenames)
+            # print(filenames)
             g.table_tuple = transform_list(filenames)
             g.table_tuple.reverse()
-            print(g.table_tuple)
+            # print(g.table_tuple)
 
             # s = [('人事', '1.1', '', '人事_1.1_自定义代码.xlsx', '', '数据元素'),
             #      ('学工', '1', '学工_1_重要业务结果.xlsx', '', '', '数据元素'),
@@ -110,9 +110,12 @@ def create_app():
         dataFile = request.files.get('mo_file')
         title = request.form.get('title')
         title.strip()
+        title = title.split("\r")[0]
         print(title)
-        return url_for('confirm', filename=title)
-
+        new_title = title.rsplit(".", 1)[0] + "确认." + title.rsplit(".", 1)[1]
+        dataFile.save(os.path.join("file/confirm", new_title))
+        # print(g.confirm_tuple)
+        return url_for('confirm', filename=new_title)
 
     @app.route("/business_submit", methods=['POST'])
     def business_submit():
