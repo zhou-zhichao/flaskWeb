@@ -370,7 +370,9 @@ def code_check(standard_file, append_file):
 
     df.columns = ['代码名称', '代码编码', '代码', '上级编码', '代码编码_标准', '上级编码_标准', '状态']
     file_name = append_file.split('/')[-1]
-    auto_adjust_column_width(df, 'file/confirm/' + file_name)
+    dir_name = 'file/confirm/'+file_name.rsplit("_", 1)[0] + "_重要业务结果/"
+    check_and_create_folder(dir_name)
+    auto_adjust_column_width(df, dir_name + file_name)
     print("别紧张，只是警告。功能正常运行。")
 
 
