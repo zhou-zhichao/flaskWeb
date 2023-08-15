@@ -246,7 +246,7 @@ def merge_on_field(dir_path, file_name):
 
 
 def merge_to_standard(file_path, merge_file):
-
+    merge_exists = os.path.exists(merge_file)
     for file_name in os.listdir(file_path):
         # If the file name contains '新增' and is an Excel file
         if re.search('新增|特殊', file_name) and file_name.endswith('.xlsx'):
@@ -264,6 +264,9 @@ def merge_to_standard(file_path, merge_file):
                 df.to_excel(writer, sheet_name="Sheet1", index=False)
                 # writer.save()
                 writer.close()
+            if not merge_exists:
+                workbook = openpyxl.Workbook()
+                workbook.save(merge_file)
             merge_df = pd.read_excel(merge_file, engine='openpyxl')
             # Merge the two dataframes on the columns 所属表 and 字段名, using left join to keep merge_file's values
             merged_df = pd.merge(merge_df, df, on=['所属表', '字段名'], how='left', suffixes=('', '_y'))
