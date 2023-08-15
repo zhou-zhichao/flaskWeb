@@ -60,6 +60,7 @@ def create_app():
 
     @app.route("/confirm/<filename>")
     def confirm(filename):
+
         return redirect("/")
 
     @app.route('/third/download/<file_name>')
