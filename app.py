@@ -30,6 +30,7 @@ def create_app():
             #      ('学工', '1.1', '学工_1.1_重要业务结果.xlsx', '学工_1.1_自定义代码.xlsx', '', '数据元素')]
         elif request.path == "/second":
             filenames = get_all_filenames('file\\confirm')
+            filenames.reverse()
             print(filenames)
             g.confirm_tuple = confirm_list_to_tuple(filenames)
             print(g.confirm_tuple)
