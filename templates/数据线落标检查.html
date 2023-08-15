@@ -12,7 +12,34 @@
 
 
 {% block content %}
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/business_submit" method="POST" enctype="multipart/form-data">
 
+                    <div class="mb-3">
+                        <label for="exampleFileUpload1" class="form-label">请选择结果确认文件：</label>
+                        <input class="form-control" type="file" id="business_result_file" name="business_result_file"
+                               accept="xlsx">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary"><a href="{{ url_for("confirm",filename=todo) }}">保存</a></button>
+{#                        todo#}
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
 
     <div id="base" class="">
 
@@ -116,7 +143,8 @@
                                         <td></td>
                                         <td>未确认</td>
                                         <td>{% if tuple[0] %}
-                                            <a href="{{ url_for('confirm',filename=tuple[3]) }}">确认</a>{% endif %}
+
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#myModal">确认</a>{% endif %}
                                         </td>
 
                                     </tr>
@@ -125,7 +153,21 @@
 
 
                         </table>
-
+<script>
+  // 当文档加载完成后
+  $(document).ready(function(){
+    // 当点击按钮时
+    $("td").click(function(){
+      // 获取按钮所在行的第一个单元格的文本
+      let name = $(this).closest("tr").find("td:nth-child(3)").text();
+      console.log(name);
+      name = name.replace(/下载/,"");
+      console.log(name);
+      // 将模态框的标题设置为该文本
+      $(".modal-title").text(name+" 修订结果上传");
+    });
+  });
+</script>
                     </div>
                 </div>
             </div>
