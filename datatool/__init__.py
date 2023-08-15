@@ -156,20 +156,21 @@ def sep_on_field(file_name):
             sheets[field] = sub_df
             print(f"Field: {field}, row count: {len(sub_df)}")
         file_name = re.sub(r"\.[^.]+$", "", file_name)
-        file_name = file_name.split('/')[-1]
+
         # Save each subset dataframe to a separate Excel file
         for field, subdiv_df in sheets.items():
             safe_field = field.replace("/", "-").replace(":", "")
-
+            output_dir = "file/temp/"
             # Create an output directory if it does not exist
-            output_dir = f"file/output/{file_name}"
+            # output_dir = file_name
             if not os.path.exists(output_dir):
                 os.makedirs(output_dir)
             # else:
             #     shutil.rmtree(output_dir)
             #     os.makedirs(output_dir)
             # Create an ExcelWriter object with xlsxwriter engine
-            writer = pd.ExcelWriter(f"{output_dir}/{file_name}_{safe_field}.xlsx", engine='xlsxwriter')
+            final_path = f"{output_dir}{safe_field}.xlsx"
+            writer = pd.ExcelWriter(final_path, engine='xlsxwriter')
             # Add two columns to the subset dataframe if the field is '新增'
             if field == '新增':
                 subdiv_df.loc[:, '新增类型'] = ''
@@ -180,7 +181,7 @@ def sep_on_field(file_name):
             auto_adjust_column_width_writer(writer, subdiv_df)
             # Save and close the ExcelWriter object
             writer.close()
-        return file_name
+        return output_dir
     except FileNotFoundError as e:
         print(e)
         print("分割文件没有成功\nsep on filed")
@@ -370,7 +371,7 @@ def code_check(standard_file, append_file):
 
     df.columns = ['代码名称', '代码编码', '代码', '上级编码', '代码编码_标准', '上级编码_标准', '状态']
     file_name = append_file.split('/')[-1]
-    dir_name = 'file/confirm/'+file_name.rsplit("_", 1)[0] + "_重要业务结果/"
+    dir_name = 'file/confirm/' + file_name.rsplit("_", 1)[0] + "_重要业务结果/"
     check_and_create_folder(dir_name)
     auto_adjust_column_width(df, dir_name + file_name)
     print("别紧张，只是警告。功能正常运行。")
@@ -628,5 +629,15 @@ def read_filenames(folder):
     # 返回结果列表
     return result
 
+
 def xlsx_func(filename):
-    pass
+    field = filename.rsplit("_")[-1].split(".")[0]
+    if field == "外供数据检查":
+        sep_on_field(filename)
+        # merge_to_standard()
+    elif field == "对外数据要求检查":
+        pass
+    elif field == "自定义代码":
+        pass
+    else:
+        print("文件名出错")

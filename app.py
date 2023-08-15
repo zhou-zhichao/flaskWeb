@@ -61,7 +61,7 @@ def create_app():
     @app.route("/confirm/<filename>")
     def confirm(filename):
         xlsx_func(filename)
-        return redirect("/")
+        return redirect("/second")
 
     @app.route('/third/download/<file_name>')
     def third_download(file_name):
