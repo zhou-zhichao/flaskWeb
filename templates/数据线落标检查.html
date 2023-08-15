@@ -20,17 +20,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/business_submit" method="POST" enctype="multipart/form-data">
+                <form action="/modify_submit" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
 
+                        <input type="hidden" class="form-control filename" id="version" name="title" value="">
+                    </div>
                     <div class="mb-3">
                         <label for="exampleFileUpload1" class="form-label">请选择结果确认文件：</label>
-                        <input class="form-control" type="file" id="business_result_file" name="business_result_file"
+                        <input class="form-control" type="file" id="business_result_file" name="mo_file"
                                accept="xlsx">
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary"><a href="{{ url_for("confirm",filename=todo) }}">保存</a></button>
-{#                        todo#}
+                        <button type="submit" class="btn btn-primary">保存</button>
+
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
 
                     </div>
@@ -165,6 +168,8 @@
       console.log(name);
       // 将模态框的标题设置为该文本
       $(".modal-title").text(name+" 修订结果上传");
+      $(".filename").val(name)
+
     });
   });
 </script>

@@ -1,4 +1,5 @@
-from flask import Flask, send_from_directory, render_template, g, request, flash, redirect, make_response, send_file
+from flask import Flask, send_from_directory, render_template, g, request, flash, redirect, make_response, send_file, \
+    url_for
 
 from datatool import *
 
@@ -103,6 +104,15 @@ def create_app():
             # 返回一个失败的响应
             flash('文件上传失败，请检查文件类型是否正确！')
             return redirect("/")
+
+    @app.route("/modify_submit", methods=['POST'])
+    def modify_submit():
+        dataFile = request.files.get('mo_file')
+        title = request.form.get('title')
+        title.strip()
+        print(title)
+        return url_for('confirm', filename=title)
+
 
     @app.route("/business_submit", methods=['POST'])
     def business_submit():
