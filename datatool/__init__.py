@@ -160,7 +160,7 @@ def sep_on_field(file_name):
         # Save each subset dataframe to a separate Excel file
         for field, subdiv_df in sheets.items():
             safe_field = field.replace("/", "-").replace(":", "")
-            output_dir = "file/temp/"
+            output_dir = "file/temp/" + file_name.rsplit("\\")[-1] +"/"
             # Create an output directory if it does not exist
             # output_dir = file_name
             if not os.path.exists(output_dir):
@@ -246,6 +246,7 @@ def merge_on_field(dir_path, file_name):
 
 
 def merge_to_standard(file_path, merge_file):
+
     for file_name in os.listdir(file_path):
         # If the file name contains '新增' and is an Excel file
         if re.search('新增|特殊', file_name) and file_name.endswith('.xlsx'):
@@ -633,8 +634,10 @@ def read_filenames(folder):
 def xlsx_func(filename):
     field = filename.rsplit("_")[-1].split(".")[0]
     if field == "外供数据检查":
-        sep_on_field(filename)
-        # merge_to_standard()
+        dirname = sep_on_field(filename)
+        version = filename.rsplit('\\')[-1].rsplit("_",1)[0]
+        check_and_create_folder("file/modify/")
+        merge_to_standard(dirname,f"file/modify/{version}修订.xlsx")
     elif field == "对外数据要求检查":
         pass
     elif field == "自定义代码":
