@@ -637,7 +637,8 @@ def xlsx_func(filename):
         dirname = sep_on_field(filename)
         version = filename.rsplit('\\')[-1].rsplit("_", 1)[0]
         check_and_create_folder("file/modify/")
-        merge_to_standard(dirname, f"file/modify/{version}修订.xlsx")
+        merge_to_standard(dirname, f"file/modify/{version}_重要结果修订.xlsx")
+        merge_on_field(dirname, "file/temp/test.xlsx")
     elif field == "对外数据要求检查":
         pass
     elif field == "自定义代码":
