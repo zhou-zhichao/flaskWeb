@@ -160,7 +160,7 @@ def sep_on_field(file_name):
         # Save each subset dataframe to a separate Excel file
         for field, subdiv_df in sheets.items():
             safe_field = field.replace("/", "-").replace(":", "")
-            output_dir = "file/temp/" + file_name.rsplit("\\")[-1] +"/"
+            output_dir = "file/temp/" + file_name.rsplit("\\")[-1] + "/"
             # Create an output directory if it does not exist
             # output_dir = file_name
             if not os.path.exists(output_dir):
@@ -264,9 +264,6 @@ def merge_to_standard(file_path, merge_file):
                 df.to_excel(writer, sheet_name="Sheet1", index=False)
                 # writer.save()
                 writer.close()
-            if not merge_exists:
-                workbook = openpyxl.Workbook()
-                workbook.save(merge_file)
             merge_df = pd.read_excel(merge_file, engine='openpyxl')
             # Merge the two dataframes on the columns 所属表 and 字段名, using left join to keep merge_file's values
             merged_df = pd.merge(merge_df, df, on=['所属表', '字段名'], how='left', suffixes=('', '_y'))
@@ -638,9 +635,9 @@ def xlsx_func(filename):
     field = filename.rsplit("_")[-1].split(".")[0]
     if field == "外供数据检查":
         dirname = sep_on_field(filename)
-        version = filename.rsplit('\\')[-1].rsplit("_",1)[0]
+        version = filename.rsplit('\\')[-1].rsplit("_", 1)[0]
         check_and_create_folder("file/modify/")
-        merge_to_standard(dirname,f"file/modify/{version}修订.xlsx")
+        merge_to_standard(dirname, f"file/modify/{version}修订.xlsx")
     elif field == "对外数据要求检查":
         pass
     elif field == "自定义代码":
