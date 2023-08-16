@@ -1,5 +1,6 @@
 import time
 
+import flask
 from flask import Flask, send_from_directory, render_template, g, request, flash, redirect, make_response, send_file, \
     url_for
 from werkzeug.utils import safe_join
@@ -127,7 +128,15 @@ def create_app():
         time.sleep(1)
         # print(g.confirm_tuple)
         # flash("保存成功")
-        return redirect(url_for('confirm', filename=file_path))
+        # 使用flask.after_this_request装饰器来注册一个函数
+        @flask.after_this_request
+        def do_something(response):
+            # 在这里执行一些操作，例如打印日志或者删除临时文件等
+            print("Saved file successfully")
+            # 重定向到confirm函数，并传递文件名参数
+            return redirect(url_for('confirm', filename=new_title))
+        # return redirect(url_for('confirm', filename=file_path))
+
 
     @app.route("/business_submit", methods=['POST'])
     def business_submit():

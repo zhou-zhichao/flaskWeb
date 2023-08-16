@@ -136,55 +136,55 @@ def auto_adjust_column_width(df, file_name, sheet_name='Sheet1'):
 # 定义一个函数，用于将一个Excel文件中的一个工作表按照"字段确认"列的不同值分割成多个子表，并保存到不同的Excel文件中
 def sep_on_field(file_name):
     # Load the data from the specified Excel file and sheet name
-    try:
-        df = pd.read_excel(f"{file_name}", engine="openpyxl", sheet_name='外供数据检查')
-        df[['业务域', "业务子域", "业务过程", "表/视图名称"]] = df[
-            ['业务域', "业务子域", "业务过程", "表/视图名称"]].fillna(
-            method='ffill')
-        df['字段确认'].fillna('已确认', inplace=True)
-        df.dropna(subset=["字段确认"], inplace=True)
-        # Get the unique values of the "字段确认"
-        distinct_values = df["字段确认"].unique()
+    # try:
+    df = pd.read_excel(f"{file_name}", engine="openpyxl", sheet_name='外供数据检查')
+    df[['业务域', "业务子域", "业务过程", "表/视图名称"]] = df[
+        ['业务域', "业务子域", "业务过程", "表/视图名称"]].fillna(
+        method='ffill')
+    df['字段确认'].fillna('已确认', inplace=True)
+    df.dropna(subset=["字段确认"], inplace=True)
+    # Get the unique values of the "字段确认"
+    distinct_values = df["字段确认"].unique()
 
-        sheets = {}
-        # For each unique value, get the subset of the dataframe and store it in the dictionary
-        df = df.rename(columns={'表/视图名称': '所属表', '业务过程': '业务单元'})
-        for field in distinct_values:
-            # sub_df = df[df["字段确认"] == field]
-            sub_df = df[df['字段确认'] == field].copy()
-            # 这段代码中的警告是因为你在对一个切片的数据框进行赋值操作，这可能会导致不可预期的结果。为了避免这个警告，你可以在切片的时候使用.copy()方法，这样就会创建一个新的数据框对象，而不是一个视图。
-            sheets[field] = sub_df
-            print(f"Field: {field}, row count: {len(sub_df)}")
-        file_name = re.sub(r"\.[^.]+$", "", file_name)
+    sheets = {}
+    # For each unique value, get the subset of the dataframe and store it in the dictionary
+    df = df.rename(columns={'表/视图名称': '所属表', '业务过程': '业务单元'})
+    for field in distinct_values:
+        # sub_df = df[df["字段确认"] == field]
+        sub_df = df[df['字段确认'] == field].copy()
+        # 这段代码中的警告是因为你在对一个切片的数据框进行赋值操作，这可能会导致不可预期的结果。为了避免这个警告，你可以在切片的时候使用.copy()方法，这样就会创建一个新的数据框对象，而不是一个视图。
+        sheets[field] = sub_df
+        print(f"Field: {field}, row count: {len(sub_df)}")
+    file_name = re.sub(r"\.[^.]+$", "", file_name)
 
-        # Save each subset dataframe to a separate Excel file
-        for field, subdiv_df in sheets.items():
-            safe_field = field.replace("/", "-").replace(":", "")
-            output_dir = "file/temp/" + file_name.rsplit("\\")[-1] + "/"
-            # Create an output directory if it does not exist
-            # output_dir = file_name
-            if not os.path.exists(output_dir):
-                os.makedirs(output_dir)
-            # else:
-            #     shutil.rmtree(output_dir)
-            #     os.makedirs(output_dir)
-            # Create an ExcelWriter object with xlsxwriter engine
-            final_path = f"{output_dir}{safe_field}.xlsx"
-            writer = pd.ExcelWriter(final_path, engine='xlsxwriter')
-            # Add two columns to the subset dataframe if the field is '新增'
-            if field == '新增':
-                subdiv_df.loc[:, '新增类型'] = ''
-                subdiv_df.loc[:, '确认状态'] = ''
-            # Write the dataframe to the ExcelWriter object
-            subdiv_df.to_excel(writer, index=False)
-            # Call the auto_adjust_column_width function to adjust the column width
-            auto_adjust_column_width_writer(writer, subdiv_df)
-            # Save and close the ExcelWriter object
-            writer.close()
-        return output_dir
-    except FileNotFoundError as e:
-        print(e)
-        print("分割文件没有成功\nsep on filed")
+    # Save each subset dataframe to a separate Excel file
+    for field, subdiv_df in sheets.items():
+        safe_field = field.replace("/", "-").replace(":", "")
+        output_dir = "file/temp/" + file_name.rsplit("\\")[-1] + "/"
+        # Create an output directory if it does not exist
+        # output_dir = file_name
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+        # else:
+        #     shutil.rmtree(output_dir)
+        #     os.makedirs(output_dir)
+        # Create an ExcelWriter object with xlsxwriter engine
+        final_path = f"{output_dir}{safe_field}.xlsx"
+        writer = pd.ExcelWriter(final_path, engine='xlsxwriter')
+        # Add two columns to the subset dataframe if the field is '新增'
+        if field == '新增':
+            subdiv_df.loc[:, '新增类型'] = ''
+            subdiv_df.loc[:, '确认状态'] = ''
+        # Write the dataframe to the ExcelWriter object
+        subdiv_df.to_excel(writer, index=False)
+        # Call the auto_adjust_column_width function to adjust the column width
+        auto_adjust_column_width_writer(writer, subdiv_df)
+        # Save and close the ExcelWriter object
+        writer.close()
+    return output_dir
+    # except FileNotFoundError as e:
+    #     print(e)
+    #     print("分割文件没有成功\nsep on filed")
 
 
 def sep_on_sheet(excel):
