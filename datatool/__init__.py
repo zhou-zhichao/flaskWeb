@@ -237,9 +237,16 @@ def merge_on_field(dir_path, file_name):
         merged_df = merged_df.drop(columns='数据元素uuid')
     # 打开file_name的路径的excel文件，如果不存在就创建一个
     # auto_adjust_column_width(merged_df, file_name, "外供数据检查")
+    if not os.path.isfile(file_name):
+        # 导入openpyxl模块
+        # import openpyxl
+        # 创建一个新的工作簿对象
+        workbook = openpyxl.Workbook()
+        # 保存工作簿到文件名
+        workbook.save(file_name)
     writer = pd.ExcelWriter(file_name, engine="openpyxl", mode="a", if_sheet_exists='replace')
     # 把merged_df写入 外供数据检查 sheet，如果存在就覆盖
-    merged_df.to_excel(writer, sheet_name="重要业务结果检查", index=False)
+    merged_df.to_excel(writer, sheet_name="外供数据检查", index=False)
     # 保存并关闭文件
     # writer.save()
     writer.close()
@@ -255,13 +262,13 @@ def merge_to_standard(file_path, merge_file):
             # Read the merge_file into another dataframe
             if not os.path.exists(merge_file):
                 # 如果不存在，就创建一个空的excel文件
-                df = pd.DataFrame(
+                df_empty = pd.DataFrame(
                     columns=["业务域", "业务子域", "业务单元", "所属表", "字段顺序", "字段名", "字段类型", "长度/值域",
                              "精度", "修订建议", "修订确认", "数据元素uuid", "字段确认", "新增类型", "确认状态"])
 
                 writer = pd.ExcelWriter(merge_file, engine="openpyxl")
 
-                df.to_excel(writer, sheet_name="Sheet1", index=False)
+                df_empty.to_excel(writer, sheet_name="Sheet1", index=False)
                 # writer.save()
                 writer.close()
             merge_df = pd.read_excel(merge_file, engine='openpyxl')
@@ -661,7 +668,8 @@ def xlsx_func(filename):
         version = filename.rsplit('\\')[-1].rsplit("_", 1)[0]
         check_and_create_folder("file/modify/")
         merge_to_standard(dirname, f"file/modify/{version}_重要结果修订.xlsx")
-        merge_on_field(dirname, "file/temp/test.xlsx")
+        merge_on_field(dirname, f"file/temp/{version}_外供数据检查确认.xlsx")
+        data_elem_align(f"file/temp/{version}_外供数据检查确认.xlsx",version.split("_")[0] + "_业务线数据元素映射.xlsx","")
     elif field == "对外数据要求检查确认":
         pass
     elif field == "自定义代码确认":

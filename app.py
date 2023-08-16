@@ -123,9 +123,9 @@ def create_app():
         title = title.split("\r")[0]
         print(title)
         new_title = title.rsplit(".", 1)[0] + "确认." + title.rsplit(".", 1)[1]
-        file_path = safe_join("file/confirm", new_title)
+        file_path = os.path.join("file\\confirm", new_title)
         dataFile.save(file_path)
-        time.sleep(1)
+        # time.sleep(1)
         # print(g.confirm_tuple)
         # flash("保存成功")
         # 使用flask.after_this_request装饰器来注册一个函数
@@ -134,7 +134,7 @@ def create_app():
             # 在这里执行一些操作，例如打印日志或者删除临时文件等
             print("Saved file successfully")
             # 重定向到confirm函数，并传递文件名参数
-            return redirect(url_for('confirm', filename=new_title))
+            return redirect(url_for('confirm', filename=file_path))
         # return redirect(url_for('confirm', filename=file_path))
 
 
