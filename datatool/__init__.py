@@ -656,15 +656,15 @@ def read_filenames(folder):
 
 def xlsx_func(filename):
     field = filename.rsplit("_")[-1].split(".")[0]
-    if field == "外供数据检查":
+    if field == "外供数据检查确认":
         dirname = sep_on_field(filename)
         version = filename.rsplit('\\')[-1].rsplit("_", 1)[0]
         check_and_create_folder("file/modify/")
         merge_to_standard(dirname, f"file/modify/{version}_重要结果修订.xlsx")
         merge_on_field(dirname, "file/temp/test.xlsx")
-    elif field == "对外数据要求检查":
+    elif field == "对外数据要求检查确认":
         pass
-    elif field == "自定义代码":
+    elif field == "自定义代码确认":
         pass
     else:
         print("文件名出错")

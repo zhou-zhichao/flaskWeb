@@ -119,10 +119,11 @@ def create_app():
         title = title.split("\r")[0]
         print(title)
         new_title = title.rsplit(".", 1)[0] + "确认." + title.rsplit(".", 1)[1]
-        dataFile.save(os.path.join("file/confirm", new_title))
+        file_path = os.path.join("file/confirm", new_title)
+        dataFile.save(file_path)
         # print(g.confirm_tuple)
         flash("保存成功")
-        return redirect(url_for('confirm', filename=new_title))
+        return redirect(url_for('confirm', filename=file_path))
 
     @app.route("/business_submit", methods=['POST'])
     def business_submit():
