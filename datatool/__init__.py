@@ -148,7 +148,7 @@ def sep_on_field(file_name):
 
     sheets = {}
     # For each unique value, get the subset of the dataframe and store it in the dictionary
-    df = df.rename(columns={'表/视图名称': '所属表', '业务过程': '业务单元'})
+    df = df.rename(columns={'所属表': '表/视图名称', '业务过程': '业务单元'})
     for field in distinct_values:
         # sub_df = df[df["字段确认"] == field]
         sub_df = df[df['字段确认'] == field].copy()
@@ -263,7 +263,7 @@ def merge_to_standard(file_path, merge_file):
             if not os.path.exists(merge_file):
                 # 如果不存在，就创建一个空的excel文件
                 df_empty = pd.DataFrame(
-                    columns=["业务域", "业务子域", "业务单元", "所属表", "字段顺序", "字段名", "字段类型", "长度/值域",
+                    columns=["业务域", "业务子域", "业务单元", "表/视图名称", "字段顺序", "字段名", "字段类型", "长度/值域",
                              "精度", "修订建议", "修订确认", "数据元素uuid", "字段确认", "新增类型", "确认状态"])
 
                 writer = pd.ExcelWriter(merge_file, engine="openpyxl")
@@ -273,7 +273,7 @@ def merge_to_standard(file_path, merge_file):
                 writer.close()
             merge_df = pd.read_excel(merge_file, engine='openpyxl')
             # Merge the two dataframes on the columns 所属表 and 字段名, using left join to keep merge_file's values
-            merged_df = pd.merge(merge_df, df, on=['所属表', '字段名'], how='left', suffixes=('', '_y'))
+            merged_df = pd.merge(merge_df, df, on=['表/视图名称', '字段名'], how='left', suffixes=('', '_y'))
             # Drop the duplicate columns from the right dataframe
             merged_df = merged_df.drop(merged_df.filter(regex='_y$').columns.tolist(), axis=1)
             # Fill the NaN values in 新增类型 and 确认状态 columns with the values from df
@@ -281,7 +281,7 @@ def merge_to_standard(file_path, merge_file):
             # merged_df['确认状态'] = merged_df['确认状态'].fillna(df['确认状态'])
             # merged_df['修订建议'] = merged_df['修订建议'].fillna(df['修订建议'])
             # Concatenate the two dataframes along the r axis, keeping only the unique rows
-            merged_df = pd.concat([merged_df, df], axis=0).drop_duplicates(keep='last', subset=['所属表', '字段名'])
+            merged_df = pd.concat([merged_df, df], axis=0).drop_duplicates(keep='last', subset=['表/视图名称', '字段名'])
             if '数据元素uuid' in merged_df.columns:
                 merged_df = merged_df.drop(columns='数据元素uuid')
             # Save the merged dataframe to a new Excel file
@@ -314,7 +314,7 @@ def data_elem_align(file_path, elem_standard, sheet_name):
     df1 = pd.read_excel(file_path, sheet_name=sheet_name)
     df2 = pd.read_excel(elem_standard)
     # 按照标准表和标准字段两个列来合并两个数据框，保留左边数据框的所有行，用how='left'参数
-    df3 = pd.merge(df1, df2, on=['所属表', '字段名'], how='left', suffixes=('', '_y'))
+    df3 = pd.merge(df1, df2, on=['表/视图名称', '字段名'], how='left', suffixes=('', '_y'))
     # 只保留数据元素这一列，用subset参数
     df4 = df3[['数据元素']]
     # 将数据元素这一列添加在file_path后面，用pd.concat函数，axis=1表示按列合并
@@ -335,7 +335,7 @@ def data_elem_align(file_path, elem_standard, sheet_name):
     # 返回合并后的数据框
     with pd.ExcelWriter(file_path, engine='openpyxl', mode='a',
                         if_sheet_exists='replace') as writer:
-        df9.to_excel(writer, sheet_name=sheet_name, index=False)
+        df9.to_excel(writer, sheet_name=sheet_name, index=False)  # todo：多一个sheet
 
 
 def code_check(standard_file, append_file):
