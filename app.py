@@ -1,3 +1,5 @@
+import time
+
 from flask import Flask, send_from_directory, render_template, g, request, flash, redirect, make_response, send_file, \
     url_for
 
@@ -62,7 +64,7 @@ def create_app():
 
     @app.route('/confirm_download/<filename>')
     def confirm_download(filename):
-        return redirect("/second")
+        return send_file(filename, as_attachment=True)
     @app.route("/confirm/<filename>")
     def confirm(filename):
         # xlsx_func(filename)
@@ -119,6 +121,7 @@ def create_app():
         new_title = title.rsplit(".", 1)[0] + "确认." + title.rsplit(".", 1)[1]
         dataFile.save(os.path.join("file/confirm", new_title))
         # print(g.confirm_tuple)
+        time.sleep(1)
         return url_for('confirm', filename=new_title)
 
     @app.route("/business_submit", methods=['POST'])
