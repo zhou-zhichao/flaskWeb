@@ -264,7 +264,8 @@ def merge_to_standard(file_path, merge_file):
             if not os.path.exists(merge_file):
                 # 如果不存在，就创建一个空的excel文件
                 df_empty = pd.DataFrame(
-                    columns=["业务域", "业务子域", "业务单元", "表/视图名称", "字段顺序", "字段名", "字段类型", "长度/值域",
+                    columns=["业务域", "业务子域", "业务单元", "表/视图名称", "字段顺序", "字段名", "字段类型",
+                             "长度/值域",
                              "精度", "修订建议", "修订确认", "数据元素uuid", "字段确认", "新增类型", "确认状态"])
 
                 writer = pd.ExcelWriter(merge_file, engine="openpyxl")
@@ -282,7 +283,8 @@ def merge_to_standard(file_path, merge_file):
             # merged_df['确认状态'] = merged_df['确认状态'].fillna(df['确认状态'])
             # merged_df['修订建议'] = merged_df['修订建议'].fillna(df['修订建议'])
             # Concatenate the two dataframes along the r axis, keeping only the unique rows
-            merged_df = pd.concat([merged_df, df], axis=0).drop_duplicates(keep='last', subset=['表/视图名称', '字段名'])
+            merged_df = pd.concat([merged_df, df], axis=0).drop_duplicates(keep='last',
+                                                                           subset=['表/视图名称', '字段名'])
             if '数据元素uuid' in merged_df.columns:
                 merged_df = merged_df.drop(columns='数据元素uuid')
             # Save the merged dataframe to a new Excel file
@@ -678,15 +680,13 @@ def xlsx_func(filename):
         merge_on_field(dirname, f"file/temp/{version}_外供数据检查确认.xlsx")
         data_elem_align(f"file/temp/{version}_外供数据检查确认.xlsx", "file/standard/" +
                         version.split("_")[0] + "_业务线数据元素映射.xlsx", "外供数据检查")
-        source_path = "file/input/" + version +f"{version}_重要业务结果.xlsx"
+        source_path = "file/input/" + version + f"/{version}_重要业务结果.xlsx"
         shutil.copy(source_path, f"file/temp/{version}_重要业务结果.xlsx")
-        r = openpyxl.load_workbook("r.xlsx")
-        w = openpyxl.load_workbook("w.xlsx")
-
+        r = openpyxl.load_workbook(filename)
+        w = openpyxl.load_workbook(f"file/temp/{version}_重要业务结果.xlsx")
         # 获取两个文件中的所有工作表的名字
         r_sheets = r.sheetnames
         w_sheets = w.sheetnames
-
         # 遍历r文件中的每一个工作表
         for r_sheet in r_sheets:
             # 判断是否在w文件中存在同名的工作表
@@ -704,7 +704,7 @@ def xlsx_func(filename):
                         w[r_sheet].cell(row=i + 1, column=j + 1, value=value)
 
         # 保存w文件，并关闭两个文件
-        w.save("w.xlsx")
+        w.save(f"file/temp/{version}_重要业务结果.xlsx")
         r.close()
         w.close()
         statistics(f"file/temp/{version}_外供数据检查确认.xlsx")
