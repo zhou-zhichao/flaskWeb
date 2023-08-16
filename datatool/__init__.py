@@ -325,7 +325,7 @@ def data_elem_align(file_path, elem_standard, sheet_name):
     df5 = pd.concat([df1, df4], axis=1)
     # df5["数据元素"] = df5["数据元素"].replace(df4["数据元素"], df1["数据元素"])
     # 读取一个叫dataelement.xlsx的文件的 数据元素 sheet
-    df6 = pd.read_excel('file/standard/dataelement.xlsx', sheet_name='数据元素')
+    df6 = pd.read_excel('file/dataelement.xlsx', sheet_name='数据元素')
     # 把df5中的数据元素和 dataelement的数据元素名称对应，用pd.merge函数，on='数据元素'表示按照数据元素这一列来合并
     df7 = pd.merge(df5, df6, on='数据元素', how='left')
     # 把df5中的数据元素后面加一列数据元素分类 并把dataelement的数据元素分类添加在 df5的数据元素后面，用subset参数
