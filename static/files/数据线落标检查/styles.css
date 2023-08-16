@@ -2877,7 +2877,12 @@ table tfoot tr td {
 /*    width: 400px;*/
 /*}*/
 td a {
-    /*margin-right: 15px;*/
+    margin-right: 25px;
     color: #02a7f0;
-    /*float:right;*/
+    float:right;
+}
+td:last-child a{
+  color: #02a7f0;
+  margin_right: auto;
+  display:block;
 }
