@@ -522,20 +522,18 @@ def confirm_list_to_tuple(file_list):
         elif part_len == 3:
             # 用反斜杠分割文件名，取最后一个部分
             part = file.split("\\")[-1]
-            # 用下划线分割文件名，取前两个部分
-            subparts = part.split("_")[:2]
+            name = part.rsplit(".", 1)[0].replace("确认", "") + ".xlsx"
             # 在字典中查找是否有对应的四层文件名，如果有则添加到子部分列表中，否则添加空字符串
-            if part in file_name:
-                subparts.append(file_name[part])
-                subparts.append("file\\confirm\\" + part + "\\" + file_name[part])
+            if name in file_name:
+                add_part = tuple_list[file_name[name]]
+                add_part.append(part)
+                add_part.append(file)
+                # subparts.append("file\\confirm\\" + part + "\\" + file_name[part])
             else:
-                subparts.append("")
-                subparts.append("")
+                add_part.append("")
+                add_part.append("")
             # 将三层文件名添加到子部分列表中
-            subparts.append(part)
-            subparts.append(file)
-            # 将子部分列表转换为元组，并添加到元组列表中
-            tuple_list.append(tuple(subparts))
+
     # 返回元组列表
     return tuple_list
 
