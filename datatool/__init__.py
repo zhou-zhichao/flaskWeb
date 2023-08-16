@@ -336,6 +336,12 @@ def data_elem_align(file_path, elem_standard, sheet_name):
     with pd.ExcelWriter(file_path, engine='openpyxl', mode='a',
                         if_sheet_exists='replace') as writer:
         df9.to_excel(writer, sheet_name=sheet_name, index=False)  # todo：多一个sheet
+    workbook = openpyxl.load_workbook(file_path)
+
+    # 删除名为sheet的工作表
+    if 'Sheet' in workbook.sheetnames:
+        workbook.remove(workbook['Sheet'])
+    workbook.save(file_path)
 
 
 def code_check(standard_file, append_file):
