@@ -2,6 +2,8 @@ import time
 
 from flask import Flask, send_from_directory, render_template, g, request, flash, redirect, make_response, send_file, \
     url_for
+from werkzeug.utils import safe_join
+
 
 from datatool import *
 
@@ -65,6 +67,7 @@ def create_app():
     @app.route('/confirm_download/<filename>')
     def confirm_download(filename):
         return send_file(filename, as_attachment=True)
+
     @app.route("/confirm/<filename>")
     def confirm(filename):
         xlsx_func(filename)
@@ -119,10 +122,11 @@ def create_app():
         title = title.split("\r")[0]
         print(title)
         new_title = title.rsplit(".", 1)[0] + "确认." + title.rsplit(".", 1)[1]
-        file_path = os.path.join("file/confirm", new_title)
+        file_path = safe_join("file/confirm", new_title)
         dataFile.save(file_path)
+        time.sleep(1)
         # print(g.confirm_tuple)
-        flash("保存成功")
+        # flash("保存成功")
         return redirect(url_for('confirm', filename=file_path))
 
     @app.route("/business_submit", methods=['POST'])
