@@ -314,7 +314,7 @@ def data_elem_align(file_path, elem_standard, sheet_name):
     df1 = pd.read_excel(file_path, sheet_name=sheet_name)
     df2 = pd.read_excel(elem_standard)
     # 按照标准表和标准字段两个列来合并两个数据框，保留左边数据框的所有行，用how='left'参数
-    df3 = pd.merge(df1, df2, on=['表/视图名称', '字段名'], how='left', suffixes=('', '_y'))
+    df3 = pd.merge(df1, df2, on=['所属表', '字段名'], how='left', suffixes=('', '_y'))
     # 只保留数据元素这一列，用subset参数
     df4 = df3[['数据元素']]
     # 将数据元素这一列添加在file_path后面，用pd.concat函数，axis=1表示按列合并
@@ -325,7 +325,7 @@ def data_elem_align(file_path, elem_standard, sheet_name):
     df5 = pd.concat([df1, df4], axis=1)
     # df5["数据元素"] = df5["数据元素"].replace(df4["数据元素"], df1["数据元素"])
     # 读取一个叫dataelement.xlsx的文件的 数据元素 sheet
-    df6 = pd.read_excel('standard/dataelement.xlsx', sheet_name='数据元素')
+    df6 = pd.read_excel('file/standard/dataelement.xlsx', sheet_name='数据元素')
     # 把df5中的数据元素和 dataelement的数据元素名称对应，用pd.merge函数，on='数据元素'表示按照数据元素这一列来合并
     df7 = pd.merge(df5, df6, on='数据元素', how='left')
     # 把df5中的数据元素后面加一列数据元素分类 并把dataelement的数据元素分类添加在 df5的数据元素后面，用subset参数
@@ -669,7 +669,8 @@ def xlsx_func(filename):
         check_and_create_folder("file/modify/")
         merge_to_standard(dirname, f"file/modify/{version}_重要结果修订.xlsx")
         merge_on_field(dirname, f"file/temp/{version}_外供数据检查确认.xlsx")
-        data_elem_align(f"file/temp/{version}_外供数据检查确认.xlsx",version.split("_")[0] + "_业务线数据元素映射.xlsx","")
+        data_elem_align(f"file/temp/{version}_外供数据检查确认.xlsx", "file/standard/" +
+                        version.split("_")[0] + "_业务线数据元素映射.xlsx", "外供数据检查")
     elif field == "对外数据要求检查确认":
         pass
     elif field == "自定义代码确认":
