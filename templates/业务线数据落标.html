@@ -74,6 +74,24 @@
         </ul>
     </div>
 </nav>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="alert alert-info alert-dismissible fade show center-block fixed-top" role="alert">
+            {{ messages[0] }}
+            {#            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
+            {#                <span aria-hidden="true">&times;</span>#}
+            {#            </button>#}
+        </div>
+    {% endif %}
+{% endwith %}
+<script>
+    // 获取alert元素
+    var alert = $('.alert');
+    // 设置2秒后淡出并收起alert
+    alert.fadeTo(1300, 500).slideUp(500, function () {
+        alert.slideUp(500);
+    });
+</script>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -119,24 +137,7 @@
 </div>
 
 <div id="base" class="container">
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <div class="alert alert-info alert-dismissible fade show center-block fixed-top" role="alert">
-            {{ messages[0] }}
-            {#            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
-            {#                <span aria-hidden="true">&times;</span>#}
-            {#            </button>#}
-        </div>
-    {% endif %}
-{% endwith %}
-<script>
-    // 获取alert元素
-    var alert = $('.alert');
-    // 设置2秒后淡出并收起alert
-    alert.fadeTo(1300, 500).slideUp(500, function () {
-        alert.slideUp(500);
-    });
-</script>
+
     <!-- Unnamed (动态面板) -->
     <div id="u0" class="ax_default">
         <div id="u0_state0" class="panel_state" data-label="记录列表" style="">
