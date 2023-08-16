@@ -1,6 +1,7 @@
 import glob
 import os
 import re
+import shutil
 import unicodedata  # 导入unicodedata模块
 
 import numpy as np
@@ -677,6 +678,9 @@ def xlsx_func(filename):
         merge_on_field(dirname, f"file/temp/{version}_外供数据检查确认.xlsx")
         data_elem_align(f"file/temp/{version}_外供数据检查确认.xlsx", "file/standard/" +
                         version.split("_")[0] + "_业务线数据元素映射.xlsx", "外供数据检查")
+        source_path = "file/input/" + version +f"{version}_重要业务结果.xlsx"
+        statistics(f"file/temp/{version}_外供数据检查确认.xlsx")
+        shutil.copy(source_path, "destination_file")
     elif field == "对外数据要求检查确认":
         pass
     elif field == "自定义代码确认":
