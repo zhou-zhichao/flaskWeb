@@ -143,8 +143,17 @@
                                         <td>{{ tuple[2] }}{% if tuple[2] %}
                                             <a href="{{ url_for('second_download',filename=tuple[3]) }}">下载</a>
                                         {% endif %}</td>
-                                        <td></td>
-                                        <td>未确认</td>
+                                        <td>{% if tuple[4] %}
+                                                {{ tuple[4] }}
+                                                <a href="{{ url_for('confirm_download',filename = tuple[5]) }}">下载</a>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if not tuple[4] %}
+                                            未确认
+                                                {% else %}已确认
+                                            {% endif %}
+                                        </td>
                                         <td>{% if tuple[0] %}
 
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#myModal">确认</a>{% endif %}
