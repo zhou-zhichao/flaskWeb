@@ -404,9 +404,7 @@ def statistics(ana_file):
     first = total['主数据']
     second = total['是否提供']
     standard_master_num = master_data['主数据'].count()  # 标准主数据属性数
-
     business_master_num = master_data.是否提供.value_counts().loc[True]  # 业务线主数据属性数
-
     standard_business_unit_num_list = pd.concat(
         [standard_output['业务域'], standard_output['业务子域'], standard_output['业务单元']],
         axis=1).drop_duplicates().count()
@@ -448,7 +446,7 @@ def statistics(ana_file):
             demand_num, in_standard_num,
             master_cover_ratio, business_cover_ratio, implementation_ratio, out_demand_cover_ratio
             ]
-    # print(len(positions), len(vals))
+    print(len(positions), len(vals))
     for position, val in zip(positions, vals):
         sheet[position].value = val
     # worksheet.write('B5', 100)
@@ -463,6 +461,8 @@ def statistics(ana_file):
         sheet_inner.append(row)
     for row in source_outer.iter_rows(values_only=True):
         sheet_outer.append(row)
+    for row in source_master.iter_rows(values_only=True):
+        sheet_master.append(row)
     # workbook.move_sheet('统计结果', after='外部数据检查')
     # workbook.reorder_sheets(['重要业务结果检查', '外部数据检查', '统计结果'])
     workbook.save('file/temp/统计.xlsx')
