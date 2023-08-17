@@ -396,8 +396,8 @@ def code_check(standard_file, append_file):
 
 def statistics(ana_file):
     master_data, standard_output, business_demand = pd.read_excel(ana_file,
-                                                                  sheet_name=['主数据检查', '重要业务结果检查',
-                                                                              '外部数据检查']).values()
+                                                                  sheet_name=['主数据检查', '外供数据检查',
+                                                                              '对外数据要求检查']).values()
     master_data['是否提供'] = master_data['是否提供'] == '提供'
     result = master_data.groupby('主数据').agg({'主数据': 'nunique', '是否提供': 'any'})
     total = result.sum()
@@ -421,11 +421,12 @@ def statistics(ana_file):
     business_output_num = drop_standard_output['业务域'].count()
     elem_num = drop_standard_output['数据元素'].count()
     overlapping_num = drop_drop_standard_output['业务域'].count()
-    drop_business_demand = business_demand[business_demand.确认状态 != '删除']
-    drop_business_demand = drop_business_demand[drop_business_demand.确认状态 != '删除，有多个收录']
+    # drop_business_demand = business_demand[business_demand.业务线确认 != '删除']
+    drop_business_demand = business_demand[~business_demand.业务线确认.str.contains('删除')]
+    # drop_business_demand = drop_business_demand[drop_business_demand.业务线确认 != '删除，有多个收录']
     demand_num = drop_business_demand.类型.count()
-    in_standard_num = drop_business_demand['标准状态'].value_counts().loc['有'] + drop_business_demand[
-        '确认状态'].str.contains('增加').sum()
+    in_standard_num = drop_business_demand['标准确认'].value_counts().loc['有'] + drop_business_demand[
+        '业务线确认'].str.contains('增加').sum()
     master_cover_ratio = business_master_num / standard_master_num
     business_cover_ratio = app_num / standard_business_unit_num
     implementation_ratio = overlapping_num / standard_output_num
@@ -683,31 +684,7 @@ def xlsx_func(filename):
         source_path = "file/input/" + version + f"/{version}_重要业务结果.xlsx"
         if not os.path.exists(f"file/temp/{version}_重要业务结果.xlsx"):
             shutil.copy(source_path, f"file/temp/{version}_重要业务结果.xlsx")
-
-        r = openpyxl.load_workbook(f"file/temp/{version}_外供数据检查确认.xlsx")
-        w = openpyxl.load_workbook(f"file/temp/{version}_重要业务结果.xlsx")
-        # 获取两个文件中的所有工作表的名字
-        r_sheets = r.sheetnames
-        w_sheets = w.sheetnames
-        # 遍历r文件中的每一个工作表
-        for r_sheet in r_sheets:
-            # 判断是否在w文件中存在同名的工作表
-            if r_sheet in w_sheets:
-                # 获取r文件中对应工作表的数据
-                r_data = r[r_sheet].values
-                # 获取w文件中对应工作表的最大行数和最大列数
-                max_row = w[r_sheet].max_row
-                max_col = w[r_sheet].max_column
-                # 遍历r_data中的每一行数据
-                for i, row in enumerate(r_data):
-                    # 遍历每一列数据
-                    for j, value in enumerate(row):
-                        # 将数据写入w文件中对应工作表的相同位置
-                        w[r_sheet].cell(row=i + 1, column=j + 1, value=value)
-        # 保存w文件，并关闭两个文件
-        w.save(f"file/temp/{version}_重要业务结果.xlsx")
-        r.close()
-        w.close()
+        partial_merge(f"file/temp/{version}_外供数据检查确认.xlsx", f"file/temp/{version}_重要业务结果.xlsx", version)
 
         statistics(f"file/temp/{version}_重要业务结果.xlsx")
     elif field == "对外数据要求检查确认":
@@ -716,3 +693,32 @@ def xlsx_func(filename):
         pass
     else:
         print("文件名出错")
+
+
+def partial_merge(r, w, version):
+    r = openpyxl.load_workbook(f"file/temp/{version}_外供数据检查确认.xlsx")
+    w = openpyxl.load_workbook(f"file/temp/{version}_重要业务结果.xlsx")
+    # 获取两个文件中的所有工作表的名字
+    r_sheets = r.sheetnames
+    w_sheets = w.sheetnames
+    # 遍历r文件中的每一个工作表
+    for r_sheet in r_sheets:
+        # 判断是否在w文件中存在同名的工作表
+        if r_sheet in w_sheets:
+
+            # 获取r文件中对应工作表的数据
+            r_data = r[r_sheet].values
+            # 获取w文件中对应工作表的最大行数和最大列数
+            max_row = w[r_sheet].max_row
+            max_col = w[r_sheet].max_column
+            w[r_sheet].delete_rows(1, max_row)
+            # 遍历r_data中的每一行数据
+            for i, row in enumerate(r_data):
+                # 遍历每一列数据
+                for j, value in enumerate(row):
+                    # 将数据写入w文件中对应工作表的相同位置
+                    w[r_sheet].cell(row=i + 1, column=j + 1, value=value)
+    # 保存w文件，并关闭两个文件
+    w.save(f"file/temp/{version}_重要业务结果.xlsx")
+    r.close()
+    w.close()
