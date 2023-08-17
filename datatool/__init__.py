@@ -441,14 +441,13 @@ def statistics(ana_file):
     sheet = workbook.active
 
     positions = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B10', 'B11', 'B9', 'B12', 'B13', 'B14', 'B15', 'B16',
-                 'B17', 'B19', 'E25', 'E26', 'E27', 'E28']
+                 'B17', 'B19']
     # positions = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12','B13']
     vals = [first, second, standard_master_num, business_master_num, standard_business_unit_num, app_num,
             standard_business_unit_num - app_num, overlapping_num, standard_output_num, business_output_num, '',
             demand_num, in_standard_num,
-            master_cover_ratio, business_cover_ratio, implementation_ratio, out_demand_cover_ratio,
-            master_cover_ratio,
-            business_cover_ratio, implementation_ratio, out_demand_cover_ratio]
+            master_cover_ratio, business_cover_ratio, implementation_ratio, out_demand_cover_ratio
+            ]
     # print(len(positions), len(vals))
     for position, val in zip(positions, vals):
         sheet[position].value = val
