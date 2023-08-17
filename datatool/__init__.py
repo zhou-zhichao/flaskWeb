@@ -426,7 +426,7 @@ def statistics(ana_file):
     # drop_business_demand = drop_business_demand[drop_business_demand.业务线确认 != '删除，有多个收录']
     demand_num = drop_business_demand.类型.count()
     in_standard_num = drop_business_demand['标准确认'].value_counts().loc['有'] + drop_business_demand[
-        '业务线确认'].str.contains('增加').sum()
+        '标准修订状态'].str.contains('增加').sum()
     master_cover_ratio = business_master_num / standard_master_num
     business_cover_ratio = app_num / standard_business_unit_num
     implementation_ratio = overlapping_num / standard_output_num
