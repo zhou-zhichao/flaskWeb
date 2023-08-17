@@ -422,7 +422,7 @@ def statistics(ana_file):
     elem_num = drop_standard_output['数据元素'].count()
     overlapping_num = drop_drop_standard_output['业务域'].count()
     # drop_business_demand = business_demand[business_demand.业务线确认 != '删除']
-    drop_business_demand = business_demand[~business_demand.业务线确认.str.contains('删除')]
+    drop_business_demand = business_demand[~business_demand.业务线确认.str.contains('删除', na=False)]
     # drop_business_demand = drop_business_demand[drop_business_demand.业务线确认 != '删除，有多个收录']
     demand_num = drop_business_demand.类型.count()
     in_standard_num = drop_business_demand['标准确认'].value_counts().loc['有'] + drop_business_demand[
@@ -433,18 +433,18 @@ def statistics(ana_file):
     out_demand_cover_ratio = in_standard_num / demand_num
 
     import shutil
-    shutil.copy("standard/统计模板.xlsx", 'output/统计.xlsx')
+    shutil.copy("file/static/统计模板.xlsx", 'file/temp/统计.xlsx')
     from openpyxl import load_workbook
     # 打开一个名为data.xlsx的文件
-    workbook = load_workbook(filename='output/统计.xlsx')
+    workbook = load_workbook(filename='file/temp/统计.xlsx')
     # 获取第一个工作表
     sheet = workbook.active
 
-    positions = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12', 'B13', 'B14', 'B15', 'B16', 'B17',
-                 'B18', 'B19', 'B20', 'B21', 'B22', 'E25', 'E26', 'E27', 'E28']
+    positions = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B10', 'B11', 'B9', 'B12', 'B13', 'B14', 'B15', 'B16',
+                 'B17', '', '', '', 'B19', 'E25', 'E26', 'E27', 'E28']
     # positions = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12','B13']
     vals = [first, second, standard_master_num, business_master_num, standard_business_unit_num, app_num,
-            standard_business_unit_num - app_num, overlapping_num, standard_output_num, business_output_num, '', '',
+            standard_business_unit_num - app_num, overlapping_num, standard_output_num, business_output_num, '',
             demand_num, in_standard_num,
             master_cover_ratio, business_cover_ratio, implementation_ratio, business_output_num - elem_num, elem_num,
             elem_num / business_output_num, out_demand_cover_ratio,
@@ -456,6 +456,7 @@ def statistics(ana_file):
     # worksheet.write('B5', 100)
     sheet_inner = workbook.create_sheet('重要业务结果检查')
     sheet_outer = workbook.create_sheet('外部数据检查')
+    sheet_master = workbook.create_sheet('主数据检查')
     temp_workbook = openpyxl.load_workbook('input/人事业务线数据标准落标分析.xlsx')
     source_inner = temp_workbook['重要业务结果检查']
     source_outer = temp_workbook['外部数据检查']
