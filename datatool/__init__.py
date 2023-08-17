@@ -696,14 +696,29 @@ def xlsx_func(filename):
         if not os.path.exists(f"file/temp/{version}_重要业务结果.xlsx"):
             shutil.copy(source_path, f"file/temp/{version}_重要业务结果.xlsx")
         partial_merge(f"file/temp/{version}_外供数据检查确认.xlsx", f"file/temp/{version}_重要业务结果.xlsx", version)
-
         statistics(f"file/temp/{version}_重要业务结果.xlsx")
+
     elif field == "对外数据要求检查确认":
         pass
     elif field == "自定义代码确认":
         pass
     else:
         print("文件名出错")
+
+
+def zip_files(zip_name, *file_paths):
+    import zipfile
+    zip_name = zip_name + ".zip"
+    # 创建一个以zip_name为文件名的压缩包，以写入模式打开
+    zip_file = zipfile.ZipFile(zip_name, "w")
+    # 遍历每个文件的路径
+    for file_path in file_paths:
+        # 把文件添加到压缩包中，使用文件名作为压缩包内的名称
+        zip_file.write(file_path, file_path.split("/")[-1])
+    # 关闭压缩包
+    zip_file.close()
+    # 返回压缩包的相对路径
+    return zip_name
 
 
 def partial_merge(r, w, version):
