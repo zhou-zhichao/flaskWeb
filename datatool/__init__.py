@@ -681,8 +681,10 @@ def xlsx_func(filename):
         data_elem_align(f"file/temp/{version}_外供数据检查确认.xlsx", "file/standard/" +
                         version.split("_")[0] + "_业务线数据元素映射.xlsx", "外供数据检查")
         source_path = "file/input/" + version + f"/{version}_重要业务结果.xlsx"
-        shutil.copy(source_path, f"file/temp/{version}_重要业务结果.xlsx")
-        r = openpyxl.load_workbook(filename)
+        if not os.path.exists(f"file/temp/{version}_重要业务结果.xlsx"):
+            shutil.copy(source_path, f"file/temp/{version}_重要业务结果.xlsx")
+
+        r = openpyxl.load_workbook(f"file/temp/{version}_外供数据检查确认.xlsx")
         w = openpyxl.load_workbook(f"file/temp/{version}_重要业务结果.xlsx")
         # 获取两个文件中的所有工作表的名字
         r_sheets = r.sheetnames
@@ -702,12 +704,12 @@ def xlsx_func(filename):
                     for j, value in enumerate(row):
                         # 将数据写入w文件中对应工作表的相同位置
                         w[r_sheet].cell(row=i + 1, column=j + 1, value=value)
-
         # 保存w文件，并关闭两个文件
         w.save(f"file/temp/{version}_重要业务结果.xlsx")
         r.close()
         w.close()
-        statistics(f"file/temp/{version}_外供数据检查确认.xlsx")
+
+        statistics(f"file/temp/{version}_重要业务结果.xlsx")
     elif field == "对外数据要求检查确认":
         pass
     elif field == "自定义代码确认":
