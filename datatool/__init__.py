@@ -441,32 +441,32 @@ def statistics(ana_file):
     sheet = workbook.active
 
     positions = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B10', 'B11', 'B9', 'B12', 'B13', 'B14', 'B15', 'B16',
-                 'B17', '', '', '', 'B19', 'E25', 'E26', 'E27', 'E28']
+                 'B17', 'B19', 'E25', 'E26', 'E27', 'E28']
     # positions = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12','B13']
     vals = [first, second, standard_master_num, business_master_num, standard_business_unit_num, app_num,
             standard_business_unit_num - app_num, overlapping_num, standard_output_num, business_output_num, '',
             demand_num, in_standard_num,
-            master_cover_ratio, business_cover_ratio, implementation_ratio, business_output_num - elem_num, elem_num,
-            elem_num / business_output_num, out_demand_cover_ratio,
+            master_cover_ratio, business_cover_ratio, implementation_ratio, out_demand_cover_ratio,
             master_cover_ratio,
             business_cover_ratio, implementation_ratio, out_demand_cover_ratio]
     # print(len(positions), len(vals))
     for position, val in zip(positions, vals):
         sheet[position].value = val
     # worksheet.write('B5', 100)
-    sheet_inner = workbook.create_sheet('重要业务结果检查')
-    sheet_outer = workbook.create_sheet('外部数据检查')
+    sheet_inner = workbook.create_sheet('外供数据检查')
+    sheet_outer = workbook.create_sheet('对外数据要求检查')
     sheet_master = workbook.create_sheet('主数据检查')
-    temp_workbook = openpyxl.load_workbook('input/人事业务线数据标准落标分析.xlsx')
-    source_inner = temp_workbook['重要业务结果检查']
-    source_outer = temp_workbook['外部数据检查']
+    temp_workbook = openpyxl.load_workbook(ana_file)
+    source_inner = temp_workbook['外供数据检查']
+    source_outer = temp_workbook['对外数据要求检查']
+    source_master = temp_workbook['主数据检查']
     for row in source_inner.iter_rows(values_only=True):
         sheet_inner.append(row)
     for row in source_outer.iter_rows(values_only=True):
         sheet_outer.append(row)
     # workbook.move_sheet('统计结果', after='外部数据检查')
     # workbook.reorder_sheets(['重要业务结果检查', '外部数据检查', '统计结果'])
-    workbook.save('output/统计.xlsx')
+    workbook.save('file/temp/统计.xlsx')
 
     # workbook.save('output/统计.xlsx')
     # file_auto_adjust_column_width('output/统计.xlsx')
