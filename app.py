@@ -85,7 +85,7 @@ def create_app():
 
     @app.route('/zip_download/<file_name>')
     def zip_download(file_name):
-        version = file_name.rsplit('.',1)[0]
+        version = file_name.rsplit('.', 1)[0]
         return send_from_directory(f"file/input/{version}/", file_name, as_attachment=True)
 
     @app.route('/second/download/<filename>')
