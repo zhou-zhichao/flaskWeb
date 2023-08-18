@@ -593,6 +593,7 @@ def transform_list(file_list):
         first, second = key.split('_')[:2]
         third = ''
         fourth = ''
+        sixth = ''
         # 遍历文件名列表中的元素
         for name in value:
             # 判断是否有重要业务结果或自定义代码
@@ -699,6 +700,7 @@ def xlsx_func(filename):
                         version.split("_")[0] + "_业务线数据元素映射.xlsx", "外供数据检查")
         partial_merge(f"file/temp/{version}_外供数据检查确认.xlsx", f"file/temp/{version}_重要业务结果.xlsx", version)
         statistics(version)
+        output_zip(version)
 
     elif field == "对外数据要求检查确认":
         # version = filename.rsplit('\\')[-1].rsplit("_", 1)[0]
@@ -708,15 +710,26 @@ def xlsx_func(filename):
                         "file/standard/" + version.split("_")[0] + "_业务线数据元素映射.xlsx", "对外数据要求检查")
         partial_merge(f'file/temp/{version}_对外数据要求确认.xlsx', f"file/temp/{version}_重要业务结果.xlsx", version)
         statistics(version)
+        output_zip(version)
     elif field == "自定义代码确认":
-        pass
+        output_zip(version)
     else:
         print("文件名出错")
 
 
+def output_zip(version):
+    file_list = []
+    files = [f"file/modify/{version}_重要结果修订.xlsx", f'file/confirm/{version}_自定义代码确认.xlsx',
+             f'file/output/{version}_重要业务结果.xlsx']
+    for file in files:
+        if os.path.exists(file):
+            file_list.append(file)
+    zip_files(f'{version}',file_list)
+
+
 def zip_files(zip_name, *file_paths):
     import zipfile
-    zip_name = zip_name + ".zip"
+    zip_name = "file/input/"+zip_name + ".zip"
     # 创建一个以zip_name为文件名的压缩包，以写入模式打开
     zip_file = zipfile.ZipFile(zip_name, "w")
     # 遍历每个文件的路径
