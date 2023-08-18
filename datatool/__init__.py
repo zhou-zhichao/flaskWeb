@@ -705,7 +705,8 @@ def xlsx_func(filename):
         shutil.copy(filename, f'file/temp/{version}_对外数据要求确认.xlsx')
         data_elem_align(f'file/temp/{version}_对外数据要求确认.xlsx',
                         version.split("_")[0] + "_业务线数据元素映射.xlsx", "对外数据要求检查")
-
+        partial_merge(f'file/temp/{version}_对外数据要求确认.xlsx',f"file/temp/{version}_重要业务结果.xlsx",version)
+        statistics()
     elif field == "自定义代码确认":
         pass
     else:
