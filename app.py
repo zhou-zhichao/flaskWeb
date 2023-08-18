@@ -1,10 +1,6 @@
-import time
-
 import flask
 from flask import Flask, send_from_directory, render_template, g, request, flash, redirect, make_response, send_file, \
     url_for
-from werkzeug.utils import safe_join
-
 
 from datatool import *
 
@@ -87,6 +83,11 @@ def create_app():
         path = os.path.join("file\\input\\", path)
         return send_from_directory(path, file_name, as_attachment=True)
 
+    @app.route('/zip_download/<file_name>')
+    def zip_download(file_name):
+        version = file_name.rsplit('.',1)[0]
+        return send_from_directory(f"file/input/{version}/", file_name, as_attachment=True)
+
     @app.route('/second/download/<filename>')
     def second_download(filename):
         return send_file(filename, as_attachment=True)
@@ -125,6 +126,7 @@ def create_app():
         new_title = title.rsplit(".", 1)[0] + "确认." + title.rsplit(".", 1)[1]
         file_path = os.path.join("file\\confirm", new_title)
         dataFile.save(file_path)
+
         # time.sleep(1)
         # print(g.confirm_tuple)
         # flash("保存成功")
@@ -136,7 +138,6 @@ def create_app():
             # 重定向到confirm函数，并传递文件名参数
             return redirect(url_for('confirm', filename=file_path))
         # return redirect(url_for('confirm', filename=file_path))
-
 
     @app.route("/business_submit", methods=['POST'])
     def business_submit():
