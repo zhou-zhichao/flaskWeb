@@ -478,7 +478,7 @@ def statistics(version):
         sheet_master.append(row)
     # workbook.move_sheet('统计结果', after='外部数据检查')
     # workbook.reorder_sheets(['重要业务结果检查', '外部数据检查', '统计结果'])
-    workbook.save(f'file/output/{version}_统计.xlsx')
+    workbook.save(f'file/output/{version}_重要业务结果.xlsx')
 
     # workbook.save('output/统计.xlsx')
     # file_auto_adjust_column_width('output/统计.xlsx')
@@ -707,6 +707,7 @@ def xlsx_func(filename):
     elif field == "对外数据要求检查确认":
         # version = filename.rsplit('\\')[-1].rsplit("_", 1)[0]
         check_and_create_folder("file/modify/")
+        first_sheet_write(filename, f"file/temp/{version}_外供数据检查确认.xlsx")
         shutil.copy(filename, f'file/temp/{version}_对外数据要求确认.xlsx')
         data_elem_align(f'file/temp/{version}_对外数据要求确认.xlsx',
                         "file/standard/" + version.split("_")[0] + "_业务线数据元素映射.xlsx", "对外数据要求检查")
@@ -735,7 +736,7 @@ def zip_files(version, *file_paths):
     # 创建一个以zip_name为文件名的压缩包，以写入模式打开
     zip_file = zipfile.ZipFile(zip_name, "w")
     # 遍历每个文件的路径
-    for file_path in file_paths:
+    for file_path in file_paths[0]:
         # 把文件添加到压缩包中，使用文件名作为压缩包内的名称
         zip_file.write(file_path, file_path.split("/")[-1])
     # 关闭压缩包
