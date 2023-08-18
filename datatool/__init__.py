@@ -449,7 +449,7 @@ def statistics(ana_file):
         'B10': overlapping_num,
         'B11': standard_output_num,
         'B9': business_output_num,
-        'B12': '',
+        'B12': demand_num - in_standard_num,
         'B13': demand_num,
         'B14': in_standard_num,
         'B15': master_cover_ratio,

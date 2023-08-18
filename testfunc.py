@@ -1,4 +1,5 @@
 from datatool import *
+
 # business_result_file_path = 'file/input/学工_1.1/学工_1.1_重要业务结果.xlsx'
 # sep_on_sheet(business_result_file_path)
 
@@ -13,4 +14,5 @@ from datatool import *
 # out = confirm_list_to_tuple(file)
 # print(out)
 
-zip_files("test",'file/confirm/学工_1.3_外供数据检查确认.xlsx','file/confirm/学工_1.3_重要业务结果/学工_1.3_对外数据要求检查.xlsx')
+zip_files("test", 'file/confirm/学工_1.3_外供数据检查确认.xlsx',
+          'file/confirm/学工_1.3_重要业务结果/学工_1.3_对外数据要求检查.xlsx')
