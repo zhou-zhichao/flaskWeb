@@ -634,12 +634,12 @@ def check_and_create_folder(folder_path):
         return
     # 检查文件夹是否存在
     if os.path.exists(folder_path):
-        print("文件夹已存在")
+        print(f"{folder_path}文件夹已存在")
     else:
         # 创建文件夹
         try:
             os.makedirs(folder_path)
-            print("文件夹创建成功")
+            print(f"{folder_path}文件夹创建成功")
         except OSError as e:
             print("文件夹创建失败，错误信息：", e)
 
@@ -685,22 +685,26 @@ def read_filenames(folder):
 
 def xlsx_func(filename):
     field = filename.rsplit("_")[-1].split(".")[0]
+    version = filename.rsplit('\\')[-1].rsplit("_", 1)[0]
+    source_path = "file/input/" + version + f"/{version}_重要业务结果.xlsx"
+    if not os.path.exists(f"file/temp/{version}_重要业务结果.xlsx"):
+        shutil.copy(source_path, f"file/temp/{version}_重要业务结果.xlsx")
     if field == "外供数据检查确认":
         dirname = sep_on_field(filename)
-        version = filename.rsplit('\\')[-1].rsplit("_", 1)[0]
         check_and_create_folder("file/modify/")
         merge_to_standard(dirname, f"file/modify/{version}_重要结果修订.xlsx")
         merge_on_field(dirname, f"file/temp/{version}_外供数据检查确认.xlsx")
         data_elem_align(f"file/temp/{version}_外供数据检查确认.xlsx", "file/standard/" +
                         version.split("_")[0] + "_业务线数据元素映射.xlsx", "外供数据检查")
-        source_path = "file/input/" + version + f"/{version}_重要业务结果.xlsx"
-        if not os.path.exists(f"file/temp/{version}_重要业务结果.xlsx"):
-            shutil.copy(source_path, f"file/temp/{version}_重要业务结果.xlsx")
         partial_merge(f"file/temp/{version}_外供数据检查确认.xlsx", f"file/temp/{version}_重要业务结果.xlsx", version)
         statistics(version)
 
     elif field == "对外数据要求检查确认":
-        pass
+        # version = filename.rsplit('\\')[-1].rsplit("_", 1)[0]
+        check_and_create_folder("file/modify/")
+        shutil.copy(filename, f'file/temp/{version}_对外数据要求确认.xlsx')
+        data_elem_align(f'file/temp/{version}_对外数据要求确认.xlsx',
+                        version.split("_")[0] + "_业务线数据元素映射.xlsx", "对外数据要求检查")
 
     elif field == "自定义代码确认":
         pass
