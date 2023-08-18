@@ -478,7 +478,7 @@ def statistics(version):
         sheet_master.append(row)
     # workbook.move_sheet('统计结果', after='外部数据检查')
     # workbook.reorder_sheets(['重要业务结果检查', '外部数据检查', '统计结果'])
-    workbook.save(f'file/temp/{version}_统计.xlsx')
+    workbook.save(f'file/output/{version}_统计.xlsx')
 
     # workbook.save('output/统计.xlsx')
     # file_auto_adjust_column_width('output/统计.xlsx')
@@ -601,6 +601,8 @@ def transform_list(file_list):
                 third = name
             elif '自定义代码' in name:
                 fourth = name
+            elif '.zip' in name:
+                sixth = name
 
         standard_elem_name = first + "_业务线数据元素映射.xlsx"
         elem_exists = os.path.exists(os.path.join("file/standard/", standard_elem_name))
@@ -609,7 +611,7 @@ def transform_list(file_list):
         else:
             fifth = ""
         # 把每个元组添加到结果列表中
-        result.append((first, second, third, fourth, fifth))
+        result.append((first, second, third, fourth, fifth, sixth))
     # 返回结果列表
     return result
 
@@ -724,12 +726,12 @@ def output_zip(version):
     for file in files:
         if os.path.exists(file):
             file_list.append(file)
-    zip_files(f'{version}',file_list)
+    zip_files(version, file_list)
 
 
-def zip_files(zip_name, *file_paths):
+def zip_files(version, *file_paths):
     import zipfile
-    zip_name = "file/input/"+zip_name + ".zip"
+    zip_name = f"file/input/{version}/" + version + ".zip"
     # 创建一个以zip_name为文件名的压缩包，以写入模式打开
     zip_file = zipfile.ZipFile(zip_name, "w")
     # 遍历每个文件的路径
