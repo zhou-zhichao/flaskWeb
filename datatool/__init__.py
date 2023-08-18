@@ -161,7 +161,7 @@ def sep_on_field(file_name):
     # Save each subset dataframe to a separate Excel file
     for field, subdiv_df in sheets.items():
         safe_field = field.replace("/", "-").replace(":", "")
-        output_dir = "file/temp/" + file_name.rsplit("\\")[-1] + "/"
+        output_dir = "file/temp/" + file_name.rsplit(os.path.sep)[-1] + "/"
         # Create an output directory if it does not exist
         # output_dir = file_name
         if not os.path.exists(output_dir):
@@ -534,11 +534,11 @@ def confirm_list_to_tuple(file_list):
     file_name = {}
     # 遍历文件列表中的每个文件名
     for i, file in enumerate(file_list):
-        all_part = file.split("\\")
+        all_part = file.split(os.path.sep)
         part_len = len(all_part)
         if part_len == 4:
             # 用反斜杠分割文件名，取最后两个部分
-            parts = file.split("\\")[-2:]
+            parts = file.split(os.path.sep)[-2:]
             # 用下划线分割第一个部分，取前两个部分
             subparts = parts[0].split("_")[:2]
             # 将第二个部分添加到子部分列表中
@@ -551,7 +551,7 @@ def confirm_list_to_tuple(file_list):
 
         elif part_len == 3:
             # 用反斜杠分割文件名，取最后一个部分
-            part = file.split("\\")[-1]
+            part = file.split(os.path.sep)[-1]
             name = part.rsplit(".", 1)[0].replace("确认", "") + ".xlsx"
             # 在字典中查找是否有对应的四层文件名，如果有则添加到子部分列表中，否则添加空字符串
             if name in file_name:
@@ -574,7 +574,7 @@ def transform_list(file_list):
     # 遍历列表中的每个文件路径
     for path in file_list:
         # 用反斜杠分割成子字符串
-        sub = path.split('\\')
+        sub = path.split(os.path.sep)
         # 取出最后两个子字符串
         folder = sub[-2]
         file = sub[-1]
@@ -689,7 +689,7 @@ def read_filenames(folder):
 
 def xlsx_func(filename):
     field = filename.rsplit("_")[-1].split(".")[0]
-    version = filename.rsplit('\\')[-1].rsplit("_", 1)[0]
+    version = filename.rsplit(os.path.sep)[-1].rsplit("_", 1)[0]
     source_path = "file/input/" + version + f"/{version}_重要业务结果.xlsx"
     if not os.path.exists(f"file/temp/{version}_重要业务结果.xlsx"):
         shutil.copy(source_path, f"file/temp/{version}_重要业务结果.xlsx")
@@ -705,7 +705,7 @@ def xlsx_func(filename):
         output_zip(version)
 
     elif field == "对外数据要求检查确认":
-        # version = filename.rsplit('\\')[-1].rsplit("_", 1)[0]
+        # version = filename.rsplit(os.path.sep)[-1].rsplit("_", 1)[0]
         check_and_create_folder("file/modify/")
         first_sheet_write(filename, f"file/temp/{version}_外供数据检查确认.xlsx")
         shutil.copy(filename, f'file/temp/{version}_对外数据要求确认.xlsx')

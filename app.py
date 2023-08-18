@@ -20,7 +20,7 @@ def create_app():
             g.file_tuple = read_filenames('file/standard')
             # print(g.file_tuple)
         elif request.path == '/third':
-            filenames = get_all_filenames('file\\input')
+            filenames = get_all_filenames('file/input')
             # print(filenames)
             g.table_tuple = transform_list(filenames)
             g.table_tuple.reverse()
@@ -30,7 +30,7 @@ def create_app():
             #      ('学工', '1', '学工_1_重要业务结果.xlsx', '', '', '数据元素'),
             #      ('学工', '1.1', '学工_1.1_重要业务结果.xlsx', '学工_1.1_自定义代码.xlsx', '', '数据元素')]
         elif request.path == "/second":
-            filenames = get_all_filenames('file\\confirm')
+            filenames = get_all_filenames('file/confirm')
             filenames.reverse()
             print(filenames)
             g.confirm_tuple = confirm_list_to_tuple(filenames)
