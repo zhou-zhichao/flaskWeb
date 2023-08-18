@@ -704,9 +704,9 @@ def xlsx_func(filename):
         check_and_create_folder("file/modify/")
         shutil.copy(filename, f'file/temp/{version}_对外数据要求确认.xlsx')
         data_elem_align(f'file/temp/{version}_对外数据要求确认.xlsx',
-                        version.split("_")[0] + "_业务线数据元素映射.xlsx", "对外数据要求检查")
-        partial_merge(f'file/temp/{version}_对外数据要求确认.xlsx',f"file/temp/{version}_重要业务结果.xlsx",version)
-        statistics()
+                        "file/standard/" + version.split("_")[0] + "_业务线数据元素映射.xlsx", "对外数据要求检查")
+        partial_merge(f'file/temp/{version}_对外数据要求确认.xlsx', f"file/temp/{version}_重要业务结果.xlsx", version)
+        statistics(version)
     elif field == "自定义代码确认":
         pass
     else:
@@ -729,8 +729,8 @@ def zip_files(zip_name, *file_paths):
 
 
 def partial_merge(r, w, version):
-    r = openpyxl.load_workbook(f"file/temp/{version}_外供数据检查确认.xlsx")
-    w = openpyxl.load_workbook(f"file/temp/{version}_重要业务结果.xlsx")
+    r = openpyxl.load_workbook(r)
+    w = openpyxl.load_workbook(w)
     # 获取两个文件中的所有工作表的名字
     r_sheets = r.sheetnames
     w_sheets = w.sheetnames
@@ -738,7 +738,6 @@ def partial_merge(r, w, version):
     for r_sheet in r_sheets:
         # 判断是否在w文件中存在同名的工作表
         if r_sheet in w_sheets:
-
             # 获取r文件中对应工作表的数据
             r_data = r[r_sheet].values
             # 获取w文件中对应工作表的最大行数和最大列数
