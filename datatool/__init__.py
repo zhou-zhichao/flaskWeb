@@ -394,8 +394,9 @@ def code_check(standard_file, append_file):
     print("别紧张，只是警告。功能正常运行。")
 
 
-def statistics(ana_file):
-    master_data, standard_output, business_demand = pd.read_excel(ana_file,
+def statistics(version):
+    ana_file = f"file/temp/{version}_重要业务结果.xlsx"
+    master_data, standard_output, business_demand = pd.read_excel(f"file/temp/{version}_重要业务结果.xlsx",
                                                                   sheet_name=['主数据检查', '外供数据检查',
                                                                               '对外数据要求检查']).values()
     master_data['是否提供'] = master_data['是否提供'] == '提供'
@@ -431,10 +432,10 @@ def statistics(ana_file):
     out_demand_cover_ratio = in_standard_num / demand_num
 
     import shutil
-    shutil.copy("file/static/统计模板.xlsx", 'file/temp/统计.xlsx')
+    shutil.copy("file/static/统计模板.xlsx", f'file/temp/{version}_统计.xlsx')
     from openpyxl import load_workbook
     # 打开一个名为data.xlsx的文件
-    workbook = load_workbook(filename='file/temp/统计.xlsx')
+    workbook = load_workbook(filename=f'file/temp/{version}_统计.xlsx')
     # 获取第一个工作表
     sheet = workbook.active
 
@@ -476,7 +477,7 @@ def statistics(ana_file):
         sheet_master.append(row)
     # workbook.move_sheet('统计结果', after='外部数据检查')
     # workbook.reorder_sheets(['重要业务结果检查', '外部数据检查', '统计结果'])
-    workbook.save('file/temp/统计.xlsx')
+    workbook.save(f'file/temp/{version}_统计.xlsx')
 
     # workbook.save('output/统计.xlsx')
     # file_auto_adjust_column_width('output/统计.xlsx')
@@ -696,10 +697,11 @@ def xlsx_func(filename):
         if not os.path.exists(f"file/temp/{version}_重要业务结果.xlsx"):
             shutil.copy(source_path, f"file/temp/{version}_重要业务结果.xlsx")
         partial_merge(f"file/temp/{version}_外供数据检查确认.xlsx", f"file/temp/{version}_重要业务结果.xlsx", version)
-        statistics(f"file/temp/{version}_重要业务结果.xlsx")
+        statistics(version)
 
     elif field == "对外数据要求检查确认":
         pass
+
     elif field == "自定义代码确认":
         pass
     else:
