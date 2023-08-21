@@ -1,6 +1,5 @@
 import flask
-from flask import Flask, send_from_directory, render_template, g, request, flash, redirect, make_response, send_file, \
-    url_for
+from flask import Flask, send_from_directory, render_template, g, request, flash, redirect, make_response, url_for
 
 from datatool import *
 
@@ -63,7 +62,9 @@ def create_app():
 
     @app.route('/confirm_download/<filename>')
     def confirm_download(filename):
-        return send_file(filename, as_attachment=True)
+        path = filename.rsplit(os.path.sep, 1)[0]
+        filename = filename.rsplit(os.path.sep, 1)[1]
+        return send_from_directory(path, filename, as_attachment=True)
 
     @app.route("/confirm/<filename>")
     def confirm(filename):
@@ -90,7 +91,9 @@ def create_app():
 
     @app.route('/second/download/<filename>')
     def second_download(filename):
-        return send_file(filename, as_attachment=True)
+        path = filename.rsplit(os.path.sep, 1)[0]
+        filename = filename.rsplit(os.path.sep, 1)[1]
+        return send_from_directory(path, filename, as_attachment=True)
 
     @app.route('/submit', methods=['POST'])
     def submit():
@@ -99,8 +102,20 @@ def create_app():
         fileType = request.form.get('fileType')
         # 获取表单中的文件数据
         dataFile = request.files.get('dataFile')
+        if fileType == "数据标准检查结果模板上传":
+            dataFile.save('file/static/统计模板.xlsx')
+            flash("上传成功！")
+            return redirect("/")
+        elif fileType == "重要业务结果文件模板上传":
+            dataFile.save('file/template/XXXX产品名称_4.0.1.xlsx')
+            flash("上传成功！")
+            return redirect("/")
+        elif fileType == "自定义代码文件模板上传":
+            dataFile.save('file/template/XXXX产品名称_4.0.1_自定义代码.xlsx')
+            flash("上传成功！")
+            return redirect("/")
         # 验证文件是否存在并且符合要求
-        if dataFile and dataFile.filename.endswith('.xlsx'):
+        elif dataFile and dataFile.filename.endswith('.xlsx'):
             # 为文件生成一个安全的文件名
             filename = business + "_" + fileType + ".xlsx"
             # 将文件保存到服务器的uploads目录下

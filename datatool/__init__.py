@@ -360,13 +360,13 @@ def code_check(standard_file, append_file):
     df['上级编码'] = df['上级编码'].apply(lambda x: str(x).split('.')[0])
     # df['上级编码_y'] = df['上级编码_y'].apply(lambda x: str(x).split('.')[0])
     df['代码编码'] = df['代码编码'].astype(str)
-    df['上级编码'] = df['上级编码'].replace(np.nan, 'nan')
-    df['上级编码_y'] = df['上级编码_y'].replace(np.nan, 'nan')
-    df['代码编码_y'] = df['代码编码_y'].replace(np.nan, 'nan')
+    df['上级编码'] = df['上级编码'].replace(np.nan, '')
+    df['上级编码_y'] = df['上级编码_y'].replace(np.nan, '')
+    df['代码编码_y'] = df['代码编码_y'].replace(np.nan, '')
 
     # 创建一个条件列表
     conditions = [
-        (df['代码编码_y'] == 'nan') & (df['上级编码_y'] == 'nan'),  # 代码编码_y和上级编码_y都为 nan
+        (df['代码编码_y'] == '') & (df['上级编码_y'] == ''),  # 代码编码_y和上级编码_y都为 nan
         (df['代码编码'] == df['代码编码_y']) & (df['上级编码'] == df['上级编码_y']),  # 代码编码和上级编码都一致
         (df['代码编码'] != df['代码编码_y']) & (df['上级编码'] == df['上级编码_y']),  # 代码编码不一致，上级编码一致
         (df['代码编码'] == df['代码编码_y']) & (df['上级编码'] != df['上级编码_y']),  # 代码编码一致，上级编码不一致
@@ -628,6 +628,7 @@ def get_all_filenames(path):
             # 把文件名添加到列表中
             filenames.append(file_path)
     # 返回文件名列表
+    filenames = filter_xlsx(filenames)
     return filenames
 
 
@@ -670,7 +671,9 @@ def read_filenames(folder):
     # 创建一个空列表来存储结果
     result = []
     # 遍历文件夹下的所有文件
-    for file in os.listdir(folder):
+    files = os.listdir(folder)
+    files = filter_xlsx(files)
+    for file in files:
         # 把文件名按照 _ 拆分成2段
         segments = file.split("_")
         # 如果拆分后的长度不是3，说明文件名不符合要求，跳过这个文件
@@ -772,3 +775,9 @@ def partial_merge(r, w, version):
     w.save(f"file/temp/{version}_重要业务结果.xlsx")
     r.close()
     w.close()
+
+
+# 定义一个函数，接受一个列表作为参数
+def filter_xlsx(list_of_paths):
+    # 使用filter和lambda表达式，过滤掉不是字符串或者不以.xlsx结尾的元素，并返回一个新的列表
+    return list(filter(lambda path: isinstance(path, str) and path.endswith(".xlsx"), list_of_paths))
