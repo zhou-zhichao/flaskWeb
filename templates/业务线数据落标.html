@@ -189,6 +189,7 @@
                             {#                                <td>下载链接</td>#}
                         </tr>
                         </thead>
+                        <tbody>
                         {% for tuple in tuples %}
                             {% if tuple %}
                             <tr>
@@ -215,11 +216,38 @@
                                     </tr>
                                 {% endif %}
                         {% endfor %}
-
+</tbody>
 
                     </table>
-
+<nav aria-label="Page navigation example">
+  <ul class="pagination" id="pagination-container"></ul>
+</nav>
                 </div>
+            <script>
+// 标记每页显示的行数
+var numPerPage = 10;
+var $tableBody = $('table tbody');
+
+$(document).ready(function () {
+    // 计算表格数据行数
+    var numRows = $tableBody.find('tr').length;
+    // 计算页数
+    var numPages = Math.ceil(numRows / numPerPage);
+    // 获取分页组件
+    var $pagination = $('#pagination-container');
+
+    $pagination.empty();
+    for (var i = 0; i < numPages; i++) {
+        $('<li class="page-item"><a class="page-link" href="#">' + (i + 1) + '</a></li>').bind('click', { newPage: i }, function (event) {
+            var currentPage = event.data['newPage'];
+            $tableBody.find('tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+        }).appendTo($pagination);
+    }
+
+    // 默认显示第一页的数据行
+    $tableBody.find('tr').hide().slice(0, numPerPage).show();
+});
+</script>
 
 
                 <!-- Unnamed (矩形) -->
