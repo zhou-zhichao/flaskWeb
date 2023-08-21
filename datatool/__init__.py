@@ -149,7 +149,7 @@ def sep_on_field(file_name):
 
     sheets = {}
     # For each unique value, get the subset of the dataframe and store it in the dictionary
-    df = df.rename(columns={'所属表': '表/视图名称', '业务过程': '业务单元'})
+    df = df.rename(columns={'所属表': '表/视图名称', '业务过程': '业务过程'})
     for field in distinct_values:
         # sub_df = df[df["字段确认"] == field]
         sub_df = df[df['字段确认'] == field].copy()
@@ -264,7 +264,7 @@ def merge_to_standard(file_path, merge_file):
             if not os.path.exists(merge_file):
                 # 如果不存在，就创建一个空的excel文件
                 df_empty = pd.DataFrame(
-                    columns=["业务域", "业务子域", "业务单元", "表/视图名称", "字段顺序", "字段名", "字段类型",
+                    columns=["业务域", "业务子域", "业务过程", "表/视图名称", "字段顺序", "字段名", "字段类型",
                              "长度/值域",
                              "精度", "修订建议", "修订确认", "数据元素uuid", "字段确认", "新增类型", "确认状态"])
 
@@ -304,9 +304,8 @@ def first_sheet_write(file_path, merge_file):
     if os.path.exists(merge_file):  # 检查文件是否存在
         print('文件已存在')
     else:  # 如果不存在
-        with open(merge_file, 'a') as f:  # 以写入模式打开文件
-            print('文件创建成功')
-            f.close()
+        workbook = openpyxl.Workbook()
+        workbook.save(merge_file)
     with pd.ExcelWriter(merge_file, engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
         df.to_excel(writer, sheet_name='产品线对外数据要求数据检查', index=False)
     # with pd.ExcelWriter(, engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
@@ -409,12 +408,12 @@ def statistics(version):
     standard_master_num = master_data['主数据'].count()  # 标准主数据属性数
     business_master_num = master_data.是否提供.value_counts().loc[True]  # 业务线主数据属性数
     standard_business_unit_num_list = pd.concat(
-        [standard_output['业务域'], standard_output['业务子域'], standard_output['业务单元']],
+        [standard_output['业务域'], standard_output['业务子域'], standard_output['业务过程']],
         axis=1).drop_duplicates().count()
     standard_business_unit_num = standard_business_unit_num_list['业务域']
     drop_standard_output = standard_output[standard_output.字段确认 != '业务线缺']
     app_num_list = pd.concat(
-        [drop_standard_output['业务域'], drop_standard_output['业务子域'], drop_standard_output['业务单元']],
+        [drop_standard_output['业务域'], drop_standard_output['业务子域'], drop_standard_output['业务过程']],
         axis=1).drop_duplicates().count()
     app_num = app_num_list['业务域']
     standard_output_num = standard_output['业务域'].count()
