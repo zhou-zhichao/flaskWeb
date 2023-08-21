@@ -17,10 +17,10 @@ def create_app():
     @app.before_request
     def before_request():
         if request.path == '/':
-            g.file_tuple = read_filenames('file/standard')
+            g.file_tuple = read_filenames(os.path.join('file', 'standard'))
             # print(g.file_tuple)
         elif request.path == '/third':
-            filenames = get_all_filenames('file/input')
+            filenames = get_all_filenames(os.path.join('file', 'input'))
             # print(filenames)
             g.table_tuple = transform_list(filenames)
             g.table_tuple.reverse()
@@ -30,7 +30,7 @@ def create_app():
             #      ('学工', '1', '学工_1_重要业务结果.xlsx', '', '', '数据元素'),
             #      ('学工', '1.1', '学工_1.1_重要业务结果.xlsx', '学工_1.1_自定义代码.xlsx', '', '数据元素')]
         elif request.path == "/second":
-            filenames = get_all_filenames('file/confirm')
+            filenames = get_all_filenames(os.path.join('file', 'confirm'))
             filenames.reverse()
             print(filenames)
             g.confirm_tuple = confirm_list_to_tuple(filenames)
@@ -80,7 +80,7 @@ def create_app():
         # 否则，返回 None
         else:
             path = None
-        path = os.path.join("file\\input\\", path)
+        path = os.path.join("file", "input", path)
         return send_from_directory(path, file_name, as_attachment=True)
 
     @app.route('/zip_download/<file_name>')
@@ -124,7 +124,7 @@ def create_app():
         title = title.split("\r")[0]
         print(title)
         new_title = title.rsplit(".", 1)[0] + "确认." + title.rsplit(".", 1)[1]
-        file_path = os.path.join("file\\confirm", new_title)
+        file_path = os.path.join('file', 'confirm', new_title)
         dataFile.save(file_path)
 
         # time.sleep(1)
@@ -176,4 +176,4 @@ def create_app():
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(host="0.0.0.0", port=81)
+    app.run(host='0.0.0.0', port=8088)

@@ -558,7 +558,7 @@ def confirm_list_to_tuple(file_list):
                 add_part = tuple_list[file_name[name]]
                 add_part.append(part)
                 add_part.append(file)
-                # subparts.append("file\\confirm\\" + part + "\\" + file_name[part])
+                # subparts.append("file\\confirm\\" + part + os.path.sep + file_name[part])
             else:
                 add_part.append("")
                 add_part.append("")
