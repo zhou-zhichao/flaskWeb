@@ -2,11 +2,11 @@ import glob
 import os
 import re
 import shutil
-import unicodedata  # 导入unicodedata模块
 
 import numpy as np
 import openpyxl
 import pandas as pd
+import unicodedata  # 导入unicodedata模块
 from openpyxl import Workbook, load_workbook
 
 
@@ -306,6 +306,7 @@ def first_sheet_write(file_path, merge_file):
     else:  # 如果不存在
         with open(merge_file, 'a') as f:  # 以写入模式打开文件
             print('文件创建成功')
+            f.close()
     with pd.ExcelWriter(merge_file, engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
         df.to_excel(writer, sheet_name='产品线对外数据要求数据检查', index=False)
     # with pd.ExcelWriter(, engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
@@ -388,7 +389,7 @@ def code_check(standard_file, append_file):
 
     df.columns = ['代码名称', '代码编码', '代码', '上级编码', '代码编码_标准', '上级编码_标准', '状态']
     file_name = append_file.split('/')[-1]
-    file_name = file_name.split(".")[0] + "检查." + file_name.split(".")[1]
+    file_name = file_name.rsplit(".", 1)[0] + "检查." + file_name.rsplit(".", 1)[1]
     dir_name = 'file/confirm/' + file_name.rsplit("_", 1)[0] + "_重要业务结果/"
     check_and_create_folder(dir_name)
     auto_adjust_column_width(df, dir_name + file_name)
@@ -691,7 +692,8 @@ def xlsx_func(filename):
     field = filename.rsplit("_")[-1].split(".")[0]
     version = filename.rsplit(os.path.sep)[-1].rsplit("_", 1)[0]
     source_path = "file/input/" + version + f"/{version}_重要业务结果.xlsx"
-    if not os.path.exists(f"file/temp/{version}_重要业务结果.xlsx"):
+    if not os.path.exists(f"file/temp/{version}_重要业务结果.xlsx") and (
+            field == "外供数据检查确认" or field == "对外数据要求检查确认"):
         shutil.copy(source_path, f"file/temp/{version}_重要业务结果.xlsx")
     if field == "外供数据检查确认":
         dirname = sep_on_field(filename)
@@ -707,14 +709,14 @@ def xlsx_func(filename):
     elif field == "对外数据要求检查确认":
         # version = filename.rsplit(os.path.sep)[-1].rsplit("_", 1)[0]
         check_and_create_folder("file/modify/")
-        first_sheet_write(filename, f"file/temp/{version}_外供数据检查确认.xlsx")
+        first_sheet_write(filename, os.path.join('file', 'temp', f'{version}_对外数据要求确认.xlsx'))
         shutil.copy(filename, f'file/temp/{version}_对外数据要求确认.xlsx')
         data_elem_align(f'file/temp/{version}_对外数据要求确认.xlsx',
                         "file/standard/" + version.split("_")[0] + "_业务线数据元素映射.xlsx", "对外数据要求检查")
         partial_merge(f'file/temp/{version}_对外数据要求确认.xlsx', f"file/temp/{version}_重要业务结果.xlsx", version)
         statistics(version)
         output_zip(version)
-    elif field == "自定义代码确认":
+    elif field == "自定义代码检查确认":
         output_zip(version)
     else:
         print("文件名出错")
@@ -722,7 +724,7 @@ def xlsx_func(filename):
 
 def output_zip(version):
     file_list = []
-    files = [f"file/modify/{version}_重要结果修订.xlsx", f'file/confirm/{version}_自定义代码确认.xlsx',
+    files = [f"file/modify/{version}_重要结果修订.xlsx", f'file/confirm/{version}_自定义代码检查确认.xlsx',
              f'file/output/{version}_重要业务结果.xlsx']
     for file in files:
         if os.path.exists(file):
