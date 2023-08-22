@@ -12,37 +12,37 @@
 
 
 {% block content %}
-<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/modify_submit" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+
+                            <input type="hidden" class="form-control filename" id="version" name="title" value="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFileUpload1" class="form-label">请选择结果确认文件：</label>
+                            <input class="form-control" type="file" id="business_result_file" name="mo_file"
+                                   accept="xlsx">
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">保存</button>
+
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+
+                        </div>
+                    </form>
+                </div>
+
             </div>
-            <div class="modal-body">
-                <form action="/modify_submit" method="POST" enctype="multipart/form-data">
-                    <div class="mb-3">
-
-                        <input type="hidden" class="form-control filename" id="version" name="title" value="">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFileUpload1" class="form-label">请选择结果确认文件：</label>
-                        <input class="form-control" type="file" id="business_result_file" name="mo_file"
-                               accept="xlsx">
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">保存</button>
-
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
-
-                    </div>
-                </form>
-            </div>
-
         </div>
     </div>
-</div>
 
     <div id="base" class="">
 
@@ -144,19 +144,20 @@
                                             <a href="{{ url_for('second_download',filename=tuple[2]) }}">下载</a>
                                         {% endif %}</td>
                                         <td>{% if tuple[4] %}
-                                                {{ tuple[4] }}
-                                                <a href="{{ url_for('confirm_download',filename = tuple[4]) }}">下载</a>
-                                            {% endif %}
+                                            {{ tuple[4] }}
+                                            <a href="{{ url_for('confirm_download',filename = tuple[4]) }}">下载</a>
+                                        {% endif %}
                                         </td>
                                         <td>
                                             {% if not tuple[4] %}
-                                            未确认
-                                                {% else %}已确认
+                                                未确认
+                                            {% else %}已确认
                                             {% endif %}
                                         </td>
                                         <td>{% if tuple[0] %}
 
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#myModal">确认</a>{% endif %}
+                                            <a href="#" data-bs-toggle="modal"
+                                               data-bs-target="#myModal">确认</a>{% endif %}
                                         </td>
 
                                     </tr>
@@ -165,84 +166,88 @@
 
 
                         </table>
-<script>
-  // 当文档加载完成后
-  $(document).ready(function(){
-    // 当点击按钮时
-    $("td").click(function(){
-      // 获取按钮所在行的第一个单元格的文本
-      let name = $(this).closest("tr").find("td:nth-child(3)").text();
-      console.log(name);
-      name = name.replace(/下载/,"");
-      console.log(name);
-      // 将模态框的标题设置为该文本
-      $(".modal-title").text(name+" 修订结果上传");
-      $(".filename").val(name)
+                        <script>
+                            // 当文档加载完成后
+                            $(document).ready(function () {
+                                // 当点击按钮时
+                                $("td").click(function () {
+                                    // 获取按钮所在行的第一个单元格的文本
+                                    let name = $(this).closest("tr").find("td:nth-child(3)").text();
+                                    console.log(name);
+                                    name = name.replace(/下载/, "");
+                                    console.log(name);
+                                    // 将模态框的标题设置为该文本
+                                    $(".modal-title").text(name + " 修订结果上传");
+                                    $(".filename").val(name)
 
-    });
-  });
-</script>
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
-         <script>
-// 标记每页显示的行数
-var numPerPage = 6;
-var $tableBody = $('table tbody');
+            <script>
+                // 标记每页显示的行数
+                var numPerPage = 6;
+                var $tableBody = $('table tbody');
 
-$(document).ready(function () {
-    // 计算表格数据行数
-    var numRows = $tableBody.find('tr').length;
-    // 计算页数
-    var numPages = Math.ceil(numRows / numPerPage);
-    // 获取分页组件
-    var $pagination = $('#pagination-container');
+                $(document).ready(function () {
+                    // 计算表格数据行数
+                    var numRows = $tableBody.find('tr').length;
+                    // 计算页数
+                    var numPages = Math.ceil(numRows / numPerPage);
+                    // 获取分页组件
+                    var $pagination = $('#pagination-container');
 
-    // 循环创建页数按钮
-    for (var i = 0; i < numPages; i++) {
-        $('<li class="page-item"><a class="page-link" href="#">' + (i + 1) + '</a></li>')
-        .insertBefore("#next-page")
-        .bind('click', { newPage: i }, function (event) {
-            var currentPage = event.data['newPage'];
-            $tableBody.find('tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
-        })
-    }
+                    // 循环创建页数按钮
+                    for (var i = 0; i < numPages; i++) {
+                        $('<li class="page-item"><a class="page-link" href="#" id="page-' + i + '">' + (i + 1) + '</a></li>') // 添加id属性
+                            .insertBefore("#next-page")
+                            .bind('click', {newPage: i}, function (event) {
+                                var currentPage = event.data['newPage'];
+                                $tableBody.find('tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+                                $(".page-link").css("color", '#02a7f0'); // 把所有页码的颜色恢复为黑色
+                                $("#page-" + currentPage).css("color", "#206676"); // 把当前页码的颜色设置为红色
+                            })
+                    }
 
-    // 默认显示第一页的数据行
-    $tableBody.find('tr').hide().slice(0, numPerPage).show();
+                    // 默认显示第一页的数据行
+                    $tableBody.find('tr').hide().slice(0, numPerPage).show();
+                    $("#page-0").css("color", "#206676"); // 把第一页的颜色设置为红色
 
-    // 首尾页处理
-    $("#next-page").click(function(){
-        var $activePage = $(".pagination li.active");
-        if ($activePage.index() < numPages) {
-            $activePage.removeClass("active").next().addClass("active").click();
-        }
-    });
+                    // 首尾页处理
+                    $("#next-page").click(function () {
+                        var $activePage = $(".pagination li.active");
+                        if ($activePage.index() < numPages) {
+                            $activePage.removeClass("active").next().addClass("active").click();
+                        }
+                    });
 
-    $("#prev-page").click(function(){
-        var $activePage = $(".pagination li.active");
-        if ($activePage.index() > 1) { // 其中1为上一页按钮
-            $activePage.removeClass("active").prev().addClass("active").click();
-        }
-    });
-});
-</script>
-<div class="fixed-bottom p-3" style="background-color: white;">
-  <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center" id="pagination-container">
-      <li class="page-item" id="prev-page">
-{#        <a class="page-link" href="#" aria-label="Previous">#}
-{#          <span aria-hidden="true">&laquo;</span>#}
-        </a>
-      </li>
-      <li class="page-item" id="next-page">
-{#        <a class="page-link" href="#" aria-label="Next">#}
-{#          <span aria-hidden="true">&raquo;</span>#}
-        </a>
-      </li>
-    </ul>
-  </nav>
-</div>
+                    $("#prev-page").click(function () {
+                        var $activePage = $(".pagination li.active");
+                        if ($activePage.index() > 1) { // 其中1为上一页按钮
+                            $activePage.removeClass("active").prev().addClass("active").click();
+                        }
+                    });
+                });
+            </script>
+
+            <div class="fixed-bottom p-3" style="background-color: white;">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center" id="pagination-container">
+                        <li class="page-item" id="prev-page">
+                            {#        <a class="page-link" href="#" aria-label="Previous">#}
+                            {#          <span aria-hidden="true">&laquo;</span>#}
+                            </a>
+                        </li>
+                        <li class="page-item" id="next-page">
+                            {#        <a class="page-link" href="#" aria-label="Next">#}
+                            {#          <span aria-hidden="true">&raquo;</span>#}
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
             <div id="u46_state1" class="panel_state" data-label="提交记录" style="visibility: hidden;">
                 <div id="u46_state1_content" class="panel_state_content">
 
