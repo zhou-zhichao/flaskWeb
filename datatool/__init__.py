@@ -478,6 +478,7 @@ def statistics(version):
         sheet_master.append(row)
     # workbook.move_sheet('统计结果', after='外部数据检查')
     # workbook.reorder_sheets(['重要业务结果检查', '外部数据检查', '统计结果'])
+    check_and_create_folder('file/output/')
     workbook.save(f'file/output/{version}_重要业务结果.xlsx')
 
     # workbook.save('output/统计.xlsx')
@@ -780,4 +781,4 @@ def partial_merge(r, w, version):
 # 定义一个函数，接受一个列表作为参数
 def filter_xlsx(list_of_paths):
     # 使用filter和lambda表达式，过滤掉不是字符串或者不以.xlsx结尾的元素，并返回一个新的列表
-    return list(filter(lambda path: isinstance(path, str) and path.endswith(".xlsx"), list_of_paths))
+    return list(filter(lambda path: isinstance(path, str) and (path.endswith(".xlsx") or path.endswith('.zip')), list_of_paths))

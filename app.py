@@ -50,6 +50,7 @@ def create_app():
 
     @app.route('/third')
     def third():
+        print(g.table_tuple)
         return render_template('业务线数据落标.html', tuples=g.table_tuple)
 
     @app.route('/download_template/<file_name>')
@@ -62,8 +63,7 @@ def create_app():
 
     @app.route('/confirm_download/<filename>')
     def confirm_download(filename):
-        path = filename.rsplit(os.path.sep, 1)[0]
-        filename = filename.rsplit(os.path.sep, 1)[1]
+        path = 'file/confirm/'
         return send_from_directory(path, filename, as_attachment=True)
 
     @app.route("/confirm/<filename>")
@@ -91,8 +91,7 @@ def create_app():
 
     @app.route('/second/download/<filename>')
     def second_download(filename):
-        path = filename.rsplit(os.path.sep, 1)[0]
-        filename = filename.rsplit(os.path.sep, 1)[1]
+        path = 'file/confirm/' + filename.rsplit('_', 1)[0] + '_重要业务结果/'
         return send_from_directory(path, filename, as_attachment=True)
 
     @app.route('/submit', methods=['POST'])
