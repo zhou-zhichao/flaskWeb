@@ -63,27 +63,27 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="/">标准文件管理</a>
+                <a class="nav-link" href="/third">业务线数据落标</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/second">数据线落标检查</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/third">业务线数据落标</a>
+                <a class="nav-link" href="/">标准文件管理</a>
             </li>
         </ul>
     </div>
 </nav>
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <div class="alert alert-info alert-dismissible fade show center-block fixed-top" role="alert">
-            {{ messages[0] }}
-            {#            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
-            {#                <span aria-hidden="true">&times;</span>#}
-            {#            </button>#}
-        </div>
-    {% endif %}
-{% endwith %}
+ {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-info alert-dismissible fade show center-block fixed-top" role="alert">
+                {{ messages[0] }}
+                {#            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
+                {#                <span aria-hidden="true">&times;</span>#}
+                {#            </button>#}
+            </div>
+        {% endif %}
+    {% endwith %}
 <script>
     // 获取alert元素
     var alert = $('.alert');

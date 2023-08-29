@@ -12,6 +12,7 @@
 
 
 {% block content %}
+
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -22,7 +23,6 @@
                 <div class="modal-body">
                     <form action="/modify_submit" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
-
                             <input type="hidden" class="form-control filename" id="version" name="title" value="">
                         </div>
                         <div class="mb-3">
@@ -63,7 +63,9 @@
                     <div id="u48" class="ax_default _文本段落1">
                         <div id="u48_div" class=""></div>
                         <div id="u48_text" class="text ">
-                            <p><span style="text-decoration:underline ;"><a href="{{ url_for('download_template',file_name='XXXX产品名称_4.0.1.xlsx') }}">重要业务结果文件模板下载</a></span></p>
+                            <p><span style="text-decoration:underline ;"><a
+                                    href="{{ url_for('download_template',file_name='XXXX产品名称_4.0.1.xlsx') }}">重要业务结果文件模板下载</a></span>
+                            </p>
                         </div>
                     </div>
 
@@ -71,7 +73,9 @@
                     <div id="u49" class="ax_default _文本段落1">
                         <div id="u49_div" class=""></div>
                         <div id="u49_text" class="text ">
-                            <p><span style="text-decoration:underline ;"><a href="{{ url_for('download_template',file_name='XXXX产品名称_4.0.1_自定义代码.xlsx') }}">自定义代码文件模板下载</a></span></p>
+                            <p><span style="text-decoration:underline ;"><a
+                                    href="{{ url_for('download_template',file_name='XXXX产品名称_4.0.1_自定义代码.xlsx') }}">自定义代码文件模板下载</a></span>
+                            </p>
                         </div>
                     </div>
 
