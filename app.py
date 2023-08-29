@@ -124,7 +124,7 @@ def create_app():
             # 为文件生成一个安全的文件名
             filename = business + "_" + fileType + ".xlsx"
             # 将文件保存到服务器的uploads目录下
-            if fileType in ["标准代码", "标准层模型"]:
+            if fileType in ["标准代码", "标准层模型", "数据元素"]:
                 filename = fileType + ".xlsx"
             dataFile.save(os.path.join('file/standard', filename))
             # 返回一个成功的响应
@@ -146,6 +146,7 @@ def create_app():
         new_title = title.rsplit(".", 1)[0] + "确认." + title.rsplit(".", 1)[1]
         file_path = os.path.join('file', 'confirm', new_title)
         dataFile.save(file_path)
+
         # time.sleep(1)
         # print(g.confirm_tuple)
         # flash("保存成功")
@@ -199,4 +200,3 @@ def create_app():
 if __name__ == '__main__':
     app = create_app()
     app.run(host='0.0.0.0', port=8088)
-#
